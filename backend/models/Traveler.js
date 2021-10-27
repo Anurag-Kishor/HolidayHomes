@@ -1,40 +1,43 @@
 class Traveler {
 
     constructor(){
-        this.FirstName = null;
-        this.LastName = null;
-        this.Email = null;
-        this.Password = null;
-        this.AddressLine1 = null;
-        this.AddressLine2 = null;
-        this.City = null;
-        this.State = null;
-        this.Country = null; 
+        this.firstName = null;
+        this.lastName = null;
+        this.email = null;
+        this.password = null;
+        this.addressLine1 = null;
+        this.addressLine2 = null;
+        this.city = null;
+        this.state = null;
+        this.country = null;
+        this.phoneNumber = null;
     }
 
-    initModel(data) {
+    initModel(firstName, lastName, email, password, addressLine1, addressLine2, city, state, country, phoneNumber) {
         
-        this.FirstName = data.FirstName;
-        this.LastName = data.LastName;
-        this.Email = data.Email;
-        this.Password = data.Password;
-        this.AddressLine1 = data.AddressLine1;
-        this.AddressLine2 = data.AddressLine2;
-        this.City = data.City;
-        this.State = data.State;
-        this.Country = data.Country;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email =email;
+        this.password = password;
+        this.addressLine1 =addressLine1;
+        this.addressLine2 = addressLine2;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+
     }
 
     //getters
-    getFirstName() { return this.FirstName }
-    getLastName() { return this.LastName }
-    getEmail() { return this.Email }
-    getPassword() { return this.getPassword }
-    getAddressLine1() { return this.AddressLine1 }
-    getAddressLine2() { return this.AddressLine2 }
-    getCity() { return this.City }
-    getState() { return this.State }
-    getCountry() { return this.Country }
+    getFirstName() { return this.firstName }
+    getLastName() { return this.lastName }
+    getEmail() { return this.email }
+    getPassword() { return this.password }
+    getAddressLine1() { return this.addressLine1 }
+    getAddressLine2() { return this.addressLine2 }
+    getCity() { return this.city }
+    getState() { return this.state }
+    getCountry() { return this.country }
 
 
     fill (newFields) {
