@@ -1,8 +1,8 @@
-const Rental = require("../models/Rental");
-const RentalService = require('../services/RentalService');
+const pool = require('../db');
 
 
-const addRental = async(req, res) => {
+const createRental = async(rental) => {
+
     try {
         
     } catch (error) {
@@ -10,7 +10,7 @@ const addRental = async(req, res) => {
     }
 }
 
-const updateRental = async(req, res) => {
+const updateRental = async(rental) => {
     try {
         
     } catch (error) {
@@ -18,7 +18,7 @@ const updateRental = async(req, res) => {
     }
 }
 
-const getRentalById = async(req, res) => {
+const getRentalById = async(id) => {
     try {
         
     } catch (error) {
@@ -26,7 +26,7 @@ const getRentalById = async(req, res) => {
     }
 }
 
-const getRentalsByHostId = async(req, res) => {
+const getRentalsByHostId = async(host_id) => {
     try {
         
     } catch (error) {
@@ -34,7 +34,7 @@ const getRentalsByHostId = async(req, res) => {
     }
 }
 
-const getRentalsBasedOnProperties = async(req, res) => {
+const getRentalsBasedOnProperties = async(properties) => {
     try {
         
     } catch (error) {
@@ -42,7 +42,7 @@ const getRentalsBasedOnProperties = async(req, res) => {
     }
 }
 
-const getMostBookedRentals = async(req, res) => {
+const getMostBookedRentals = async() => {
     try {
         
     } catch (error) {
@@ -50,7 +50,8 @@ const getMostBookedRentals = async(req, res) => {
     }
 }
 
-const getMostRatedRentals = async(req, res) => {
+
+const getMostRatedRentals = async() => {
     try {
         
     } catch (error) {
@@ -58,7 +59,7 @@ const getMostRatedRentals = async(req, res) => {
     }
 }
 
-const setAvailability = async(req, res) => {
+const setAvailability = async(rental_id) => {
     try {
         
     } catch (error) {
@@ -66,7 +67,8 @@ const setAvailability = async(req, res) => {
     }
 }
 
-const postReview = async(req, res) => {
+const postReview = async(rental_id, data, traveler_id) => {
+
     try {
         
     } catch (error) {
@@ -74,16 +76,12 @@ const postReview = async(req, res) => {
     }
 }
 
-const addService = async(req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
+const addService = async(renta_id) => {
+
 }
 
 module.exports = {
-    addRental,
+    createRental,
     updateRental,
     getRentalById,
     getRentalsByHostId,
