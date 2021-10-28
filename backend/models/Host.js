@@ -1,4 +1,4 @@
-class Traveler {
+class Host {
 
     constructor(){
         this.firstName = null;
@@ -51,4 +51,4 @@ class Traveler {
     
 }
 
-module.exports = Traveler;
+module.exports = Host;

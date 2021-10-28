@@ -1,10 +1,10 @@
 const pool = require('../db');
 
-const travelerExists = async(traveler) => {
+const hostExists = async(host) => {
 
     const value = await pool.query(
         "SELECT * FROM users WHERE email= $1",
-        [traveler.email]
+        [host.email]
     )
 
     if(value.rowCount > 0){
@@ -48,13 +48,13 @@ const findUser = async(email) => {
     return value;
 }
 
-const createTraveler = async(traveler) => {
+const createHost = async(host) => {
 
-    if((await travelerExists(traveler))){
+    if((await hostExists(host))){
         return {status: 401, success: false, error: "User already exists"};
     }
    
-    const locationId = await findLocationId(traveler.city, traveler.state, traveler.country);
+    const locationId = await findLocationId(host.city, host.state, host.country);
 
 
     // Add to Users table
@@ -62,35 +62,25 @@ const createTraveler = async(traveler) => {
     try{
         newUser = await pool.query(
             "INSERT INTO users (role_id, email, password) VALUES ($1, $2, $3) RETURNING *",
-            [2, traveler.email, traveler.password]
+            [1, host.email, host.password]
         )
     } catch(error){
         return {status: 401, success: false, error: error.message};
     }    
    
         
-    //Adding to Traveler Table
+    //Adding to Host Table
     try{
-        const newTraveler = await pool.query(
-            "INSERT INTO traveler (traveler_id, firstname, lastname, phonenumber, addressline1, addressline2, location_id) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-            [newUser.rows[0].user_id, traveler.firstName, traveler.lastName, traveler.phoneNumber, traveler.addressLine1, traveler.addressLine2, locationId ]
+        const newHost = await pool.query(
+            "INSERT INTO host (host_id, firstname, lastname, phonenumber, addressline1, addressline2, location_id) VALUES ($1, $2, $3, $4, $5, $6, $7)",
+            [newUser.rows[0].user_id, host.firstName, host.lastName, host.phoneNumber, host.addressLine1, host.addressLine2, locationId ]
         )
 
-       /* if(newTraveler.rowCount < 1){
-            await pool.query(
-                "DELETE FROM users WHERE email=$1",
-                [traveler.email]
-            )
-
-            await pool.query(
-                "DELETE FROM location where location_id=$1",
-                [locationId]
-            )  
-        }*/
+     
     }catch(error){
         await pool.query(
             "DELETE FROM users WHERE email=$1",
-            [traveler.email]
+            [host.email]
         )
         return {status: 401, success: false, error: error.message};
     }
@@ -98,16 +88,16 @@ const createTraveler = async(traveler) => {
     return {status : 200, success: true};
 }
 
-const updateTraveler = async(id, traveler) => {
+const updateHost = async(id, host) => {
 
     try {
        // console.log(id);
-       // console.log(traveler);
-        const locationId = await findLocationId(traveler.city, traveler.state, traveler.country);
+       // console.log(host);
+        const locationId = await findLocationId(host.city, host.state, host.country);
       //  console.log(locationId);
-        const updatedTraveler = await pool.query(
-            "UPDATE traveler SET firstname=$1, lastname=$2, phonenumber= $3, addressline1= $4, addressline2 =$5, location_id=$6 WHERE traveler_id=$7 RETURNING *",
-            [traveler.firstName, traveler.lastName, traveler.phoneNumber, traveler.addressLine1, traveler.addressLine2, locationId.toString(), id]
+        const updatedHost = await pool.query(
+            "UPDATE host SET firstname=$1, lastname=$2, phonenumber= $3, addressline1= $4, addressline2 =$5, location_id=$6 WHERE host_id=$7 RETURNING *",
+            [host.firstName, host.lastName, host.phoneNumber, host.addressLine1, host.addressLine2, locationId.toString(), id]
         )
 
         return {status : 200, success: true};
@@ -118,13 +108,13 @@ const updateTraveler = async(id, traveler) => {
 
 }
 
-const getTravelerById = async(id) => {
+const getHostById = async(id) => {
     try {
         const data = await pool.query (
-            "SELECT u.user_id, u.email, t.firstname, t.lastname, t.phonenumber, t.addressline1, t.addressline2, l.city, l.state, l.country from traveler t " + 
-            "JOIN Users u ON t.traveler_id = u.user_id " + 
+            "SELECT u.user_id, u.email, t.firstname, t.lastname, t.phonenumber, t.addressline1, t.addressline2, l.city, l.state, l.country from host t " + 
+            "JOIN Users u ON t.host_id = u.user_id " + 
             "JOIN Location l ON l.location_id = t.location_id " + 
-            "WHERE traveler_id=$1",
+            "WHERE host_id=$1",
             [id]
         );
 
@@ -134,13 +124,13 @@ const getTravelerById = async(id) => {
     }
 }
 
-const getAllTravelers = async() => {
+const getAllHosts = async() => {
 
     try {
 
         const data = await pool.query(
-            "SELECT u.user_id, u.email, t.firstname, t.lastname, t.phonenumber, t.addressline1, t.addressline2, l.city, l.state, l.country from traveler t " + 
-            "JOIN Users u ON t.traveler_id = u.user_id " + 
+            "SELECT u.user_id, u.email, t.firstname, t.lastname, t.phonenumber, t.addressline1, t.addressline2, l.city, l.state, l.country from host t " + 
+            "JOIN Users u ON t.host_id = u.user_id " + 
             "JOIN Location l ON l.location_id = t.location_id "        
         );
         return {status: 200, success: true, data: data.rows};
@@ -149,10 +139,10 @@ const getAllTravelers = async() => {
     }
 }
 
-const deleteTraveler = async(id) => {
+const deleteHost = async(id) => {
     try {
-        const deleteTraveler = await pool.query(
-            "DELETE FROM traveler WHERE traveler_id = $1",
+        const deleteHost = await pool.query(
+            "DELETE FROM host WHERE host_id = $1",
             [id]
         );
         return {status: 200, success: true};
@@ -162,9 +152,9 @@ const deleteTraveler = async(id) => {
 }
 
 module.exports = {
-    createTraveler,
-    updateTraveler,
-    getTravelerById,
-    getAllTravelers,
-    deleteTraveler
+    createHost,
+    updateHost,
+    getHostById,
+    getAllHosts,
+    deleteHost
 }

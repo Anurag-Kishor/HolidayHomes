@@ -73,13 +73,31 @@ const getAllTravelers = async(req, res) => {
 }
 
 const getTravelerById = async(req, res) => {
-    console.log('IM traveler');
-    res.send('Hello');
+    try {
+
+        const id = req.params.id;
+        const result = await TravelerService.getTravelerById(id);
+        res.status(result.status).send(result);
+
+    } catch (error) {
+        res.status(401).send({success: false, error: error.message});
+    }
+}
+
+const deleteTraveler = async(req, res) => {
+    try {
+        const id = req.pramams.id;
+        const result = await TravelerService.deleteTraveler(id);
+        res.status(result.status).send(result);
+    } catch (error) {
+        res.status(401).send({success: false, error: error.message});
+    }
 }
 
 module.exports = {
     getAllTravelers, 
     getTravelerById,
     createTraveler,
-    updateTraveler
+    updateTraveler,
+    deleteTraveler
 };
