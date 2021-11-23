@@ -1,13 +1,13 @@
-const Traveler = require("../models/Traveler");
-const TravelerService = require('../services/TravelerService');
+const Host = require("../models/Host");
+const HostService = require('../services/HostService');
 
-const createTraveler = async(req, res) => {
+const createHost = async(req, res) => {
     try {
         const data = req.body;
 
-        let traveler = new Traveler();
+        let host = new Host();
 
-        traveler.initModel(
+        host.initModel(
             data.firstName,    
             data.lastName,
             data.email,
@@ -20,8 +20,8 @@ const createTraveler = async(req, res) => {
             data.phoneNumber
         )
         
-       // console.log(traveler);
-        const result = await TravelerService.createTraveler(traveler);
+       // console.log(host);
+        const result = await HostService.createHost(host);
        // console.log("Imhere");
         res.status(result.status).send(result);
         
@@ -31,16 +31,16 @@ const createTraveler = async(req, res) => {
 
 }
 
-const updateTraveler = async(req, res) => {
+const updateHost = async(req, res) => {
     try {
 
         const id = req.params.id;
         const data = req.body;
         //console.log(id);
        // console.log(data);
-        let traveler = new Traveler();
+        let host = new Host();
 
-        traveler.initModel(
+        host.initModel(
             data.firstName,    
             data.lastName,
             data.email,
@@ -53,7 +53,7 @@ const updateTraveler = async(req, res) => {
             data.phoneNumber
         )
 
-        const result = await TravelerService.updateTraveler(id, traveler);
+        const result = await HostService.updateHost(id, host);
         res.status(result.status).send(result);
 
     } catch (error) {
@@ -61,10 +61,10 @@ const updateTraveler = async(req, res) => {
     }
 }
 
-const getAllTravelers = async(req, res) => {
+const getAllHosts = async(req, res) => {
     
     try {
-        const result = await TravelerService.getAllTravelers();    
+        const result = await HostService.getAllHosts();    
         res.status(result.status).send(result);
     } catch (error) {
         res.status(401).send({success: false, error: error.message});
@@ -72,11 +72,11 @@ const getAllTravelers = async(req, res) => {
 
 }
 
-const getTravelerById = async(req, res) => {
+const getHostById = async(req, res) => {
     try {
 
         const id = req.params.id;
-        const result = await TravelerService.getTravelerById(id);
+        const result = await HostService.getHostById(id);
         res.status(result.status).send(result);
 
     } catch (error) {
@@ -84,10 +84,10 @@ const getTravelerById = async(req, res) => {
     }
 }
 
-const deleteTraveler = async(req, res) => {
+const deleteHost = async(req, res) => {
     try {
         const id = req.pramams.id;
-        const result = await TravelerService.deleteTraveler(id);
+        const result = await HostService.deleteHost(id);
         res.status(result.status).send(result);
     } catch (error) {
         res.status(401).send({success: false, error: error.message});
@@ -95,9 +95,9 @@ const deleteTraveler = async(req, res) => {
 }
 
 module.exports = {
-    getAllTravelers, 
-    getTravelerById,
-    createTraveler,
-    updateTraveler,
-    deleteTraveler
+    getAllHosts, 
+    getHostById,
+    createHost,
+    updateHost,
+    deleteHost
 };
