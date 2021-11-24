@@ -1,0 +1,22 @@
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #ff6666 !important;
+  color: white !important;
+}
+
+body {
+  overflow: hidden;
+}
+
+.btn-secondary-hh {
+  border-color: #ff6666 !important;
+  color: #ff6666 !important;
+  background-color: none !important;
+}
+
+.btn-secondary-hh:hover {
+  background-color: #ff6666 !important;
+  color: white !important;
+}
