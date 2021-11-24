@@ -86,7 +86,15 @@ function SignupScreen() {
                 </Row>
 
                 {/* Remember Me - Forgot Password */}
-                <Row style={{ height: "7vh" }}>
+                <Row
+                  style={{
+                    height: "5vh",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                  className="mb-3"
+                >
                   <Col md={4}>
                     <FormControlLabel
                       control={<Checkbox color="error" />}
