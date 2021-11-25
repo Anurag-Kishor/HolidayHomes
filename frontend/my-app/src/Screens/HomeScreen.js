@@ -1,12 +1,12 @@
 import React from "react";
 import {
   Col,
-  Container,
   Image,
   Navbar,
   Row,
   Button,
   Card,
+  Container,
 } from "react-bootstrap";
 import logo from "../assets/hhlogo.png";
 import resortPhoto from "../assets/pixabay_maldives-1200.jpg";
@@ -42,9 +42,15 @@ function HomeScreen() {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                  <Navbar.Text className="p-5">Become a Host</Navbar.Text>
-                  <Navbar.Text className="p-5">Signup</Navbar.Text>
-                  <Navbar.Text className="p-5">Login</Navbar.Text>
+                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
+                    Become a Host
+                  </Navbar.Text>
+                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
+                    Signup
+                  </Navbar.Text>
+                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
+                    Login
+                  </Navbar.Text>
                 </Navbar.Collapse>
               </Container>
             </Navbar>
@@ -65,14 +71,14 @@ function HomeScreen() {
                   Explore Gujarat!
                 </h4>
                 <br />
-                <h4>
+                <h5>
                   Rent suitable homes and experience your trips at an affordable
                   cost.
-                </h4>
+                </h5>
               </Row>
               {/* Where Field */}
               <Row>
-                <h4>Where</h4>
+                <h5>Where</h5>
               </Row>
               <Row
                 style={{
@@ -99,10 +105,10 @@ function HomeScreen() {
               {/* Check In Field - Check Out Field */}
               <Row>
                 <Col md={3}>
-                  <h4>Check In</h4>
+                  <h5>Check In</h5>
                 </Col>
                 <Col md={{ span: 3, offset: 4 }}>
-                  <h4>Check Out</h4>
+                  <h5>Check Out</h5>
                 </Col>
               </Row>
               <Row className=" align-items-center mb-3">
@@ -152,7 +158,7 @@ function HomeScreen() {
 
               {/* Guest Field */}
               <Row>
-                <h4>Guest</h4>
+                <h5>Guest</h5>
               </Row>
               <Row
                 style={{
@@ -178,11 +184,7 @@ function HomeScreen() {
 
               {/* Search Button */}
               <Row>
-                <Col
-                  md={{ span: 8, offset: 2 }}
-                  style={{ marginTop: 30 }}
-                  className="d-grid"
-                >
+                <Col md={{ span: 8, offset: 2 }} className="d-grid">
                   <Button
                     variant="primary"
                     size="lg"
@@ -203,11 +205,11 @@ function HomeScreen() {
       {/* Recommended */}
       <Row className="px-5 pt-5">
         <Col md={2}>
-          <h2>Recommended</h2>{" "}
+          <h4>Recommended</h4>{" "}
         </Col>
         <Col md={{ span: 2, offset: 8 }}>
           <Row>
-            <h3>See All</h3>
+            <h5>See All</h5>
           </Row>
         </Col>
       </Row>
@@ -267,6 +269,7 @@ function HomeScreen() {
             </Card>
           </Paper>
         </Col>
+
         <Col>
           <Paper elevation={3}>
             <Card sx={{ maxWidth: 345 }}>
@@ -382,7 +385,7 @@ function HomeScreen() {
       {/* Most Viewed */}
       <Row className="px-5 pt-5">
         <Col md={2}>
-          <h2>Most Viewed</h2>{" "}
+          <h4>Most Viewed</h4>{" "}
         </Col>
         <Col md={{ span: 2, offset: 8 }}>
           <Row>
@@ -556,6 +559,23 @@ function HomeScreen() {
             </Card>
           </Paper>
         </Col>
+      </Row>
+
+      {/* Testimonials */}
+      <Row className="px-5 pt-5">
+        <Col md={4}>
+          <h4>Testimonials</h4>{" "}
+        </Col>
+      </Row>
+      <Row className="px-5 mb-3">
+        <Col
+          style={{
+            height: "40vh",
+            width: "90%",
+            backgroundColor: "#e5e5e5",
+            borderRadius: 15,
+          }}
+        ></Col>
       </Row>
     </>
   );
