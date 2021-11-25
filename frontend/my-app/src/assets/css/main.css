@@ -7,7 +7,7 @@
 }
 
 body {
-  overflow: scroll;
+  overflow: auto;
 }
 
 .btn-secondary-hh {
