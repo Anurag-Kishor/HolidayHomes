@@ -398,7 +398,7 @@ function HomeScreen() {
           </Row>
         </Col>
       </Row>
-      <Row className="px-5 mb-3">
+      <Row className="px-5 mb-5">
         <Col>
           <Paper elevation={3}>
             <Card sx={{ maxWidth: 345 }}>
@@ -567,50 +567,65 @@ function HomeScreen() {
       </Row>
 
       {/* Testimonials */}
-      <Carousel
-        showArrows={true}
-        infiniteLoop={true}
-        showThumbs={false}
-        showStatus={false}
-        autoPlay={true}
-        interval={6100}
+      <Row
+        className="mb-3"
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#ff6666",
+        }}
       >
-        <div>
-          <img src={testimonial1} />
-          <div className="myCarousel">
-            <h3>Shirley Fultz</h3>
-            <h4>Designer</h4>
-            <p>
-              It's freeing to be able to catch up on customized news and not be
-              distracted by a social media element on the same site
-            </p>
-          </div>
-        </div>
+        <Col md={4}>
+          <h1 style={{ color: "white" }}>Testimonials</h1>
+        </Col>
+        <Col md={8} className="p-2">
+          <Carousel
+            showArrows={true}
+            infiniteLoop={true}
+            showThumbs={false}
+            showStatus={false}
+            autoPlay={true}
+            interval={6100}
+          >
+            <div>
+              <img src={testimonial1} />
+              <div className="myCarousel">
+                <h3>Shirley Fultz</h3>
+                <h4>Designer</h4>
+                <p>
+                  It's freeing to be able to catch up on customized news and not
+                  be distracted by a social media
+                </p>
+              </div>
+            </div>
 
-        <div>
-          <img src={testimonial2} />
-          <div className="myCarousel">
-            <h3>Daniel Keystone</h3>
-            <h4>Designer</h4>
-            <p>
-              The simple and intuitive design makes it easy for me use. I highly
-              recommend Fetch to my peers.
-            </p>
-          </div>
-        </div>
+            <div>
+              <img src={testimonial2} />
+              <div className="myCarousel">
+                <h3>Daniel Keystone</h3>
+                <h4>Designer</h4>
+                <p>
+                  The simple and intuitive design makes it easy for me use. I
+                  highly recommend Fetch to my peers.
+                </p>
+              </div>
+            </div>
 
-        <div>
-          <img src={testimonial3} />
-          <div className="myCarousel">
-            <h3>Theo Sorel</h3>
-            <h4>Designer</h4>
-            <p>
-              I enjoy catching up with Fetch on my laptop, or on my phone when
-              I'm on the go!
-            </p>
-          </div>
-        </div>
-      </Carousel>
+            <div>
+              <img src={testimonial3} />
+              <div className="myCarousel">
+                <h3>Theo Sorel</h3>
+                <h4>Designer</h4>
+                <p>
+                  I enjoy catching up with Fetch on my laptop, or on my phone
+                  when I'm on the go!
+                </p>
+              </div>
+            </div>
+          </Carousel>
+        </Col>
+      </Row>
     </>
   );
 }
