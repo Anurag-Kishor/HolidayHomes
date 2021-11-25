@@ -95,7 +95,7 @@ function SignupScreen() {
                   }}
                   className="mb-3"
                 >
-                  <Col md={4}>
+                  <Col md={12}>
                     <FormControlLabel
                       control={<Checkbox color="error" />}
                       label="Remember Me"

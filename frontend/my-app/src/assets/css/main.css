@@ -27,3 +27,17 @@ body {
   background-size: cover;
   height: 80vh;
 }
+
+.photo-rental-info {
+  background: no-repeat center center fixed;
+  background-size: cover;
+  height: 60vh;
+}
+
+.row {
+  --bs-gutter-x: 0 !important;
+}
+
+.rs-picker-toggle-value {
+  color: "#ff6666 !important";
+}
