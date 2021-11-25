@@ -287,11 +287,14 @@
 .carousel .slide img {
   width: 139px !important;
   border-radius: 50%;
+  margin-top: 2%;
 }
 
 .myCarousel {
   background: #fafafa;
+  border-radius: 2%;
   margin-top: -6%;
+  margin-bottom: 3%;
   width: 54%;
   margin-left: auto;
   margin-right: auto;
@@ -300,7 +303,8 @@
   padding-left: 5%;
   padding-right: 5%;
   border: 1px solid #ddd;
-  height: 286px;
+  height: 400px;
+  
 }
 
 .carousel .control-dots {
@@ -361,8 +365,8 @@
 }
 
 .carousel.carousel-slider .control-arrow {
-  background: #000 !important;
-  height: 50px !important;
+  background: #C6C6C6 !important;
+  height: 150px !important;
   position: absolute;
   top: 35% !important;
 }
@@ -400,3 +404,5 @@
     border-radius: 50%;
   }
 }
+
+
