@@ -1,0 +1,29 @@
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #ff6666 !important;
+  color: white !important;
+}
+
+body {
+  overflow: scroll;
+}
+
+.btn-secondary-hh {
+  border-color: #ff6666 !important;
+  color: #ff6666 !important;
+  background-color: none !important;
+}
+
+.btn-secondary-hh:hover {
+  background-color: #ff6666 !important;
+  color: white !important;
+}
+
+.cover-photo-home {
+  background: url("../pexels-alexandr-podvalny-3278215.jpg") no-repeat center
+    center fixed;
+  background-size: cover;
+  height: 80vh;
+}
