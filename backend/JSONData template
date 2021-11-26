@@ -1,0 +1,42 @@
+//For host or travellers
+{
+    "firstName" : "anurag",
+    "lastName" : "Kishor",
+    "email": "anuragkakkan12@gmail.com",
+    "password": "123456",
+    "addressLine1": "test",
+    "addressLIne2" : "testaddress2",
+    "city": "Ahmedabad",
+    "state": "Gujarat",
+    "country": "India",
+    "phoneNumber": "940980789"
+}
+
+
+
+//For Adding Rentals
+{
+    "name" : "testRental2",
+    "description" : "description",
+    "addressLine1": "addressLine1Rental1",
+    "addressLine2": "addressLine2Rental1",
+    "city": "ahmedabad",
+    "state": "gujarat",
+    "country": "India",
+    "available": true,
+    "dateFrom": "12-11-2021",
+    "dateTo": "22-11-2021",
+    "pricePerDay": 1500,
+    "rentalTypeId": 1,
+    "numberOfRooms": 2,
+    "numberOfGuests": 4,
+    "services": [1, 2],
+    "host_id": 1
+}
+
+//For posting reviews 
+{
+    "traveler_id": 2,
+    "description": "Good",
+    "stars": 3
+}
