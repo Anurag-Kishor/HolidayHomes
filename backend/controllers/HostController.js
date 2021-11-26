@@ -94,10 +94,19 @@ const deleteHost = async(req, res) => {
     }
 }
 
+const getRentalsByHostId = async(req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     getAllHosts, 
     getHostById,
     createHost,
     updateHost,
-    deleteHost
+    deleteHost,
+    getRentalsByHostId,
 };
