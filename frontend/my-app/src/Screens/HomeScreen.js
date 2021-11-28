@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Col,
   Image,
@@ -31,37 +31,68 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Carousel } from "react-responsive-carousel";
 import "../assets/css/carousel.min.css";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 function HomeScreen() {
+  const getUser = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (getUser === null) {
+      navigate("/signup");
+      console.log("CALLING");
+    }
+  }, [getUser]);
+
   return (
     <>
       {/* Cover Photo - Search Form - Navbar */}
-      <Row className="cover-photo-home">
+      <Row
+        className="cover-photo-home row__allow__gutter"
+        style={{ textAlign: "left" }}
+      >
         <Col>
           {/* Navbar */}
           <Row>
             <Navbar>
               <Container>
-                <Navbar.Brand href="#home">
+                <Navbar.Brand>
                   <Image src={logo} height="100" />
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
-                    Become a Host
-                  </Navbar.Text>
-                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
-                    Signup
-                  </Navbar.Text>
-                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
-                    Login
-                  </Navbar.Text>
+                  <Link to="/become-a-host" style={{ textDecoration: "none" }}>
+                    <Navbar.Text
+                      className="p-5 h5"
+                      style={{ color: "#ff6666" }}
+                    >
+                      Become a Host
+                    </Navbar.Text>
+                  </Link>
+                  <Link to="/me" style={{ textDecoration: "none" }}>
+                    <Navbar.Text
+                      className="p-5 h5"
+                      style={{ color: "#ff6666" }}
+                    >
+                      Me
+                    </Navbar.Text>
+                  </Link>
+                  <Link to="/signin" style={{ textDecoration: "none" }}>
+                    <Navbar.Text
+                      className="p-5 h5"
+                      style={{ color: "#ff6666" }}
+                    >
+                      Logout
+                    </Navbar.Text>
+                  </Link>
                 </Navbar.Collapse>
               </Container>
             </Navbar>
           </Row>
           {/* Search Form */}
-          <Row>
+          <Row className="row__allow__gutter">
             <Col
               md={{ span: 4, offset: 3 }}
               style={{
@@ -71,7 +102,7 @@ function HomeScreen() {
               }}
               className="p-5"
             >
-              <Row className="mb-3">
+              <Row className="mb-3 row__allow__gutter">
                 <h4 style={{ textAlign: "center", color: "#ff6666" }}>
                   Explore Gujarat!
                 </h4>
@@ -82,7 +113,7 @@ function HomeScreen() {
                 </h5>
               </Row>
               {/* Where Field */}
-              <Row>
+              <Row className="row__allow__gutter">
                 <h5>Where</h5>
               </Row>
               <Row
@@ -91,7 +122,7 @@ function HomeScreen() {
                   borderRadius: 12,
                   height: "7vh",
                 }}
-                className="align-items-center mb-3"
+                className="align-items-center mb-3 row__allow__gutter"
               >
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <TextField
@@ -108,7 +139,7 @@ function HomeScreen() {
               </Row>
 
               {/* Check In Field - Check Out Field */}
-              <Row>
+              <Row className="row__allow__gutter">
                 <Col md={3}>
                   <h5>Check In</h5>
                 </Col>
@@ -116,7 +147,7 @@ function HomeScreen() {
                   <h5>Check Out</h5>
                 </Col>
               </Row>
-              <Row className=" align-items-center mb-3">
+              <Row className=" align-items-center mb-3 row__allow__gutter">
                 <Col
                   md={5}
                   style={{
@@ -162,7 +193,7 @@ function HomeScreen() {
               </Row>
 
               {/* Guest Field */}
-              <Row>
+              <Row className="row__allow__gutter">
                 <h5>Guest</h5>
               </Row>
               <Row
@@ -171,7 +202,7 @@ function HomeScreen() {
                   borderRadius: 12,
                   height: "7vh",
                 }}
-                className="align-items-center mb-3"
+                className="align-items-center mb-3 row__allow__gutter"
               >
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <TextField
@@ -188,7 +219,7 @@ function HomeScreen() {
               </Row>
 
               {/* Search Button */}
-              <Row>
+              <Row className="row__allow__gutter">
                 <Col md={{ span: 8, offset: 2 }} className="d-grid">
                   <Button
                     variant="primary"
@@ -208,7 +239,7 @@ function HomeScreen() {
       </Row>
 
       {/* Recommended */}
-      <Row className="px-5 pt-5">
+      <Row className="px-0 pt-5 row__allow__gutter">
         <Col md={2}>
           <h4>Recommended</h4>{" "}
         </Col>
@@ -218,7 +249,7 @@ function HomeScreen() {
           </Row>
         </Col>
       </Row>
-      <Row className="px-5 mb-3">
+      <Row className="px-5 mb-3 row__allow__gutter">
         <Col>
           <Paper elevation={3}>
             <Card sx={{ maxWidth: 345 }}>
@@ -388,7 +419,7 @@ function HomeScreen() {
       </Row>
 
       {/* Most Viewed */}
-      <Row className="px-5 pt-5">
+      <Row className="px-0 pt-5 row__allow__gutter">
         <Col md={2}>
           <h4>Most Viewed</h4>{" "}
         </Col>
@@ -398,7 +429,7 @@ function HomeScreen() {
           </Row>
         </Col>
       </Row>
-      <Row className="px-5 mb-5">
+      <Row className="px-5 mb-5 row__allow__gutter">
         <Col>
           <Paper elevation={3}>
             <Card sx={{ maxWidth: 345 }}>
@@ -567,65 +598,6 @@ function HomeScreen() {
       </Row>
 
       {/* Testimonials */}
-      {/* <Row
-        className="mb-3"
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "#ff6666",
-        }}
-      >
-        <Col md={4}>
-          <h1 style={{ color: "white" }}>Testimonials</h1>
-        </Col>
-        <Col md={8} className="p-2">
-          <Carousel
-            showArrows={true}
-            infiniteLoop={true}
-            showThumbs={false}
-            showStatus={false}
-            autoPlay={true}
-            interval={6100}
-          >
-            <div>
-              <img src={testimonial1} />
-              <div className="myCarousel">
-                <h3>Shirley Fultz</h3>
-                <h4>Designer</h4>
-                <p>
-                  It's freeing to be able to catch up on customized news and not
-                  be distracted by a social media
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <img src={testimonial2} />
-              <div className="myCarousel">
-                <h3>Daniel Keystone</h3>
-                <h4>Designer</h4>
-                <p>
-                  The simple and intuitive design makes it easy for me use. I
-                  highly recommend Fetch to my peers.
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <img src={testimonial3} />
-              <div className="myCarousel">
-                <h3>Theo Sorel</h3>
-                <h4>Designer</h4>
-                <p>
-                  I enjoy catching up with Fetch on my laptop, or on my phone
-                  when I'm on the go!
-                </p>
-              </div>
-            </div>
-          </Carousel>
-        </Col>
-      </Row> */}
       <Carousel
         showArrows={true}
         infiniteLoop={true}
@@ -670,6 +642,15 @@ function HomeScreen() {
           </div>
         </div>
       </Carousel>
+
+      {/* About Us */}
+
+      {/* Footer */}
+      <Row className="row__allow__gutter pt-5">
+        <Col>
+          <Footer />
+        </Col>
+      </Row>
     </>
   );
 }
