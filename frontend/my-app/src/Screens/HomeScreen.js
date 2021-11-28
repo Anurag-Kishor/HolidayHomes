@@ -29,6 +29,9 @@ import {
 import { Box } from "@mui/system";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded';
 import { Carousel } from "react-responsive-carousel";
 import "../assets/css/carousel.min.css";
 import { useSelector } from "react-redux";
@@ -128,13 +131,13 @@ function HomeScreen() {
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <TextField
                     id="input-with-sx"
-                    label="Email"
+                    label="Location"
                     variant="standard"
                     color="warning"
                     fullWidth
                   />
-                  <LocationOnIcon
-                    sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                  <AddLocationAltRoundedIcon
+                    sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
                   />
                 </Box>
               </Row>
@@ -160,13 +163,13 @@ function HomeScreen() {
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                     <TextField
                       id="input-with-sx"
-                      label="Email"
+                      label="Check-in Date"
                       variant="standard"
                       color="warning"
                       fullWidth
                     />
-                    <LocationOnIcon
-                      sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                    <EventNoteRoundedIcon
+                      sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
                     />
                   </Box>
                 </Col>
@@ -181,13 +184,13 @@ function HomeScreen() {
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                     <TextField
                       id="input-with-sx"
-                      label="Email"
+                      label="Check-out-date"
                       variant="standard"
                       color="warning"
                       fullWidth
                     />
-                    <LocationOnIcon
-                      sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                    <EventNoteRoundedIcon
+                      sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
                     />
                   </Box>
                 </Col>
@@ -213,8 +216,8 @@ function HomeScreen() {
                     color="warning"
                     fullWidth
                   />
-                  <LocationOnIcon
-                    sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                  <GroupAddRoundedIcon
+                    sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
                   />
                 </Box>
               </Row>
