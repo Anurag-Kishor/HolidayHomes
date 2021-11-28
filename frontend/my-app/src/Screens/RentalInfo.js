@@ -21,6 +21,7 @@ import PasswordIcon from "@mui/icons-material/Password";
 import "../assets/css/main.css";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
+import Footer from "../Components/Footer";
 function RentalInfo() {
   const [searchValue, setSearchValue] = React.useState("");
   var rentalPhotoVar = {
@@ -39,7 +40,7 @@ function RentalInfo() {
               <SearchBar
                 value={searchValue}
                 onChange={(newValue) => setSearchValue(searchValue)}
-                onRequestSearch={() => {}}
+                onRequestSearch={() => { }}
               />
             </Col>
             <Navbar.Toggle />
@@ -800,6 +801,12 @@ function RentalInfo() {
               </Row>
             </Paper>
           </Row>
+        </Col>
+      </Row>
+      {/* Footer */}
+      <Row className="row__allow__gutter pt-5">
+        <Col>
+          <Footer />
         </Col>
       </Row>
     </>

@@ -33,6 +33,7 @@ import { Carousel } from "react-responsive-carousel";
 import "../assets/css/carousel.min.css";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import abus from "../assets/4.png";
 import Footer from "../Components/Footer";
 
 function HomeScreen() {
@@ -644,9 +645,9 @@ function HomeScreen() {
       </Carousel>
 
       {/* About Us */}
-
+      <img src={abus} height="500" className="mt-5" style={{ "paddingLeft": "300px" }} />
       {/* Footer */}
-      <Row className="row__allow__gutter pt-5">
+      <Row className="row__allow__gutter pt-4">
         <Col>
           <Footer />
         </Col>
