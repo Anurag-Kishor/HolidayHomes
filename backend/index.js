@@ -3,12 +3,12 @@ const app = express();
 const traveler = require('./routes/TravelerRoute');
 const admin = require('./routes/AdminRoute')
 const host = require('./routes/HostRoute')
-const pool = require("./db");
-
+const rental = require('./routes/RentalRoute')
 //middlewares
 app.use(express.json());
 
 //routes
+app.use('/rental', rental)
 app.use('/traveler', traveler);
 app.use('/admin', admin);
 app.use('/host', host)

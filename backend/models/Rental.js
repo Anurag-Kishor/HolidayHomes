@@ -13,16 +13,16 @@ class Rental {
         this.dateTo = null;
         this.verified = null;
         this.pricePerDay = null;
-        this.rentalTypeName = null;
-        this.numberofRooms = null;
+        this.rentalTypeId = null;
+        this.numberOfRooms = null;
         this.numberOfGuests = null;
-        this.servies = null;
+        this.services = null;
         this.host_id = null;
     }
 
     initModel(name, description, addressLine1, addressLine2, city, state, country,
-            available, dateFrom, dateTo, verified, pricePerDay, rentalTypeName,
-            numberofRooms, numberOfGuests, services, host_id) {
+            available, dateFrom, dateTo, verified, pricePerDay, rentalTypeId,
+            numberOfRooms, numberOfGuests, services, host_id) {
         this.name = name;
         this.description = description;
         this.addressLine1 = addressLine1;
@@ -35,8 +35,8 @@ class Rental {
         this.dateTo = dateTo;
         this.verified = verified;
         this.pricePerDay = pricePerDay;
-        this.rentalTypeName = rentalTypeName;
-        this.numberofRooms = numberofRooms;
+        this.rentalTypeId = rentalTypeId;
+        this.numberOfRooms = numberOfRooms;
         this.numberOfGuests = numberOfGuests;
         this.services = services;
         this.host_id = host_id;

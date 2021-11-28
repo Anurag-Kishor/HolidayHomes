@@ -4,23 +4,19 @@ const {
     addRental,
     updateRental,
     getRentalById,
-    getRentalsByHostId,
-    getRentalsBasedOnProperties,
-    getMostBookedRentals,
-    getMostRatedRentals,
     setAvailability,
     postReview,
-    addService
+    addService,
+    averageRating
 } = require('../controllers/RentalController')
 
 //GET rentals
 router.get('/:id', getRentalById)
-router.get('/search', getRentalsBasedOnProperties)
-router.get('/:host_id/review', addService)
+router.get('/:rental_id/review', averageRating)
 
 // POST / ADD rental
 router.post('/', addRental);
-router.post('/:host_id/review', postReview)
+router.post('/:rental_id/review', postReview)
 
 // PUT / UPDATE rental 
 router.put('/', updateRental);
@@ -28,8 +24,4 @@ router.put('/:id/availability', setAvailability);
 
 
 
-
-router.get('/:host_id', getRentalsByHostId) //put this in host route 
-
-
-// put mostBooked and mostRated in Home Service
+module.exports = router;
