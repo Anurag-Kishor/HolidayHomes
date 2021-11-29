@@ -17,7 +17,25 @@ import { Rating, Typography, Divider, Paper, TextField } from "@mui/material";
 import "../../node_modules/rsuite/dist/rsuite.min.css";
 import DateRangePicker from "rsuite/DateRangePicker";
 import PasswordIcon from "@mui/icons-material/Password";
-
+import GarageIcon from '@mui/icons-material/Garage';
+import GroupsIcon from '@mui/icons-material/Groups';
+import GiteIcon from '@mui/icons-material/Gite';
+import BedIcon from '@mui/icons-material/Bed';
+import DeckIcon from '@mui/icons-material/Deck';
+import BalconyIcon from '@mui/icons-material/Balcony';
+import ParkIcon from '@mui/icons-material/Park';
+import PoolIcon from '@mui/icons-material/Pool';
+import BadgeIcon from '@mui/icons-material/Badge';
+import TodayIcon from '@mui/icons-material/Today';
+import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
+import CreateIcon from '@mui/icons-material/Create';
+import PetsIcon from '@mui/icons-material/Pets';
+import CancelScheduleSendIcon from '@mui/icons-material/CancelScheduleSend';
+import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
 import "../assets/css/main.css";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
@@ -40,7 +58,7 @@ function RentalInfo() {
               <SearchBar
                 value={searchValue}
                 onChange={(newValue) => setSearchValue(searchValue)}
-                onRequestSearch={() => {}}
+                onRequestSearch={() => { }}
               />
             </Col>
             <Navbar.Toggle />
@@ -132,14 +150,14 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <GroupsIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Guests</h5>
                   </Row>
                   <Row>
-                    <h6>Single</h6>
+                    <h6>20</h6>
                   </Row>
                 </Col>
               </Row>
@@ -163,14 +181,14 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <GiteIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={2} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Bed Rooms</h5>
                   </Row>
                   <Row>
-                    <h6>Single</h6>
+                    <h6>2</h6>
                   </Row>
                 </Col>
               </Row>
@@ -192,14 +210,14 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <BedIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Beds</h5>
                   </Row>
                   <Row>
-                    <h6>Single</h6>
+                    <h6>3</h6>
                   </Row>
                 </Col>
               </Row>
@@ -278,11 +296,11 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <GarageIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Parking</h5>
                   </Row>
                 </Col>
               </Row>
@@ -305,75 +323,11 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <DeckIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "start",
-              alignItems: "center",
-              marginTop: 5,
-            }}
-          >
-            <Col md={{ span: 2 }}>
-              <Row
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "start",
-                }}
-              >
-                <Col
-                  md={{ span: 4 }}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "end",
-                    marginRight: 5,
-                  }}
-                >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
-                </Col>
-                <Col md={7} style={{ textAlign: "left" }}>
-                  <Row>
-                    <h5>Room Type</h5>
-                  </Row>
-                </Col>
-              </Row>
-            </Col>
-            <Col md={{ span: 2 }}>
-              <Row
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "start",
-                }}
-              >
-                <Col
-                  md={{ span: 4 }}
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "end",
-                    marginRight: 5,
-                  }}
-                >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
-                </Col>
-                <Col md={7} style={{ textAlign: "left" }}>
-                  <Row>
-                    <h5>Room Type</h5>
+                    <h5>Cafe</h5>
                   </Row>
                 </Col>
               </Row>
@@ -406,11 +360,11 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <BalconyIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Balcony</h5>
                   </Row>
                 </Col>
               </Row>
@@ -433,11 +387,11 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <ParkIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Garden</h5>
                   </Row>
                 </Col>
               </Row>
@@ -470,11 +424,11 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <PoolIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Swimming pool</h5>
                   </Row>
                 </Col>
               </Row>
@@ -497,11 +451,75 @@ function RentalInfo() {
                     marginRight: 5,
                   }}
                 >
-                  <RoomPreferencesIcon style={{ color: "#ff6666" }} />
+                  <AcUnitIcon style={{ color: "#ff6666" }} />
                 </Col>
                 <Col md={7} style={{ textAlign: "left" }}>
                   <Row>
-                    <h5>Room Type</h5>
+                    <h5>Air Conditioner</h5>
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+          <Row
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "start",
+              alignItems: "center",
+              marginTop: 5,
+            }}
+          >
+            <Col md={{ span: 2 }}>
+              <Row
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "start",
+                }}
+              >
+                <Col
+                  md={{ span: 4 }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "end",
+                    marginRight: 5,
+                  }}
+                >
+                  <SportsEsportsIcon style={{ color: "#ff6666" }} />
+                </Col>
+                <Col md={7} style={{ textAlign: "left" }}>
+                  <Row>
+                    <h5>Game Zone</h5>
+                  </Row>
+                </Col>
+              </Row>
+            </Col>
+            <Col md={{ span: 2 }}>
+              <Row
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "start",
+                }}
+              >
+                <Col
+                  md={{ span: 4 }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "end",
+                    marginRight: 5,
+                  }}
+                >
+                  <FitnessCenterIcon style={{ color: "#ff6666" }} />
+                </Col>
+                <Col md={7} style={{ textAlign: "left" }}>
+                  <Row>
+                    <h5>Gymnasium</h5>
                   </Row>
                 </Col>
               </Row>
@@ -526,27 +544,27 @@ function RentalInfo() {
               <List>
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <FiberManualRecordIcon style={{ color: "#ff6666" }} />
+                    <SmokeFreeIcon style={{ color: "#ff6666" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary="No Smoking" />
                 </ListItem>
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <FiberManualRecordIcon style={{ color: "#ff6666" }} />
+                    <PetsIcon style={{ color: "#ff6666" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary="Pets Allowed" />
                 </ListItem>
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <FiberManualRecordIcon style={{ color: "#ff6666" }} />
+                    <CancelScheduleSendIcon style={{ color: "#ff6666" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary="Free Cancelation before 48 hours" />
                 </ListItem>
                 <ListItem disablePadding>
                   <ListItemIcon>
-                    <FiberManualRecordIcon style={{ color: "#ff6666" }} />
+                    <HistoryToggleOffIcon style={{ color: "#ff6666" }} />
                   </ListItemIcon>
-                  <ListItemText primary="Inbox" />
+                  <ListItemText primary="Check-in: After 9:00 AM" />
                 </ListItem>
               </List>
             </Col>
@@ -594,6 +612,7 @@ function RentalInfo() {
               <h4>Reviews</h4>{" "}
             </Col>
           </Row>
+          {/* kavisha dev kashish */}
           <Row
             style={{
               alignItems: "center",
@@ -605,7 +624,7 @@ function RentalInfo() {
             className="px-5"
           >
             <Col
-              md={{ span: 2 }}
+              md={2}
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -615,7 +634,21 @@ function RentalInfo() {
               <Rating name="read-only" value={5} readOnly />
             </Col>
             <Col md={3}>
-              <Typography align="left">49 Reviews</Typography>{" "}
+              <Typography align="left">69 Reviews</Typography>{" "}
+            </Col>
+            <Col md={4}>
+              <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                <CreateIcon
+                  sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                />
+                <TextField
+                  id="input-with-sx"
+                  label="Write a New Review"
+                  variant="standard"
+                  color="warning"
+                  fullWidth
+                />
+              </Box>
             </Col>
           </Row>
           <Row className="px-5 mb-3">
@@ -731,12 +764,12 @@ function RentalInfo() {
               >
                 <Row className="h-100 d-flex flex-row align-items-center mb-3">
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                    <PasswordIcon
+                    <BadgeIcon
                       sx={{ color: "action.active", mr: 1, my: 0.5 }}
                     />
                     <TextField
                       id="input-with-sx"
-                      label="Password"
+                      label="Full Name"
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -745,12 +778,12 @@ function RentalInfo() {
                 </Row>
                 <Row className="h-100 d-flex flex-row align-items-center mb-3">
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                    <PasswordIcon
+                    <TodayIcon
                       sx={{ color: "action.active", mr: 1, my: 0.5 }}
                     />
                     <TextField
                       id="input-with-sx"
-                      label="Password"
+                      label="Check-In-date"
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -759,12 +792,12 @@ function RentalInfo() {
                 </Row>
                 <Row className="h-100 d-flex flex-row align-items-center mb-3">
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                    <PasswordIcon
+                    <InsertInvitationIcon
                       sx={{ color: "action.active", mr: 1, my: 0.5 }}
                     />
                     <TextField
                       id="input-with-sx"
-                      label="Password"
+                      label="Check-Out-Date"
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -773,12 +806,12 @@ function RentalInfo() {
                 </Row>
                 <Row className="h-100 d-flex flex-row align-items-center">
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                    <PasswordIcon
+                    <GroupsIcon
                       sx={{ color: "action.active", mr: 1, my: 0.5 }}
                     />
                     <TextField
                       id="input-with-sx"
-                      label="Password"
+                      label="No. Of Guests"
                       variant="standard"
                       color="warning"
                       fullWidth
