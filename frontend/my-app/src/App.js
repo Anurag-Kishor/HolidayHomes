@@ -13,6 +13,7 @@ import {
   useNavigate,
   BrowserRouter,
 } from "react-router-dom";
+import UserProfileScreen from "./Screens/UserProfileScreen";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signin" element={<SigninScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/rentalinfo/*" element={<RentalInfo />} />
+          <Route path="/user/*" element={<UserProfileScreen />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -36,11 +36,11 @@ function RentalInfo() {
             <Navbar.Brand href="#home">
               <Image src={logo} height="100" />
             </Navbar.Brand>
-            <Col md={{ span: 5 }}>
+            <Col md={{ span: 4, offset: 1 }}>
               <SearchBar
                 value={searchValue}
                 onChange={(newValue) => setSearchValue(searchValue)}
-                onRequestSearch={() => { }}
+                onRequestSearch={() => {}}
               />
             </Col>
             <Navbar.Toggle />

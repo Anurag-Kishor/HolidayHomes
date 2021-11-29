@@ -360,16 +360,18 @@ function SignupScreen() {
 
                 {/* Login Button */}
                 <Row className="mb-3">
-                  <Link to="../signin">
-                    <Button
-                      variant="outline-primary"
-                      size="lg"
-                      className="btn-secondary-hh"
-                      // style={{ borderColor: "#ff6666", color: "#ff6666" }}
-                    >
-                      Login
-                    </Button>
-                  </Link>
+                  <Col md={12}>
+                    <Link to="../signin" style={{ textDecoration: "none" }}>
+                      <Button
+                        variant="outline-primary"
+                        size="lg"
+                        className="btn-secondary-hh"
+                        style={{ width: "100%", display: "block" }}
+                      >
+                        Login
+                      </Button>
+                    </Link>
+                  </Col>
                 </Row>
               </Container>
             </Col>

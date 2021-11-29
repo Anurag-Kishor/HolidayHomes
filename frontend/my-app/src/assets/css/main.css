@@ -28,6 +28,13 @@ body {
   height: 80vh;
 }
 
+.cover-photo-user-profile {
+  background: url("../pexels-kyle-loftus-2734519.jpg") no-repeat center center
+    fixed;
+  background-size: cover;
+  height: 75vh;
+}
+
 .photo-rental-info {
   background: no-repeat center center fixed;
   background-size: cover;
@@ -44,4 +51,9 @@ body {
 
 .rs-picker-toggle-value {
   color: "#ff6666 !important";
+}
+
+.apply__borders {
+  border: 2px solid #ff6666;
+  border-radius: 15px;
 }
