@@ -37,7 +37,7 @@ function SignupScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const signUpSubmit = () => {
+  const signUpSubmit = async () => {
     if (
       !regexValidations.validEmail.test(email) ||
       !regexValidations.validPassword.test(password) ||
@@ -66,8 +66,10 @@ function SignupScreen() {
         city,
       };
 
-      dispatch(loginUser(user));
+      await dispatch(loginUser(user));
+      console.log("NAVIGATE BAKI HAI");
       navigate("/");
+      console.log("NAVIGATE HOGAYA");
     }
   };
 

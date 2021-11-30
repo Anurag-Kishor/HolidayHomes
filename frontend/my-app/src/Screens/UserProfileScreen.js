@@ -82,29 +82,17 @@ const UserProfileScreen = () => {
                   <h3>Profile</h3>
                 </Col>
               </Row>
-              <InputField
-                IconName="AddLocationAltRoundedIcon"
-                iconPlacement="left"
-              />
-              {/* <Row>
-                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                  <AddLocationAltRoundedIcon
-                    sx={{
-                      color: "action.active",
-                      mr: 1,
-                      my: 0.5,
-                      fontSize: 30,
-                    }}
-                  />
-                  <TextField
-                    id="input-with-sx"
-                    label="Full Name"
-                    variant="standard"
-                    color="warning"
-                    fullWidth
-                  />
-                </Box>
-              </Row> */}
+              <InputField label="Test" iconPlacement="left">
+                <AddLocationAltRoundedIcon
+                  sx={{
+                    color: "action.active",
+                    mr: 1,
+                    my: 0.5,
+                    fontSize: 30,
+                  }}
+                />
+              </InputField>
+
               <Row>
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <AddLocationAltRoundedIcon

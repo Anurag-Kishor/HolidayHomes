@@ -22,6 +22,7 @@ import "../assets/css/main.css";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
 import Footer from "../Components/Footer";
+import NavbarHH from "../Components/NavbarHH";
 function RentalInfo() {
   const [searchValue, setSearchValue] = React.useState("");
   var rentalPhotoVar = {
@@ -30,7 +31,7 @@ function RentalInfo() {
   return (
     <>
       {/* Navbar - Search */}
-      <Row>
+      {/* <Row>
         <Navbar>
           <Container>
             <Navbar.Brand href="#home">
@@ -57,7 +58,8 @@ function RentalInfo() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-      </Row>
+      </Row> */}
+      <NavbarHH />
 
       {/* Rental Photo */}
       <Row className="photo-rental-info" style={rentalPhotoVar}></Row>

@@ -1,43 +1,25 @@
 import React, { useEffect } from "react";
-import {
-  Col,
-  Image,
-  Navbar,
-  Row,
-  Button,
-  Card,
-  Container,
-} from "react-bootstrap";
+import { Col, Image, Navbar, Row, Button, Container } from "react-bootstrap";
 import logo from "../assets/hhlogo.png";
-import resortPhoto from "../assets/pixabay_maldives-1200.jpg";
 import testimonial1 from "../assets/1.png";
 import testimonial2 from "../assets/2.png";
 import testimonial3 from "../assets/3.png";
 import "../assets/css/main.css";
-import {
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Divider,
-  IconButton,
-  Paper,
-  Rating,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { TextField } from "@mui/material";
 import { Box } from "@mui/system";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import AddLocationAltRoundedIcon from '@mui/icons-material/AddLocationAltRounded';
-import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
-import GroupAddRoundedIcon from '@mui/icons-material/GroupAddRounded';
+import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
+import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
+import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 import { Carousel } from "react-responsive-carousel";
 import "../assets/css/carousel.min.css";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import abus from "../assets/4.png";
 import Footer from "../Components/Footer";
+import RentalCard from "../Components/RentalCard";
+import InputField from "../Components/InputField";
 
 function HomeScreen() {
   const getUser = useSelector((state) => state.user.user);
@@ -47,6 +29,8 @@ function HomeScreen() {
     if (getUser === null) {
       navigate("/signup");
       console.log("CALLING");
+    } else {
+      console.log(getUser);
     }
   }, [getUser]);
 
@@ -63,7 +47,9 @@ function HomeScreen() {
             <Navbar>
               <Container>
                 <Navbar.Brand>
-                  <Image src={logo} height="100" />
+                  <Link to="/">
+                    <Image src={logo} height="100" />
+                  </Link>
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -95,6 +81,7 @@ function HomeScreen() {
               </Container>
             </Navbar>
           </Row>
+
           {/* Search Form */}
           <Row className="row__allow__gutter">
             <Col
@@ -137,7 +124,12 @@ function HomeScreen() {
                     fullWidth
                   />
                   <AddLocationAltRoundedIcon
-                    sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
+                    sx={{
+                      color: "action.active",
+                      mr: 1,
+                      my: 0.5,
+                      fontSize: 30,
+                    }}
                   />
                 </Box>
               </Row>
@@ -151,7 +143,7 @@ function HomeScreen() {
                   <h5>Check Out</h5>
                 </Col>
               </Row>
-              <Row className=" align-items-center mb-3 row__allow__gutter">
+              <Row className="align-items-center mb-3 row__allow__gutter">
                 <Col
                   md={5}
                   style={{
@@ -169,7 +161,12 @@ function HomeScreen() {
                       fullWidth
                     />
                     <EventNoteRoundedIcon
-                      sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
+                      sx={{
+                        color: "action.active",
+                        mr: 1,
+                        my: 0.5,
+                        fontSize: 30,
+                      }}
                     />
                   </Box>
                 </Col>
@@ -190,7 +187,12 @@ function HomeScreen() {
                       fullWidth
                     />
                     <EventNoteRoundedIcon
-                      sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
+                      sx={{
+                        color: "action.active",
+                        mr: 1,
+                        my: 0.5,
+                        fontSize: 30,
+                      }}
                     />
                   </Box>
                 </Col>
@@ -217,7 +219,12 @@ function HomeScreen() {
                     fullWidth
                   />
                   <GroupAddRoundedIcon
-                    sx={{ color: "action.active", mr: 1, my: 0.5, fontSize: 30, }}
+                    sx={{
+                      color: "action.active",
+                      mr: 1,
+                      my: 0.5,
+                      fontSize: 30,
+                    }}
                   />
                 </Box>
               </Row>
@@ -255,170 +262,14 @@ function HomeScreen() {
       </Row>
       <Row className="px-5 mb-3 row__allow__gutter">
         <Col>
-          <Paper elevation={3}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={resortPhoto}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Holiday Inn Resort Bali Benoa
-                  </Typography>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col
-                      md={{ span: 3 }}
-                      className="border rounded"
-                      style={{ marginLeft: 10 }}
-                    >
-                      1 ROOM
-                    </Col>
-                    <Col md={{ span: 3, offset: 5 }}>
-                      <Typography variant="body1" align="right">
-                        Rs. 4200/Night
-                      </Typography>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col md={3}>
-                      <Rating name="read-only" value={5} readOnly />
-                    </Col>
-                    <Col md={3}>
-                      <Typography>49 Reviews</Typography>{" "}
-                    </Col>
-                  </Row>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Paper>
+          <RentalCard />
         </Col>
 
         <Col>
-          <Paper elevation={3}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={resortPhoto}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Holiday Inn Resort Bali Benoa
-                  </Typography>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col
-                      md={{ span: 3 }}
-                      className="border rounded"
-                      style={{ marginLeft: 10 }}
-                    >
-                      1 ROOM
-                    </Col>
-                    <Col md={{ span: 3, offset: 5 }}>
-                      <Typography variant="body1" align="right">
-                        Rs. 4200/Night
-                      </Typography>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col md={3}>
-                      <Rating name="read-only" value={5} readOnly />
-                    </Col>
-                    <Col md={3}>
-                      <Typography>49 Reviews</Typography>{" "}
-                    </Col>
-                  </Row>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Paper>
+          <RentalCard />
         </Col>
         <Col>
-          <Paper elevation={3}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={resortPhoto}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Holiday Inn Resort Bali Benoa
-                  </Typography>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col
-                      md={{ span: 3 }}
-                      className="border rounded"
-                      style={{ marginLeft: 10 }}
-                    >
-                      1 ROOM
-                    </Col>
-                    <Col md={{ span: 3, offset: 5 }}>
-                      <Typography variant="body1" align="right">
-                        Rs. 4200/Night
-                      </Typography>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col md={3}>
-                      <Rating name="read-only" value={5} readOnly />
-                    </Col>
-                    <Col md={3}>
-                      <Typography>49 Reviews</Typography>{" "}
-                    </Col>
-                  </Row>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Paper>
+          <RentalCard />
         </Col>
       </Row>
 
@@ -435,169 +286,13 @@ function HomeScreen() {
       </Row>
       <Row className="px-5 mb-5 row__allow__gutter">
         <Col>
-          <Paper elevation={3}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={resortPhoto}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Holiday Inn Resort Bali Benoa
-                  </Typography>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col
-                      md={{ span: 3 }}
-                      className="border rounded"
-                      style={{ marginLeft: 10 }}
-                    >
-                      1 ROOM
-                    </Col>
-                    <Col md={{ span: 3, offset: 5 }}>
-                      <Typography variant="body1" align="right">
-                        Rs. 4200/Night
-                      </Typography>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col md={3}>
-                      <Rating name="read-only" value={5} readOnly />
-                    </Col>
-                    <Col md={3}>
-                      <Typography>49 Reviews</Typography>{" "}
-                    </Col>
-                  </Row>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Paper>
+          <RentalCard />
         </Col>
         <Col>
-          <Paper elevation={3}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={resortPhoto}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Holiday Inn Resort Bali Benoa
-                  </Typography>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col
-                      md={{ span: 3 }}
-                      className="border rounded"
-                      style={{ marginLeft: 10 }}
-                    >
-                      1 ROOM
-                    </Col>
-                    <Col md={{ span: 3, offset: 5 }}>
-                      <Typography variant="body1" align="right">
-                        Rs. 4200/Night
-                      </Typography>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col md={3}>
-                      <Rating name="read-only" value={5} readOnly />
-                    </Col>
-                    <Col md={3}>
-                      <Typography>49 Reviews</Typography>{" "}
-                    </Col>
-                  </Row>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Paper>
+          <RentalCard />
         </Col>
         <Col>
-          <Paper elevation={3}>
-            <Card sx={{ maxWidth: 345 }}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  height="300"
-                  image={resortPhoto}
-                  alt="green iguana"
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Holiday Inn Resort Bali Benoa
-                  </Typography>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col
-                      md={{ span: 3 }}
-                      className="border rounded"
-                      style={{ marginLeft: 10 }}
-                    >
-                      1 ROOM
-                    </Col>
-                    <Col md={{ span: 3, offset: 5 }}>
-                      <Typography variant="body1" align="right">
-                        Rs. 4200/Night
-                      </Typography>
-                    </Col>
-                  </Row>
-                  <Row
-                    style={{
-                      alignItems: "center",
-                      height: "4vh",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <Col md={3}>
-                      <Rating name="read-only" value={5} readOnly />
-                    </Col>
-                    <Col md={3}>
-                      <Typography>49 Reviews</Typography>{" "}
-                    </Col>
-                  </Row>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Paper>
+          <RentalCard />
         </Col>
       </Row>
 
@@ -648,7 +343,12 @@ function HomeScreen() {
       </Carousel>
 
       {/* About Us */}
-      <img src={abus} height="500" className="mt-5" style={{ "paddingLeft": "300px" }} />
+      <img
+        src={abus}
+        height="500"
+        className="mt-5"
+        style={{ paddingLeft: "300px" }}
+      />
       {/* Footer */}
       <Row className="row__allow__gutter pt-4">
         <Col>
