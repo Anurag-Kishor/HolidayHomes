@@ -306,7 +306,7 @@ function HomeScreen() {
         interval={6100}
       >
         <div>
-          <img src={testimonial1} />
+          <img src={testimonial2} />
           <div className="myCarousel">
             <h3>Shirley Fultz</h3>
             <h4>Designer</h4>
@@ -330,7 +330,7 @@ function HomeScreen() {
         </div>
 
         <div>
-          <img src={testimonial3} />
+          <img src={testimonial2} />
           <div className="myCarousel">
             <h3>Theo Sorel</h3>
             <h4>Designer</h4>
