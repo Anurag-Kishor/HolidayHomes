@@ -14,6 +14,7 @@ import {
   BrowserRouter,
 } from "react-router-dom";
 import UserProfileScreen from "./Screens/UserProfileScreen";
+import SearchScreen from "./Screens/SearchScreen";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/rentalinfo/*" element={<RentalInfo />} />
           <Route path="/user/*" element={<UserProfileScreen />} />
+          <Route path="/Search" element={<SearchScreen />} />
         </Routes>
       </BrowserRouter>
     </div>
