@@ -4,6 +4,7 @@ import SignupScreen from "./Screens/SignupScreen";
 import SigninScreen from "./Screens/SigninScreen";
 import HomeScreen from "./Screens/HomeScreen";
 import RentalInfo from "./Screens/RentalInfo";
+import AddPlace from "./Screens/AddPlace";
 import "./App.css";
 
 import {
@@ -26,7 +27,8 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/rentalinfo/*" element={<RentalInfo />} />
           <Route path="/user/*" element={<UserProfileScreen />} />
-          <Route path="/Search" element={<SearchScreen />} />
+          <Route path="/search" element={<SearchScreen />} />
+          <Route path="/addplace" element={<AddPlace />} />
         </Routes>
       </BrowserRouter>
     </div>
