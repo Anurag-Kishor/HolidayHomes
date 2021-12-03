@@ -20,8 +20,10 @@ import PasswordIcon from "@mui/icons-material/Password";
 import GarageIcon from '@mui/icons-material/Garage';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GiteIcon from '@mui/icons-material/Gite';
+import IconButton from '@mui/material/IconButton';
 import BedIcon from '@mui/icons-material/Bed';
 import DeckIcon from '@mui/icons-material/Deck';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import BalconyIcon from '@mui/icons-material/Balcony';
 import ParkIcon from '@mui/icons-material/Park';
 import PoolIcon from '@mui/icons-material/Pool';
@@ -635,10 +637,10 @@ function RentalInfo() {
             >
               <Rating name="read-only" value={5} readOnly />
             </Col>
-            <Col md={3}>
+            <Col md={1}>
               <Typography align="left">69 Reviews</Typography>{" "}
             </Col>
-            <Col md={4}>
+            <Col md={6}>
               <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                 <CreateIcon
                   sx={{ color: "action.active", mr: 1, my: 0.5 }}
@@ -649,7 +651,14 @@ function RentalInfo() {
                   variant="standard"
                   color="warning"
                   fullWidth
+
                 />
+                <CheckCircleIcon
+                  sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                  fullWidth
+                />
+
+
               </Box>
             </Col>
           </Row>
