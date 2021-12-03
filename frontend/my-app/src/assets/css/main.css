@@ -4,6 +4,7 @@
 .btn-primary:visited {
   background-color: #ff6666 !important;
   color: white !important;
+  border-color: #ff6666 !important;
 }
 
 body {
@@ -56,4 +57,9 @@ body {
 .apply__borders {
   border: 2px solid #ff6666;
   border-radius: 15px;
+}
+
+.apply__borders__5 {
+  border: 2px solid #ff6666;
+  border-radius: 5px;
 }

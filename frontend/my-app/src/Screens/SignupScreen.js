@@ -21,6 +21,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import { loginUser } from "../app/Actions/userActions";
+import InputField from "../Components/InputField.js";
 
 function SignupScreen() {
   const [errors, setErrors] = useState("");
@@ -115,20 +116,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Full Name"
+                        iconPlacement="left"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                      >
                         <AccountCircle
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Full Name"
-                          color="warning"
-                          variant="standard"
-                          value={fullName}
-                          onChange={(e) => setFullName(e.target.value)}
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                   <Col lg={2}></Col>
@@ -137,20 +134,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Contact Number"
+                        iconPlacement="left"
+                        value={contactNumber}
+                        onChange={(e) => setContactNumber(e.target.value)}
+                      >
                         <PhoneIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Contact Number"
-                          variant="standard"
-                          color="warning"
-                          value={contactNumber}
-                          onChange={(e) => setContactNumber(e.target.value)}
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                 </Row>
@@ -162,20 +155,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Email"
+                        iconPlacement="left"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      >
                         <AlternateEmailIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Email"
-                          variant="standard"
-                          color="warning"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                   <Col lg={2}></Col>
@@ -184,20 +173,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Password"
+                        iconPlacement="left"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      >
                         <PasswordIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Password"
-                          variant="standard"
-                          color="warning"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                 </Row>
@@ -209,20 +194,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Address Line 1"
+                        iconPlacement="left"
+                        value={addressLine1}
+                        onChange={(e) => setAddressLine1(e.target.value)}
+                      >
                         <HomeIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Address Line 1"
-                          variant="standard"
-                          color="warning"
-                          value={addressLine1}
-                          onChange={(e) => setAddressLine1(e.target.value)}
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                 </Row>
@@ -234,20 +215,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Address Line 2"
+                        iconPlacement="left"
+                        value={addressLine2}
+                        onChange={(e) => setAddressLine2(e.target.value)}
+                      >
                         <HomeIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Address Line 2"
-                          variant="standard"
-                          color="warning"
-                          value={addressLine2}
-                          onChange={(e) => setAddressLine2(e.target.value)}
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                 </Row>

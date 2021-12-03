@@ -13,6 +13,8 @@ const InputField = (props) => {
             label={props.label}
             variant="standard"
             color="warning"
+            value={props.value}
+            onChange={props.onChange}
             fullWidth
           />
         </>
