@@ -13,6 +13,10 @@ import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded
 import resortPhoto from "../assets/pixabay_maldives-1200.jpg";
 
 import InputField from "../Components/InputField";
+import BadgeIcon from '@mui/icons-material/Badge';
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
+import HomeIcon from '@mui/icons-material/Home';
 
 import { Link } from "react-router-dom";
 
@@ -38,7 +42,7 @@ const UserProfileScreen = () => {
               <SearchBar
                 value={searchValue}
                 onChange={(newValue) => setSearchValue(searchValue)}
-                onRequestSearch={() => {}}
+                onRequestSearch={() => { }}
               />
             </Col>
             <Navbar.Toggle />
@@ -108,12 +112,12 @@ const UserProfileScreen = () => {
             <Col md={12} className="apply__borders">
               <Row className="row__allow__gutter">
                 <Col md={12}>
-                  <h3>Profile</h3>
+                  <h2 style={{ color: "#ff6666" }}>Profile</h2>
                 </Col>
               </Row>
               <Row className="mb-2">
-                <InputField label="Test" iconPlacement="left">
-                  <AddLocationAltRoundedIcon
+                <InputField label="Full Name" iconPlacement="left">
+                  <BadgeIcon
                     sx={{
                       color: "action.active",
                       mr: 1,
@@ -124,8 +128,8 @@ const UserProfileScreen = () => {
                 </InputField>
               </Row>
               <Row className="mb-2">
-                <InputField label="Test" iconPlacement="left">
-                  <AddLocationAltRoundedIcon
+                <InputField label="Contact No." iconPlacement="left">
+                  <PhoneInTalkIcon
                     sx={{
                       color: "action.active",
                       mr: 1,
@@ -137,8 +141,8 @@ const UserProfileScreen = () => {
               </Row>
 
               <Row className="mb-2">
-                <InputField label="Test" iconPlacement="left">
-                  <AddLocationAltRoundedIcon
+                <InputField label="Email ID" iconPlacement="left">
+                  <MarkEmailReadIcon
                     sx={{
                       color: "action.active",
                       mr: 1,
@@ -149,8 +153,8 @@ const UserProfileScreen = () => {
                 </InputField>
               </Row>
               <Row className="mb-2">
-                <InputField label="Test" iconPlacement="left">
-                  <AddLocationAltRoundedIcon
+                <InputField label="Address Line 1" iconPlacement="left">
+                  <HomeIcon
                     sx={{
                       color: "action.active",
                       mr: 1,
@@ -161,8 +165,8 @@ const UserProfileScreen = () => {
                 </InputField>
               </Row>
               <Row className="mb-2">
-                <InputField label="Test" iconPlacement="left">
-                  <AddLocationAltRoundedIcon
+                <InputField label="Address Line 2" iconPlacement="left">
+                  <HomeIcon
                     sx={{
                       color: "action.active",
                       mr: 1,
@@ -202,7 +206,7 @@ const UserProfileScreen = () => {
         >
           <Row className="row__allow__gutter px-5 pt-3">
             <Col md={12}>
-              <h3>History</h3>
+              <h2 style={{ color: "#ff6666" }}>History</h2>
             </Col>
           </Row>
 
