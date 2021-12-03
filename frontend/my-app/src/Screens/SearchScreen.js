@@ -9,6 +9,7 @@ import {
     Container,
 } from "react-bootstrap";
 import InputField from "../Components/InputField";
+import SearchCardNavbar from "../Components/SearchCardNavbar";
 import logo from "../assets/hhlogo.png";
 import "../assets/css/main.css";
 import { TextField } from "@mui/material";
@@ -17,56 +18,15 @@ import RentalCard from "../Components/RentalCard";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import ReviewDiv from "../Components/ReviewDiv";
+import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
+import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
+import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 
 function SearchScreen() {
     return (
         <>
             {/* Cover Photo - Search Form - Navbar */}
-            <Row
-                className="cover-photo-home row__allow__gutter"
-                style={{ textAlign: "left" }}
-            >
-                <Col>
-                    <Row>
-                        <Navbar>
-                            <Container>
-                                <Navbar.Brand>
-                                    <Link to="/">
-                                        <Image src={logo} height="100" />
-                                    </Link>
-                                </Navbar.Brand>
-                                <Navbar.Toggle />
-                                <Navbar.Collapse className="justify-content-end">
-                                    <Link to="/become-a-host" style={{ textDecoration: "none" }}>
-                                        <Navbar.Text
-                                            className="p-5 h5"
-                                            style={{ color: "#ff6666" }}
-                                        >
-                                            Become a Host
-                    </Navbar.Text>
-                                    </Link>
-                                    <Link to="/me" style={{ textDecoration: "none" }}>
-                                        <Navbar.Text
-                                            className="p-5 h5"
-                                            style={{ color: "#ff6666" }}
-                                        >
-                                            Me
-                    </Navbar.Text>
-                                    </Link>
-                                    <Link to="/signin" style={{ textDecoration: "none" }}>
-                                        <Navbar.Text
-                                            className="p-5 h5"
-                                            style={{ color: "#ff6666" }}
-                                        >
-                                            Logout
-                    </Navbar.Text>
-                                    </Link>
-                                </Navbar.Collapse>
-                            </Container>
-                        </Navbar>
-                    </Row>
-                </Col>
-            </Row>
+            <SearchCardNavbar />
             <Row className="px-0 pt-5 row__allow__gutter">
                 <Col md={3}>
                     <h2 style={{ color: "#ff6666" }}>Search Title Goes Here</h2>{" "}
