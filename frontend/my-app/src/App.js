@@ -6,7 +6,6 @@ import HomeScreen from "./Screens/HomeScreen";
 import RentalInfo from "./Screens/RentalInfo";
 import AddPlace from "./Screens/AddPlace";
 import SearchScreen from "./Screens/SearchScreen";
-import AddPlace from "./Screens/AddPlace";
 import "./App.css";
 
 import {
