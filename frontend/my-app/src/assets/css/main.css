@@ -63,3 +63,7 @@ body {
   border: 2px solid #ff6666;
   border-radius: 5px;
 }
+
+.width__150 {
+  width: calc(100%);
+}
