@@ -36,6 +36,12 @@ body {
   height: 75vh;
 }
 
+.cover-photo-host-profile {
+  background: url("../9.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 75vh;
+}
+
 .photo-rental-info {
   background: no-repeat center center fixed;
   background-size: cover;

@@ -90,7 +90,7 @@ const HostProfileScreen = () => {
 
       {/* Profile - Rentals */}
       <Row
-        className="row__allow__gutter cover-photo-user-profile px-5 py-5"
+        className="row__allow__gutter cover-photo-host-profile px-5 py-5"
         style={{
           display: "flex",
           flexDirection: "row",
