@@ -23,7 +23,7 @@ import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 import { Link } from "react-router-dom";
 
-import { loginUser } from "../app/Actions/userActions";
+import { signupUser } from "../app/Actions/userActions";
 import InputField from "../Components/InputField.js";
 
 function SignupScreen() {
@@ -58,9 +58,11 @@ function SignupScreen() {
       );
     } else {
       setErrors("");
+      const fullNameArr = fullName.split(" ");
       const user = {
-        fullName,
-        contactNumber,
+        firstName: fullName,
+        lastName: "TATTI",
+        phoneNumber: contactNumber,
         email,
         password,
         addressLine1,
@@ -70,8 +72,12 @@ function SignupScreen() {
         city,
       };
 
-      await dispatch(loginUser(user));
-      navigate("/");
+      const response = await dispatch(signupUser(user));
+      if (response.status !== 200) {
+        setErrors(response.error);
+      } else {
+        navigate("/signin");
+      }
     }
   };
 
