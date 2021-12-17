@@ -1,4 +1,4 @@
-class Host {
+class User {
 
     constructor(){
         this.firstName = null;
@@ -11,9 +11,10 @@ class Host {
         this.state = null;
         this.country = null;
         this.phoneNumber = null;
+        this.isHost = null;
     }
 
-    initModel(firstName, lastName, email, password, addressLine1, addressLine2, city, state, country, phoneNumber) {
+    initModel(firstName, lastName, email, password, addressLine1, addressLine2, city, state, country, phoneNumber, isHost) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email =email;
@@ -24,6 +25,7 @@ class Host {
         this.state = state;
         this.country = country;
         this.phoneNumber = phoneNumber;
+        this.isHost = isHost;
 
     }
 
@@ -51,4 +53,4 @@ class Host {
     
 }
 
-module.exports = Host;
+module.exports = User;

@@ -40,3 +40,14 @@
     "description": "Good",
     "stars": 3
 }
+
+//For new booking
+{
+    "rentalId" : 1,
+    "travelerId": 2,
+    "bookFrom": "12/12/2021",
+    "bookTo": "12/01/2022",
+    "amount": 30000,
+    "numberOfRooms": 1,
+    "numberOfGuests": 2
+}

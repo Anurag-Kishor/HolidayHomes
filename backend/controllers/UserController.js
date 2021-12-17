@@ -1,27 +1,29 @@
-const Host = require("../models/Host");
-const HostService = require('../services/HostService');
+const User = require("../models/User");
+const UserService = require('../services/UserService');
+const bcrypt = require('bcrypt')
 
-const createHost = async(req, res) => {
+const createUser = async(req, res) => {
     try {
         const data = req.body;
+        const hashedPassword = await bcrypt.hash(data.password, 10);
+        let user = new User();
 
-        let host = new Host();
-
-        host.initModel(
+        user.initModel(
             data.firstName,    
             data.lastName,
             data.email,
-            data.password,
+            hashedPassword,
             data.addressLine1,
             data.addressLine2,
             data.city,
             data.state,
             data.country,
-            data.phoneNumber
+            data.phoneNumber,
+            false
         )
         
-       // console.log(host);
-        const result = await HostService.createHost(host);
+       // console.log(traveler);
+        const result = await UserService.createUser(user);
        // console.log("Imhere");
         res.status(result.status).send(result);
         
@@ -31,16 +33,16 @@ const createHost = async(req, res) => {
 
 }
 
-const updateHost = async(req, res) => {
+const updateUser = async(req, res) => {
     try {
 
         const id = req.params.id;
         const data = req.body;
         //console.log(id);
        // console.log(data);
-        let host = new Host();
+        let user = new User();
 
-        host.initModel(
+        user.initModel(
             data.firstName,    
             data.lastName,
             data.email,
@@ -53,7 +55,7 @@ const updateHost = async(req, res) => {
             data.phoneNumber
         )
 
-        const result = await HostService.updateHost(id, host);
+        const result = await UserService.updateUser(id, user);
         res.status(result.status).send(result);
 
     } catch (error) {
@@ -61,10 +63,9 @@ const updateHost = async(req, res) => {
     }
 }
 
-const getAllHosts = async(req, res) => {
-    
+const getAllUsers = async(req, res) => {
     try {
-        const result = await HostService.getAllHosts();    
+        const result = await UserService.getAllUsers();    
         res.status(result.status).send(result);
     } catch (error) {
         res.status(401).send({success: false, error: error.message});
@@ -72,11 +73,11 @@ const getAllHosts = async(req, res) => {
 
 }
 
-const getHostById = async(req, res) => {
+const getUserById = async(req, res) => {
     try {
 
         const id = req.params.id;
-        const result = await HostService.getHostById(id);
+        const result = await UserService.getUserById(id);
         res.status(result.status).send(result);
 
     } catch (error) {
@@ -84,29 +85,33 @@ const getHostById = async(req, res) => {
     }
 }
 
-const deleteHost = async(req, res) => {
+const deleteUser = async(req, res) => {
     try {
         const id = req.pramams.id;
-        const result = await HostService.deleteHost(id);
+        const result = await UserService.deleteUser(id);
         res.status(result.status).send(result);
     } catch (error) {
         res.status(401).send({success: false, error: error.message});
     }
 }
 
-const getRentalsByHostId = async(req, res) => {
+const checkIfUserIsHost = async(req, res) => {
+
     try {
-        
-    } catch (error) {
-        
+        const id = req.params.id;
+        const result = await UserService.checkIfUserIsHost(id);
+
+        res.status(result.status).send(result)
+    }catch(error) {
+        res.status(401).send({success: false, error: error.message});
     }
 }
 
 module.exports = {
-    getAllHosts, 
-    getHostById,
-    createHost,
-    updateHost,
-    deleteHost,
-    getRentalsByHostId,
+    getAllUsers, 
+    getUserById,
+    createUser,
+    updateUser,
+    deleteUser,
+    checkIfUserIsHost
 };
