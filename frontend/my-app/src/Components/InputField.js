@@ -11,6 +11,7 @@ const InputField = (props) => {
           <TextField
             id="input-with-sx"
             label={props.label}
+            type={props.type ? props.type : "text"}
             variant="standard"
             color="warning"
             value={props.value}

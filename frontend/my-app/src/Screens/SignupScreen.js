@@ -12,6 +12,9 @@ import signUpCover from "../assets/undraw_Business_deal_re_up4u.png";
 import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import PublicIcon from "@mui/icons-material/Public";
+import LocationCityIcon from "@mui/icons-material/LocationCity";
+import ChaletIcon from "@mui/icons-material/Chalet";
 import PasswordIcon from "@mui/icons-material/Password";
 import HomeIcon from "@mui/icons-material/Home";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -68,32 +71,32 @@ function SignupScreen() {
       };
 
       await dispatch(loginUser(user));
-      console.log("NAVIGATE BAKI HAI");
       navigate("/");
-      console.log("NAVIGATE HOGAYA");
     }
   };
 
   return (
     <>
       <Row style={{ height: "100vh" }}>
-        <Col sm={7} style={{ backgroundColor: "#E5E5E5" }}>
+        <Col xs={12} lg={7} style={{ backgroundColor: "#E5E5E5" }}>
           {errors.length !== 0 ? (
             <Row className="pt-0 px-10">
-              <Alert
-                style={{
-                  backgroundColor: "#ff6666",
-                  color: "white",
-                  borderColor: "#ff6666",
-                }}
-              >
-                {errors}
-              </Alert>
+              <Col xs={12} lg={12}>
+                <Alert
+                  style={{
+                    backgroundColor: "#ff6666",
+                    color: "white",
+                    borderColor: "#ff6666",
+                  }}
+                >
+                  {errors}
+                </Alert>
+              </Col>
             </Row>
           ) : null}
 
           <Row className="justify-content-md-center py-5">
-            <Col sm={10}>
+            <Col xs={12} lg={10}>
               <Container
                 style={{ backgroundColor: "#e5e5e5", height: "88vh" }}
                 className="p-5"
@@ -102,7 +105,7 @@ function SignupScreen() {
                   style={{ height: "10vh" }}
                   className="d-flex flex-row mb-5 align-items-center"
                 >
-                  <Col sm={11}>
+                  <Col xs={6} sm={11}>
                     <h2>Welcome</h2>
                   </Col>
                   <Col>
@@ -112,24 +115,28 @@ function SignupScreen() {
                 {/* Full Name - Contact Number */}
                 <Row style={{ height: "7vh" }} className="mb-3">
                   <Col
+                    xs={12}
                     lg={5}
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
-                      <InputField
-                        label="Full Name"
-                        iconPlacement="left"
-                        value={fullName}
-                        onChange={(e) => setFullName(e.target.value)}
-                      >
-                        <AccountCircle
-                          sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                        />
-                      </InputField>
+                      <Col xs={12}>
+                        <InputField
+                          label="Full Name"
+                          iconPlacement="left"
+                          value={fullName}
+                          onChange={(e) => setFullName(e.target.value)}
+                        >
+                          <AccountCircle
+                            sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                          />
+                        </InputField>
+                      </Col>
                     </Row>
                   </Col>
-                  <Col lg={2}></Col>
+                  <Col xs lg={2}></Col>
                   <Col
+                    xs={12}
                     lg={5}
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
@@ -151,6 +158,7 @@ function SignupScreen() {
                 {/* Email - Password */}
                 <Row style={{ height: "7vh" }} className="mb-3">
                   <Col
+                    xs={12}
                     lg={5}
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
@@ -158,6 +166,7 @@ function SignupScreen() {
                       <InputField
                         label="Email"
                         iconPlacement="left"
+                        type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                       >
@@ -175,6 +184,7 @@ function SignupScreen() {
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
                       <InputField
                         label="Password"
+                        type="password"
                         iconPlacement="left"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -237,11 +247,11 @@ function SignupScreen() {
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
                       <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <AccountCircle
+                        <PublicIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
                         <FormControl fullWidth>
-                          <InputLabel id="select-label-country">
+                          <InputLabel id="select-label-country" color="warning">
                             Country
                           </InputLabel>
                           <Select
@@ -267,7 +277,7 @@ function SignupScreen() {
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
                       <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <AccountCircle
+                        <ChaletIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
                         <FormControl fullWidth>
@@ -297,7 +307,7 @@ function SignupScreen() {
                   >
                     <Row className="h-100 d-flex flex-row align-items-center px-4">
                       <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <AccountCircle
+                        <LocationCityIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
                         <FormControl fullWidth>
@@ -356,7 +366,7 @@ function SignupScreen() {
             </Col>
           </Row>
         </Col>
-        <Col sm={5}>
+        <Col xs lg={5}>
           <Row className="align-items-center h-100">
             <Image src={signUpCover} />
           </Row>
