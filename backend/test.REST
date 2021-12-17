@@ -1,0 +1,32 @@
+POST http://localhost:5000/api/user
+Content-Type: application/json
+
+{
+    "firstName": "Anurag",
+    "lastName": "Kakkan",
+    "email": "anurag@gmail.com",
+    "password": "1234",
+    "addressLine1": "12th street",
+    "addressLine2": "baker road",
+    "city": "ahmedabad",
+    "state": "gujarat",
+    "country": "India",
+    "phoneNumber": 9409809197
+}
+
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "anurag@gmail.com",
+    "password": "1234"
+}
+
+
+###
+GET http://localhost:5000/api/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOGYzYjFhYjAtODRhNy00YzQwLWIzOTgtYTc2YTQ4OThmY2Q5IiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5NzQzMzk4LCJleHAiOjE2Mzk3NDM0MTh9.ktlW0L95I3emHNGDGCaI7M_qbIGEGAKKFrCELvtScqM
+
+###
+GET http://localhost:5000/api/auth/refreshToken

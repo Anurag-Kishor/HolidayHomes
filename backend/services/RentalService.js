@@ -107,7 +107,23 @@ const calculateAverageReview = async(rental_id) => {
         return {status : 400, success: false, error: error};
     }
 }
-const addService = async(renta_id) => {
+
+const addService = async(services) => {
+    try {
+
+        services.forEach(async(service) => {
+            const res = 
+            await pool.query('INSERT INTO services(description) VALUES ($1) RETURNING service_id', 
+            [service], (err, res) => {
+                if(err){
+                    return {status : 400, success: false, err: error};
+                }
+            });
+        })
+        return {status : 200, success: true};
+    } catch (error) {
+        return {status : 400, success: false, error: error};
+    }
 
 }
 

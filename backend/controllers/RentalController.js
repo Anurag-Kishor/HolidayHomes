@@ -89,11 +89,15 @@ const averageRating = async(req, res) => {
 
     }
 }
+
+//Add new services to service table
 const addService = async(req, res) => {
     try {
-
+        const services = req.body.services;
+        const result = await RentalService.addService(services);
+        res.status(result.status).send(result); 
     } catch (error) {
-        
+        res.status(401).send({success: false, error: error.message});
     }
 }
 
@@ -104,5 +108,6 @@ module.exports = {
     setAvailability,
     postReview,
     addService,
-    averageRating
+    averageRating,
+    addService
 }

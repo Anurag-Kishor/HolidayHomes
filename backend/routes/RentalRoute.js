@@ -17,6 +17,7 @@ router.get('/:rental_id/review', averageRating)
 // POST / ADD rental
 router.post('/', addRental);
 router.post('/:rental_id/review', postReview)
+router.post('/service', addService)
 
 // PUT / UPDATE rental 
 router.put('/', updateRental);
