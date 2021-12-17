@@ -118,6 +118,7 @@ function SignupScreen() {
                     <Image src={logo} fluid />
                   </Col>
                 </Row>
+
                 {/* Full Name - Contact Number */}
                 <Row style={{ height: "7vh" }} className="mb-3">
                   <Col
