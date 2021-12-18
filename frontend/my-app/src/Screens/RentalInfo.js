@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Col,
   Image,
@@ -13,38 +13,50 @@ import logo from "../assets/hhlogo.png";
 import rentalPhoto from "../assets/pexels-alexandr-podvalny-3278215.jpg";
 import RoomPreferencesIcon from "@mui/icons-material/RoomPreferences";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { Rating, Typography, Divider, Paper, TextField } from "@mui/material";
+import {
+  Rating,
+  Typography,
+  Divider,
+  Paper,
+  TextField,
+  Alert,
+} from "@mui/material";
 import "../../node_modules/rsuite/dist/rsuite.min.css";
 import DateRangePicker from "rsuite/DateRangePicker";
 import PasswordIcon from "@mui/icons-material/Password";
-import GarageIcon from '@mui/icons-material/Garage';
-import GroupsIcon from '@mui/icons-material/Groups';
-import GiteIcon from '@mui/icons-material/Gite';
-import IconButton from '@mui/material/IconButton';
-import BedIcon from '@mui/icons-material/Bed';
-import DeckIcon from '@mui/icons-material/Deck';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import BalconyIcon from '@mui/icons-material/Balcony';
-import ParkIcon from '@mui/icons-material/Park';
-import PoolIcon from '@mui/icons-material/Pool';
-import BadgeIcon from '@mui/icons-material/Badge';
-import TodayIcon from '@mui/icons-material/Today';
-import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import SmokeFreeIcon from '@mui/icons-material/SmokeFree';
-import CreateIcon from '@mui/icons-material/Create';
-import PetsIcon from '@mui/icons-material/Pets';
-import CancelScheduleSendIcon from '@mui/icons-material/CancelScheduleSend';
-import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
+import GarageIcon from "@mui/icons-material/Garage";
+import GroupsIcon from "@mui/icons-material/Groups";
+import GiteIcon from "@mui/icons-material/Gite";
+import IconButton from "@mui/material/IconButton";
+import BedIcon from "@mui/icons-material/Bed";
+import DeckIcon from "@mui/icons-material/Deck";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import BalconyIcon from "@mui/icons-material/Balcony";
+import ParkIcon from "@mui/icons-material/Park";
+import PoolIcon from "@mui/icons-material/Pool";
+import BadgeIcon from "@mui/icons-material/Badge";
+import TodayIcon from "@mui/icons-material/Today";
+import InsertInvitationIcon from "@mui/icons-material/InsertInvitation";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
+import SmokeFreeIcon from "@mui/icons-material/SmokeFree";
+import CreateIcon from "@mui/icons-material/Create";
+import PetsIcon from "@mui/icons-material/Pets";
+import CancelScheduleSendIcon from "@mui/icons-material/CancelScheduleSend";
+import HistoryToggleOffIcon from "@mui/icons-material/HistoryToggleOff";
 import "../assets/css/main.css";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
 import Footer from "../Components/Footer";
 import NavbarHH from "../Components/NavbarHH";
 function RentalInfo() {
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [isAvailable, setIsAvailable] = useState(false);
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [noOfGuests, setNoOfGuests] = useState("");
+  const [errors, setErrors] = useState("");
   var rentalPhotoVar = {
     backgroundImage: "url(" + rentalPhoto + ")",
   };
@@ -86,8 +98,23 @@ function RentalInfo() {
 
       <Row>
         {/* LEFT HAND SIDE FROM TITLE TILL REVIEWS */}
-        <Col md={9}>
+        <Col md={8}>
           {/* Rental Title - Location */}
+          {errors.length !== 0 ? (
+            <Row className="pt-0 px-10">
+              <Col xs={12} lg={12}>
+                <Alert
+                  style={{
+                    backgroundColor: "#ff6666",
+                    color: "white",
+                    borderColor: "#ff6666",
+                  }}
+                >
+                  {errors}
+                </Alert>
+              </Col>
+            </Row>
+          ) : null}
           <Row className="px-5 pt-5" style={{ textAlign: "left" }}>
             <Col md={{ span: 12 }}>
               <h3>Title goes here</h3>{" "}
@@ -582,7 +609,7 @@ function RentalInfo() {
           </Row>
 
           {/* Availability */}
-          <Row className="px-5 pt-3 mb-1" style={{ textAlign: "left" }}>
+          {/* <Row className="px-5 pt-3 mb-1" style={{ textAlign: "left" }}>
             <Col md={{ span: 10 }}>
               <h4>Availability</h4>{" "}
             </Col>
@@ -601,14 +628,14 @@ function RentalInfo() {
                 style={{ color: "#ff6666 !important" }}
               />
             </Col>
-          </Row>
+          </Row> */}
 
           {/* Line - After Availability */}
-          <Row className="px-5">
+          {/* <Row className="px-5">
             <Col md={{ span: 10 }}>
               <hr />
             </Col>
-          </Row>
+          </Row> */}
 
           {/* Reviews */}
           <Row className="px-5 pt-3 mb-1" style={{ textAlign: "left" }}>
@@ -642,23 +669,18 @@ function RentalInfo() {
             </Col>
             <Col md={6}>
               <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                <CreateIcon
-                  sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                />
+                <CreateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                 <TextField
                   id="input-with-sx"
                   label="Write a New Review"
                   variant="standard"
                   color="warning"
                   fullWidth
-
                 />
                 <CheckCircleIcon
                   sx={{ color: "action.active", mr: 1, my: 0.5 }}
                   fullWidth
                 />
-
-
               </Box>
             </Col>
           </Row>
@@ -750,7 +772,7 @@ function RentalInfo() {
           </Row>
         </Col>
         {/* RIGHT HAND SIDE BOOKING FORM */}
-        <Col md={3}>
+        <Col md={4}>
           <Row className="px-5 pt-5">
             <Paper elevation={5} style={{ padding: 10 }}>
               <Typography variant="h5" align="left" style={{ marginLeft: 30 }}>
@@ -773,7 +795,7 @@ function RentalInfo() {
                   marginBottom: 35,
                 }}
               >
-                <Row className="h-100 d-flex flex-row align-items-center mb-3">
+                {/* <Row className="h-100 d-flex flex-row align-items-center mb-3">
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                     <BadgeIcon
                       sx={{ color: "action.active", mr: 1, my: 0.5 }}
@@ -786,6 +808,12 @@ function RentalInfo() {
                       fullWidth
                     />
                   </Box>
+                </Row> */}
+                <Row className="h-100 d-flex flex-row align-items-center mb-3">
+                  <DateRangePicker
+                    appearance="default"
+                    style={{ color: "#ff6666 !important" }}
+                  />
                 </Row>
                 <Row className="h-100 d-flex flex-row align-items-center mb-3">
                   <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -795,6 +823,7 @@ function RentalInfo() {
                     <TextField
                       id="input-with-sx"
                       label="Check-In-date"
+                      disabled
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -809,6 +838,7 @@ function RentalInfo() {
                     <TextField
                       id="input-with-sx"
                       label="Check-Out-Date"
+                      disabled
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -822,6 +852,9 @@ function RentalInfo() {
                     />
                     <TextField
                       id="input-with-sx"
+                      type="number"
+                      min="1"
+                      max="20"
                       label="No. Of Guests"
                       variant="standard"
                       color="warning"
@@ -830,19 +863,46 @@ function RentalInfo() {
                   </Box>
                 </Row>
               </Paper>
-              <Row className="mb-4">
-                <Col md={{ span: 8, offset: 2 }} className="d-grid gap-2">
-                  <Button
-                    variant="primary"
-                    style={{
-                      backgroundColor: "#FF6666",
-                      borderColor: "#ff6666",
-                    }}
-                  >
-                    Make Payment
-                  </Button>
-                </Col>
-              </Row>
+              {isAvailable ? (
+                <>
+                  <Row className="mb-4">
+                    <Col md={{ span: 8, offset: 2 }} className="d-grid gap-2">
+                      <Typography variant="body1">
+                        Total Amount: 13200
+                      </Typography>
+                    </Col>
+                  </Row>
+                  <Row className="mb-4">
+                    <Col md={{ span: 8, offset: 2 }} className="d-grid gap-2">
+                      <Button
+                        variant="primary"
+                        style={{
+                          backgroundColor: "#FF6666",
+                          borderColor: "#ff6666",
+                        }}
+                      >
+                        Make Payment
+                      </Button>
+                    </Col>
+                  </Row>
+                </>
+              ) : (
+                <>
+                  <Row className="mb-4">
+                    <Col md={{ span: 8, offset: 2 }} className="d-grid gap-2">
+                      <Button
+                        variant="primary"
+                        style={{
+                          backgroundColor: "#FF6666",
+                          borderColor: "#ff6666",
+                        }}
+                      >
+                        Check Availability
+                      </Button>
+                    </Col>
+                  </Row>
+                </>
+              )}
             </Paper>
           </Row>
         </Col>
