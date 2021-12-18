@@ -13,17 +13,18 @@ const { authenticateToken } = require("./middleware/Authorization");
 const app = express();
 
 //middlewares
-
-const corseOptions = { credentials: true, origin: process.env.URL || "*" };
-app.use(cors(corseOptions));
+const corsOptions = {credentials: true, origin: process.env.URL || '*'}
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
 //routes
 
-app.use("/api/auth", authRouter);
-app.use("/api/rental", authenticateToken, rentalRouter);
-app.use("/api/admin", authenticateToken, adminRouter);
-app.use("/api/user", userRouter);
-app.use("/api/booking", authenticateToken, bookingRouter);
+app.use('/api/auth', authRouter)
+app.use('/api/rental', authenticateToken, rentalRouter)
+app.use('/api/admin', authenticateToken, adminRouter);
+app.use('/api/user', userRouter)
+app.use('/api/booking', authenticateToken, bookingRouter)
+
 
 app.listen(5000, console.log("Connected to port 5000"));
