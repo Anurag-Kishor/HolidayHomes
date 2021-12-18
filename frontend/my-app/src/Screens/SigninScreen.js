@@ -1,9 +1,12 @@
-import React from "react";
-import { Container, Row, Col, Button, Image } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Col, Button, Image, Alert } from "react-bootstrap";
 
 import "../assets/css/main.css";
 import logo from "../assets/hhlogo.png";
 import signInCover from "../assets/undraw_File_bundle_re_6q1e.png";
+
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import TextField from "@mui/material/TextField";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -11,12 +14,50 @@ import PasswordIcon from "@mui/icons-material/Password";
 import Box from "@mui/material/Box";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import { Link } from "react-router-dom";
+import { loginUser } from "../app/Actions/userActions";
+import InputField from "../Components/InputField";
 
 function SignupScreen() {
+  const [errors, setErrors] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const loginAsync = async () => {
+    const user = {
+      email,
+      password,
+    };
+    const resVar = await dispatch(loginUser(user));
+    if (!resVar.success) {
+      setErrors(resVar.error);
+    } else {
+      navigate("/");
+    }
+  };
+
   return (
     <>
       <Row style={{ height: "98vh" }} className="row__allow__gutter">
         <Col sm={5} style={{ backgroundColor: "#E5E5E5" }}>
+          {errors.length !== 0 ? (
+            <Row className="pt-0 px-10">
+              <Col xs={12} lg={12}>
+                <Alert
+                  style={{
+                    backgroundColor: "#ff6666",
+                    color: "white",
+                    borderColor: "#ff6666",
+                  }}
+                >
+                  {errors}
+                </Alert>
+              </Col>
+            </Row>
+          ) : null}
+
           <Row className="justify-content-md-center py-5 row__allow__gutter">
             <Col md={10} lg={10} sm={10}>
               <Container
@@ -51,18 +92,16 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Email"
+                        iconPlacement="left"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      >
                         <AlternateEmailIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Email"
-                          variant="standard"
-                          color="warning"
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                 </Row>
@@ -77,18 +116,17 @@ function SignupScreen() {
                     style={{ backgroundColor: "white", borderRadius: 10 }}
                   >
                     <Row className="h-100 d-flex flex-row align-items-center row__allow__gutter">
-                      <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                      <InputField
+                        label="Password"
+                        iconPlacement="left"
+                        value={password}
+                        type="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                      >
                         <PasswordIcon
                           sx={{ color: "action.active", mr: 1, my: 0.5 }}
                         />
-                        <TextField
-                          id="input-with-sx"
-                          label="Password"
-                          variant="standard"
-                          color="warning"
-                          fullWidth
-                        />
-                      </Box>
+                      </InputField>
                     </Row>
                   </Col>
                 </Row>
@@ -126,6 +164,7 @@ function SignupScreen() {
                       backgroundColor: "#FF6666",
                       borderColor: "#ff6666",
                     }}
+                    onClick={loginAsync}
                   >
                     Login
                   </Button>

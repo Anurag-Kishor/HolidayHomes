@@ -41,10 +41,10 @@ function HomeScreen() {
       {/* Cover Photo - Search Form - Navbar */}
       <SearchCardNavbar />
 
-      {/* Recommended */}
+      {/* Newest Additions */}
       <Row className="px-0 pt-5 row__allow__gutter">
         <Col md={2}>
-          <h4>Recommended</h4>{" "}
+          <h4>Newest Additions</h4>{" "}
         </Col>
         <Col md={{ span: 2, offset: 8 }}>
           <Row>
