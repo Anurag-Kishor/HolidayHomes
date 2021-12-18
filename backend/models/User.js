@@ -7,26 +7,20 @@ class User {
         this.password = null;
         this.addressLine1 = null;
         this.addressLine2 = null;
-        this.city = null;
-        this.state = null;
-        this.country = null;
-        this.phoneNumber = null;
-        this.isHost = null;
+        this.location_id = null;
+        this.isHost = false;
+
     }
 
-    initModel(firstName, lastName, email, password, addressLine1, addressLine2, city, state, country, phoneNumber, isHost) {
+    initModel(firstName, lastName, email, password, addressLine1, addressLine2, location_id, phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email =email;
         this.password = password;
         this.addressLine1 =addressLine1;
         this.addressLine2 = addressLine2;
-        this.city = city;
-        this.state = state;
-        this.country = country;
+        this.location_id = location_id
         this.phoneNumber = phoneNumber;
-        this.isHost = isHost;
-
     }
 
     //getters

@@ -22,7 +22,7 @@ CREATE TABLE Users (
     PhoneNumber numeric(10, 0) NOT NULL UNIQUE,
     AddressLine1 varchar(100) NOT NULL,
     AddressLine2 varchar(100),
-    Location_id uuid,
+    Location_id uuid NOT NULL,
     isHost BOOLEAN NOT NULL DEFAULT 'f',
     CONSTRAINT fk_Role 
         FOREIGN KEY(Role_id) 
@@ -41,10 +41,30 @@ CREATE TABLE Rental_Type (
     Name varchar(30) NOT NULL
 );
 
+INSERT INTO Rental_Type(name) VALUES ('Bungalow');
+INSERT INTO Rental_Type(name) VALUES ('Villa');
+INSERT INTO Rental_Type(name) VALUES ('Flat');
+
+
+
 CREATE TABLE Services (
     Service_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
     Description varchar(30) NOT NULL
 ); 
+
+INSERT INTO Services(Description) VALUES ('Air Condition');
+INSERT INTO Services(Description) VALUES ('Gym');
+INSERT INTO Services(Description) VALUES ('Breakfast');
+INSERT INTO Services(Description) VALUES ('TV');
+INSERT INTO Services(Description) VALUES ('Washing Machine');
+INSERT INTO Services(Description) VALUES ('Wifi');
+INSERT INTO Services(Description) VALUES ('Smoke Alarms');
+INSERT INTO Services(Description) VALUES ('Heating');
+INSERT INTO Services(Description) VALUES ('Hair Dryer');
+INSERT INTO Services(Description) VALUES ('Security Cameras');
+
+
+
 
 CREATE TABLE Rental (
     Rental_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -101,6 +121,7 @@ CREATE TABLE Rental_Services (
         REFERENCES Rental(Rental_id)
         ON DELETE CASCADE
 );
+
 
 CREATE TABLE Rental_Reviews (
     User_id uuid NOT NULL,
