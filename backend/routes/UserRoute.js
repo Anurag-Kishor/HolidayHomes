@@ -1,14 +1,16 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {authenticateToken} = require('../middleware/Authorization')
-const { 
-    getAllUsers, 
-    getUserById,
-    createUser,
-    updateUser,
-    deleteUser,
-    makeHost
-    } = require('../controllers/UserController');
+
+const { authenticateToken } = require("../middleware/Authorization");
+const {
+  getAllUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser, 
+  makeHost,
+  checkIfUserIsHost,
+} = require("../controllers/UserController");
 
 
 
