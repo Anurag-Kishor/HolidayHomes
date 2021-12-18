@@ -13,8 +13,9 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Col, Row } from "react-bootstrap";
+import InputField from "./InputField";
 
-export default function BasicInfo() {
+export default function BasicInfo(props) {
   return (
     <Row
       style={{
@@ -34,9 +35,7 @@ export default function BasicInfo() {
             <Paper
               variant="outlined"
               style={{
-                // padding: 20,
                 borderColor: "#ff6666",
-                // marginBottom: 35,
               }}
               className="p-4 mb-2"
             >
@@ -60,30 +59,30 @@ export default function BasicInfo() {
                 </Box>
               </Row>
               <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                <InputField
+                  label="Place Name"
+                  iconPlacement="left"
+                  value={props.basicInfoFields.placeName}
+                  onChange={(e) =>
+                    props.basicInfoFields.setPlaceName(e.target.value)
+                  }
+                >
                   <CreateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-                  <TextField
-                    id="input-with-sx"
-                    label="Place Name"
-                    variant="standard"
-                    color="warning"
-                    fullWidth
-                  />
-                </Box>
+                </InputField>
               </Row>
               <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                <InputField
+                  label="Address"
+                  iconPlacement="left"
+                  value={props.basicInfoFields.address}
+                  onChange={(e) =>
+                    props.basicInfoFields.setAddress(e.target.value)
+                  }
+                >
                   <EditLocationIcon
                     sx={{ color: "action.active", mr: 1, my: 0.5 }}
                   />
-                  <TextField
-                    id="input-with-sx"
-                    label="Address"
-                    variant="standard"
-                    color="warning"
-                    fullWidth
-                  />
-                </Box>
+                </InputField>
               </Row>
               <Row className="h-100 d-flex flex-row align-items-center mb-3">
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
@@ -97,6 +96,10 @@ export default function BasicInfo() {
                     variant="standard"
                     color="warning"
                     fullWidth
+                    value={props.basicInfoFields.about}
+                    onChange={(e) =>
+                      props.basicInfoFields.setAbout(e.target.value)
+                    }
                     rows={2}
                     maxRows={4}
                   />
