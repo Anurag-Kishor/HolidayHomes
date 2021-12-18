@@ -87,7 +87,7 @@ const getRentalById = async(id) => {
                                         'JOIN rental_type t on t.type_id=r.rentalType WHERE r.rental_id=$1', [id]);
        
 
-       const result = await getServices(id);
+       const result = await getRentalServices(id);
 
        if(result.data) {
             const services = {
@@ -156,9 +156,8 @@ const addService = async(services) => {
 
 }
 
-const getServices = async(rentalId) => {
+const getRentalServices = async(rentalId) => {
     try {
-        console.log('ser')
 
         const services = await pool.query('SELECT s.description FROM rental_services rs ' + 
                                        'JOIN services s ON s.service_id = rs.service_id WHERE rs.rental_id = $1 ', [rentalId]);
@@ -168,6 +167,27 @@ const getServices = async(rentalId) => {
     }
 }
 
+const getAllServices = async() => {
+    
+    try {
+        const services = await pool.query('SELECT * FROM services'); 
+        return {status: 200, success: true, data: services.rows}
+    } catch (error) {
+        return {status : 400, success: false, error: error.message};
+    }
+}
+
+const getRentalTypes = async() => {
+    
+    try {
+        const services = await pool.query('SELECT * FROM rental_type'); 
+        return {status: 200, success: true, data: services.rows}
+    } catch (error) {
+        return {status : 400, success: false, error: error.message};
+    }
+}
+
+
 module.exports = {
     createRental,
     updateRental,
@@ -175,5 +195,8 @@ module.exports = {
     setAvailability,
     postReview,
     addService,
-    calculateAverageReview
+    calculateAverageReview,
+    getAllServices,
+    getRentalTypes
+    
 }
