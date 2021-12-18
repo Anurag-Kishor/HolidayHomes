@@ -97,6 +97,28 @@ const addService = async(req, res) => {
     }
 }
 
+
+const getAllServices = async(req, res) => {
+    try {
+        console.log('here11')
+        const result = await RentalService.getAllServices();
+        res.status(result.status).json(result);  
+    } catch (error) {
+        res.status(401).send({success: false, error: error.message});
+    }
+}
+
+
+const getRentalTypes = async(req, res) => {
+    try {
+        console.log('here11')
+        const result = await RentalService.getRentalTypes();
+        res.status(result.status).json(result);  
+    } catch (error) {
+        res.status(401).send({success: false, error: error.message});
+    }
+}
+
 module.exports = {
     addRental,
     updateRental,
@@ -105,5 +127,7 @@ module.exports = {
     postReview,
     addService,
     averageRating,
-    addService
+    addService,
+    getAllServices,
+    getRentalTypes
 }

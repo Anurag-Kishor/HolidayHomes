@@ -94,3 +94,11 @@ Content-Type: application/json
     "bookFrom": "2021-11-25",
     "bookTo": "2021-12-01"  
 }
+
+###
+GET http://localhost:5000/api/rental/info/service
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQ4MDc1LCJleHAiOjE2Mzk4NDkyNzV9.HMUIc3m9ehoVp2AW7UgT8m6n3cnJ3UqBVN8T-OTRFiQ
+
+###
+GET http://localhost:5000/api/rental/info/rentalType
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQ4MDc1LCJleHAiOjE2Mzk4NDkyNzV9.HMUIc3m9ehoVp2AW7UgT8m6n3cnJ3UqBVN8T-OTRFiQ
