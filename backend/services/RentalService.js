@@ -24,42 +24,47 @@ const findLocationId = async(city, state, country) => {
     return locationId;
 }
 
+const doesLocationIdExist = async(location_id) => {
+    const result = await pool.query('SELECT * FROM location WHERE location_id=$1', [location_id]);
+    if(result.rows.length === 0 ) return false;
+    return true;
+}
+
 const createRental = async(rental) => {
 
-    const client = await pool.connect();
+  //  const client = await pool.connect();
     try {
-        await client.query('BEGIN')
-        const locationId = await findLocationId(rental.city, rental.state, rental.country);
+       // await client.query('BEGIN')
+        const check = await doesLocationIdExist(rental.locationId);
         
+        if(!check) return {status : 400, success: false, error: "The location is not available!"};
+
         //Adding to RENTAL Table
         const rentalData = 'INSERT INTO RENTAL(name, description, addressline1, addressline2, location_id, available, datefrom, dateto, verified, priceperday,rentaltype, numberofrooms, numberofguests, host_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING rental_id'
-        const rentalDataValues = [rental.name, rental.description, rental.addressLine1, rental.addressLine2, locationId, rental.available, rental.dateFrom, rental.dateTo, false, rental.pricePerDay, rental.rentalTypeId, rental.numberOfRooms, rental.numberOfGuests, rental.host_id]
-        const res = await client.query(rentalData, rentalDataValues)
+        const rentalDataValues = [rental.name, rental.description, rental.addressLine1, rental.addressLine2, rental.locationId, rental.available, rental.dateFrom, rental.dateTo, false, rental.pricePerDay, rental.rentalTypeId, rental.numberOfRooms, rental.numberOfGuests, rental.host_id]
+        const res = await pool.query(rentalData, rentalDataValues)
 
         //Adding to RENTAL_SERVICES Table
         rental.services.forEach(async(service) => {
 
             try{
-            const rental_serviceRes = await client.query('INSERT INTO rental_services(service_id, rental_id) VALUES ($1, $2)', [service, res.rows[0].rental_id])
+            const rental_serviceRes = await pool.query('INSERT INTO rental_services(service_id, rental_id) VALUES ($1, $2)', [service, res.rows[0].rental_id])
             }
             catch(e) {
-                await client.query('ROLLBACK')
-                return {status : 400, success: e};
+           //    await client.query('ROLLBACK')
+                return {status : 400, success: false, error: e.message};
             }
         })
 
-        //Adding to host_rentals;
-    //    await client.query('INSERT INTO host_rentals(rental_id, host_id) VALUES ($1, $2)', [res, rental.host_id])
-        await client.query('COMMIT')
+       // await client.query('COMMIT')
+        console.log(rental)
 
         return {status : 200, success: true};
     } catch (error) {
-        await client.query('ROLLBACK')
-        return {status : 400, success: error};
+     //   await client.query('ROLLBACK')
+        return {status : 400, success: false, error: error.message};
 
-    } finally {
-        client.release()
-    }
+    } 
 }
 
 const updateRental = async(rental) => {
@@ -72,9 +77,33 @@ const updateRental = async(rental) => {
 
 const getRentalById = async(id) => {
     try {
-        const rental = await pool.query('SELECT * from rental WHERE rental_id = $1', [id]);
-        return {status : 200, success: true, data:rental.rows};
-    } catch (error) {
+        console.log(id)
+
+        const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, r.dateFrom, r.dateTo, r.pricePerDay, ' + 
+                                        't.name as rentalType, r.numberOfRooms, r.numberOfGuests, ' + 
+                                        'u.FirstName, u.LastName, u.PhoneNumber, u.Email from rental r ' + 
+                                        'JOIN Location l ON r.location_id= l.location_id ' + 
+                                        'JOIN Users u ON r.host_id=u.user_id ' + 
+                                        'JOIN rental_type t on t.type_id=r.rentalType WHERE r.rental_id=$1', [id]);
+       
+
+       const result = await getServices(id);
+
+       if(result.data) {
+            const services = {
+               services: result.data
+            }
+           const rentalDetails = Object.assign(rental.rows[0], services);
+           return {status : 200, success: true, data:rentalDetails};
+
+        }else {
+            return {status : 200, success: true, data:rental.rows};
+        }
+
+    } 
+    catch (error) {
+        console.log('here1')
+
         return {status : 400, success: false, error: error};
     }
 }
@@ -94,7 +123,7 @@ const postReview = async(rental_id, data) => {
         return {status : 200, success: true};
 
     } catch (error) {
-        return {status : 400, success: false};
+        return {status : 400, success: false, error: error.message};
     }
 }
 
@@ -122,9 +151,21 @@ const addService = async(services) => {
         })
         return {status : 200, success: true};
     } catch (error) {
-        return {status : 400, success: false, error: error};
+        return {status : 400, success: false, error: error.message};
     }
 
+}
+
+const getServices = async(rentalId) => {
+    try {
+        console.log('ser')
+
+        const services = await pool.query('SELECT s.description FROM rental_services rs ' + 
+                                       'JOIN services s ON s.service_id = rs.service_id WHERE rs.rental_id = $1 ', [rentalId]);
+        return {status: 200, success: true, data: services.rows}
+    } catch (error) {
+        return {status : 400, success: false, error: error.message};
+    }
 }
 
 module.exports = {

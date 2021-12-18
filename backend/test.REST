@@ -2,16 +2,14 @@ POST http://localhost:5000/api/user
 Content-Type: application/json
 
 {
-    "firstName": "Anurag",
-    "lastName": "Kakkan",
-    "email": "anurag@gmail.com",
+    "firstName": "User2",
+    "lastName": "LastName2",
+    "email": "User2@gmail.com",
     "password": "1234",
     "addressLine1": "12th street",
     "addressLine2": "baker road",
-    "city": "ahmedabad",
-    "state": "gujarat",
-    "country": "India",
-    "phoneNumber": 9409809197
+    "locationId": "f3c392ca-4e26-48f2-844d-8a5beb24d086",
+    "phoneNumber": 9409809199
 }
 
 ###
@@ -23,13 +21,76 @@ Content-Type: application/json
     "password": "1234"
 }
 
-
+### setting the user as host
+PUT http://localhost:5000/api/user/host/e24e95c6-31f9-4da3-8448-bbd040a06b93
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQwMDY0LCJleHAiOjE2Mzk4NDEyNjR9.TX8J6VSKU719fvx4RLipkyACIAbXCvda1D7hpECeq34
 ###
 GET http://localhost:5000/api/user
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOGYzYjFhYjAtODRhNy00YzQwLWIzOTgtYTc2YTQ4OThmY2Q5IiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5NzQzMzk4LCJleHAiOjE2Mzk3NDM0MTh9.ktlW0L95I3emHNGDGCaI7M_qbIGEGAKKFrCELvtScqM
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODM0MDc4LCJleHAiOjE2Mzk4MzUyNzh9.PfmqoeOg8g8917mHRyTlm_1pzhchHR1CS08rpVUSyXg
 ###
 GET http://localhost:5000/api/auth/refreshToken
 
+###
+DELETE http://localhost:5000/api/auth/refreshToken
+
+###
+GET http://localhost:5000/api/booking/rental/cost
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODM0MDc4LCJleHAiOjE2Mzk4MzUyNzh9.PfmqoeOg8g8917mHRyTlm_1pzhchHR1CS08rpVUSyXg
+
+### Adding a new rental
+POST http://localhost:5000/api/rental
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODM0MjQ3LCJleHAiOjE2Mzk4MzU0NDd9.AfHcO96xdhOPi6MPgePfV843e4vuhYUxkYFBlVeBd9Y
+Content-Type: application/json
+
+{
+    "name": "mansion3",
+    "description": "This is a rich people mansion",
+    "addressLine1": "78th Random address",
+    "addressLine2": "No-where Lane",
+    "location_id": "b68f029b-4f95-4f0a-b15c-afb737c88643",
+    "dateFrom": "2021-12-20",
+    "dateTo": "2021-12-25",
+    "pricePerDay": 1500,
+    "rentalTypeId": "c1a7c5f4-d9d0-412d-9ca1-86390d409988",
+    "numberOfRooms": 2,
+    "numberOfGuests": 4,
+    "services": ["c8d912d0-eaed-4072-8d46-daa27ad1aab3", "f18c5974-ea89-4d3d-871e-47099ef1bfca"],
+    "host_id": "e24e95c6-31f9-4da3-8448-bbd040a06b93"
+}
 
 
+### GETTING rental details by ID 
+GET http://localhost:5000/api/rental/b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODMzMzY0LCJleHAiOjE2Mzk4MzQ1NjR9.qFUNk5hjMSb7RMo-Gb1mX4_bO0_IiUFtn1MKF2oSlrE
+
+
+### POSTing a new booking
+POST http://localhost:5000/api/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQxNTI2LCJleHAiOjE2Mzk4NDI3MjZ9.0ipqq8T-EDDWdotZ7xknsVOWNU9GqRjDYLMyV0QWRBc
+Content-Type: application/json
+
+{
+    "rentalId": "b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7",
+    "userId": "677f1bbb-a5b5-4b27-8c6f-368725abdbb8",
+    "bookFrom": "2021-11-25",
+    "bookTo": "2021-12-01",
+    "amount": 540, 
+    "numberOfGuests": 2
+    
+}
+
+###
+GET http://localhost:5000/api/booking
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQxNTI2LCJleHAiOjE2Mzk4NDI3MjZ9.0ipqq8T-EDDWdotZ7xknsVOWNU9GqRjDYLMyV0QWRBc
+
+
+###
+GET http://localhost:5000/api/booking/availablity
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQyOTg2LCJleHAiOjE2Mzk4NDQxODZ9.NCPYAJJBD7wv-IPrtoekK84tH3LSaVWyZiVZt7E9j3A
+Content-Type: application/json
+
+{
+    "rentalId": "b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7",
+    "bookFrom": "2021-11-25",
+    "bookTo": "2021-12-01"  
+}

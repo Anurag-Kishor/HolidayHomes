@@ -2,10 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const adminRouter = require("./routes/AdminRoute");
-const rentalRouter = require("./routes/RentalRoute");
-const bookingRouter = require("./routes/BookingRoute");
-const userRouter = require("./routes/UserRoute");
+const adminRouter = require('./routes/AdminRoute')
+const rentalRouter = require('./routes/RentalRoute')
+const bookingRouter = require('./routes/BookingRoute');
+const userRouter = require('./routes/UserRoute');
+const homeRouter = require('./routes/HomeRoute');
 
 const authRouter = require("./routes/AuthRoute");
 const { authenticateToken } = require("./middleware/Authorization");
@@ -19,8 +20,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 //routes
-
 app.use('/api/auth', authRouter)
+app.use('/api/home', homeRouter)
 app.use('/api/rental', authenticateToken, rentalRouter)
 app.use('/api/admin', authenticateToken, adminRouter);
 app.use('/api/user', userRouter)
