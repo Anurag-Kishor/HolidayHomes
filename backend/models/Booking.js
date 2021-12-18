@@ -6,18 +6,16 @@ class Booking {
         this.bookFrom = null;
         this.bookTo = null;
         this.amount = null;
-        this.numberOfRooms = null;
         this.numberOfGuests = null;
     }
 
     initModel(rentalId, userId, bookFrom, bookTo,
-              amount, numberOfRooms,numberOfGuests) {
+              amount, numberOfGuests) {
         this.rentalId = rentalId;
         this.userId = userId;
         this.bookFrom = bookFrom;
         this.bookTo = bookTo;
         this.amount = amount;
-        this.numberOfRooms = numberOfRooms;
         this.numberOfGuests = numberOfGuests;
     }
 

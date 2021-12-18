@@ -37,6 +37,11 @@ const findLocationId = async(city, state, country) => {
     return locationId;
 }
 
+const doesLocationIdExist = async(location_id) => {
+    const result = await pool.query('SELECT * FROM location WHERE location_id=$1', [location_id]);
+    if(result.rows.length === 0 ) return false;
+    return true;
+}
 
 const checkIfUserIsHost = async(user_id) => {
 
@@ -55,14 +60,14 @@ const createUser = async(user) => {
     if((await userExists(user))){
         return {status: 401, success: false, error: "User already exists"};
     }
-   
-   //const locationId = await findLocationId(host.city, host.state, host.country);
+    const check = await doesLocationIdExist(user.location_id);
+    if(!check) return {status : 400, success: false, error: "The location is not available!"};
 
     //Adding to Users Table
     try{
         const newUser = await pool.query(
-            "INSERT INTO users (email, password, firstname, lastname, phonenumber, addressline1, addressline2, ishost) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-            [user.email, user.password, user.firstName, user.lastName, user.phoneNumber, user.addressLine1, user.addressLine2, false ]
+            "INSERT INTO users (email, password, firstname, lastname, phonenumber, addressline1, addressline2, ishost, Location_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+            [user.email, user.password, user.firstName, user.lastName, user.phoneNumber, user.addressLine1, user.addressLine2, false, user.location_id ]
         )
         return {status : 200, success: true};
 
@@ -136,11 +141,23 @@ const deleteUser = async(id) => {
     }
 }
 
+const makeHost = async(userId) => {
+    try {
+        console.log(userId);
+        const result = await pool.query('UPDATE Users SET isHost=true WHERE user_id = $1', [userId]);
+        return {status: 200, success: true};
+        
+    } catch (error) {
+        return {status: 401, success: false, error: error.message};
+    }
+}
+
 module.exports = {
     createUser,
     updateUser,
     getUserById,
     getAllUsers,
     deleteUser,
-    checkIfUserIsHost
+    checkIfUserIsHost,
+    makeHost
 }

@@ -25,9 +25,9 @@ router.post('/login', async(req, res) => {
         //JWT
         let tokens = jwtTokens(user.rows[0]);
         res.cookie('refresh_token', tokens.refreshToken, {httpOnly: true});
-        res.json(tokens);
+        tokens["user_id"] = user.rows[0].user_id;
+        return res.json(tokens);
 
-        return res.status(200).json({success: true})
     } catch (error) {
        return res.status(401).json({success: false, error: error.message});
 
@@ -51,6 +51,15 @@ router.get('/refreshToken', (req, res) => {
     } catch (error) {
         return res.status(401).json({success: false, error: error.message});
 
+    }
+})
+
+router.delete('/refreshToken', (req, res) => {
+    try {
+        res.clearCookie('refresh_token')
+        return res.status(200).json({success: true, data: 'Refresh token deleted'});
+    } catch (error) {
+        return res.status(401).json({success: false, error: error.message});
     }
 })
 

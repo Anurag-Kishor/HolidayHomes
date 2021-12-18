@@ -1,5 +1,13 @@
-
+const express = require('express');
 const { 
-    getRentalsBasedOnProperties
+    getRentalsBasedOnProperties, getAllLocations
     } = require('../controllers/HomeController');
-router.get('/search', getRentalsBasedOnProperties)
+const router = express.Router();
+const {authenticateToken} = require('../middleware/Authorization')
+
+
+//GET 
+router.get('/location', authenticateToken, getAllLocations);
+router.get('/search', authenticateToken, getRentalsBasedOnProperties)
+
+module.exports = router;

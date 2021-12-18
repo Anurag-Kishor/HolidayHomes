@@ -10,7 +10,6 @@ const addRole = async(req, res) => {
     }
 };
 
-
 module.exports = {
-    addRole
+    addRole, 
 }

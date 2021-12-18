@@ -24,5 +24,4 @@ router.put('/', updateRental);
 router.put('/:id/availability', setAvailability);
 
 
-
 module.exports = router;

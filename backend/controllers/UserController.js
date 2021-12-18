@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const UserService = require('../services/UserService');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const { response } = require("express");
 
 const createUser = async(req, res) => {
     try {
@@ -15,11 +16,8 @@ const createUser = async(req, res) => {
             hashedPassword,
             data.addressLine1,
             data.addressLine2,
-            data.city,
-            data.state,
-            data.country,
-            data.phoneNumber,
-            false
+            data.locationId,
+            data.phoneNumber
         )
         
        // console.log(traveler);
@@ -49,9 +47,7 @@ const updateUser = async(req, res) => {
             data.password,
             data.addressLine1,
             data.addressLine2,
-            data.city,
-            data.state,
-            data.country,
+            data.locationId,
             data.phoneNumber
         )
 
@@ -107,11 +103,23 @@ const checkIfUserIsHost = async(req, res) => {
     }
 }
 
+const makeHost = async(req, res) => {
+    try {
+        console.log('here')
+        const userId = req.params.user_id;
+        const result = await UserService.makeHost(userId);
+        res.status(result.status).send(result);
+    } catch (error) {
+        res.status(401).send({success: false, error: error.message});
+    }
+}
+
 module.exports = {
     getAllUsers, 
     getUserById,
     createUser,
     updateUser,
     deleteUser,
-    checkIfUserIsHost
+    checkIfUserIsHost, 
+    makeHost
 };
