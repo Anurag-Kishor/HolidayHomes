@@ -20,7 +20,7 @@ import {
 
 
 
-export default function BasicInfo() {
+export default function Amenities() {
 
 
     return (
@@ -136,6 +136,21 @@ export default function BasicInfo() {
                                 </Col>
                             </Row>
                         </Paper>
+                        <Col >
+                            <Typography variant="h5" align="center" style={{ marginLeft: 30 }}>
+                                Others
+              </Typography>
+                            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                                <CreateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+                                <TextField
+                                    id="input-with-sx"
+                                    label="eg:- No Drinking;outside food not allowed"
+                                    variant="standard"
+                                    color="warning"
+                                    fullWidth
+                                />
+                            </Box>
+                        </Col>
                     </Paper>
                 </Row>
             </Col>
@@ -203,6 +218,21 @@ export default function BasicInfo() {
                                 </Col>
                             </Row>
                         </Paper>
+                        <Col >
+                            <Typography variant="h5" align="center" style={{ marginLeft: 30 }}>
+                                Others
+              </Typography>
+                            <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                                <CreateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
+                                <TextField
+                                    id="input-with-sx"
+                                    label="eg:- No Drinking;outside food not allowed"
+                                    variant="standard"
+                                    color="warning"
+                                    fullWidth
+                                />
+                            </Box>
+                        </Col>
                         {/* Add Others Fieled */}
                     </Paper>
                     <hr />

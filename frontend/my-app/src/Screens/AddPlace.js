@@ -9,8 +9,9 @@ import { Rating, Typography, Divider, Paper, TextField } from "@mui/material";
 
 import BasicInfo from '../Components/BasicInfo';
 import Amenities from '../Components/Amenities';
+import RentalDetails from '../Components/RentalDetails';
 
-const steps = ['Basic Info', 'Ameneties', 'Rental Aviablity'];
+const steps = ['Basic Info', 'Ameneties', 'Rental Details'];
 
 export default function HorizontalNonLinearStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -90,7 +91,7 @@ export default function HorizontalNonLinearStepper() {
                             {activeStep === 0 && <BasicInfo />}
                             {/* <BasicInfo /> */}
                             {activeStep === 1 && <Amenities />}
-                            {activeStep === 2 && 'Step3'}
+                            {activeStep === 2 && <RentalDetails />}
 
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Button
