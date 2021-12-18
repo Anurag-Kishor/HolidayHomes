@@ -2,13 +2,14 @@ import * as React from 'react';
 import CreateIcon from '@mui/icons-material/Create';
 import { Typography, Paper, TextField } from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
-import { CalendarComponent } from '@syncfusion/ej2-react-calendars';
+import DateRangePicker from "rsuite/DateRangePicker";
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GiteIcon from '@mui/icons-material/Gite';
 import RoomPreferencesIcon from "@mui/icons-material/RoomPreferences";
 import BedIcon from '@mui/icons-material/Bed';
 import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
 import {
     Col,
     Image,
@@ -19,14 +20,37 @@ import {
 } from "react-bootstrap";
 
 
-
+const roomtype = [
+    {
+        value: 'single_bed',
+        label: 'Single Bed',
+    },
+    {
+        value: 'double_bed',
+        label: 'Double bed',
+    },
+    {
+        value: 'family_room',
+        label: 'Family Room',
+    },
+    {
+        value: 'queen',
+        label: 'Queen',
+    },
+    {
+        value: 'king',
+        label: 'King',
+    },
+];
 
 
 export default function RentalDetails() {
 
-    const minDate = ("02/05/2021 10:30 AM")
-    const maxDate = ("02/05/2021 09:00 AM")
-    const dateValue = ("02/06/2021 06:00 PM")
+    const [room_type, setType] = React.useState('EUR');
+    const handleChange = (event) => {
+        setType(event.target.value);
+    };
+
     return (
         <Row style={{ display: "flex", flexDirection: "row", justifyContent: "space-around" }}>
             <Col md={5}>
@@ -54,7 +78,7 @@ export default function RentalDetails() {
           /> */}
                             <Row >
                                 <Col md="12">
-                                    <Row className="h-10 d-flex flex-row align-items-center mx-3">
+                                    <Row className="h-10 d-flex flex-row align-items-center mx-3 mb-5">
                                         <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                                             <CurrencyRupeeIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                                             <TextField
@@ -66,8 +90,12 @@ export default function RentalDetails() {
                                             />
                                         </Box>
                                     </Row>
-                                    <Row className="h-20 d-flex flex-row align-items-center mx-3">
-                                        <CalendarComponent id="calendar" value={dateValue} min={minDate} max={maxDate} />
+
+                                    <Row className="h-40 d-flex flex-row align-items-center mx-3">
+                                        <DateRangePicker
+                                            appearance="default"
+                                            style={{ color: "#ff6666 !important" }}
+                                        />
                                         {/* akki */}
                                     </Row>
 
@@ -100,11 +128,19 @@ export default function RentalDetails() {
                                             <RoomPreferencesIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
                                             <TextField
                                                 id="input-with-sx"
+                                                select
                                                 label="Room Type"
+                                                value={room_type}
                                                 variant="standard"
                                                 color="warning"
                                                 fullWidth
-                                            />
+                                                onChange={handleChange}
+                                            >{roomtype.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                            </TextField>
                                         </Box>
                                     </Row>
                                     <Row className="h-10 d-flex flex-row align-items-center mb-3">
