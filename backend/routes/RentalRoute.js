@@ -7,12 +7,17 @@ const {
     setAvailability,
     postReview,
     addService,
-    averageRating
+    averageRating,
+    getAllServices,
+    getRentalTypes
 } = require('../controllers/RentalController')
 
 //GET rentals
-router.get('/:id', getRentalById)
+router.get('/info/service', getAllServices)
+router.get('/info/rentalType', getRentalTypes)
+router.get('/info/:id', getRentalById)
 router.get('/:rental_id/review', averageRating)
+
 
 // POST / ADD rental
 router.post('/', addRental);
