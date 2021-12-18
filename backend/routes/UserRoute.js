@@ -11,9 +11,9 @@ const {
     } = require('../controllers/UserController');
 
 
-router.get('/', getAllUsers);
-router.get('/:id', getUserById);
+router.get('/', authenticateToken, getAllUsers);
+router.get('/:id', authenticateToken, getUserById);
 router.post('/', createUser);
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.put('/:id', authenticateToken, updateUser);
+router.delete('/:id', authenticateToken, deleteUser);
 module.exports = router;
