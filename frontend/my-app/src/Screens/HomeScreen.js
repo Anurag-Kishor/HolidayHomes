@@ -72,12 +72,12 @@ function HomeScreen() {
         </Col>
         <Col md={{ span: 2, offset: 8 }}>
           <Row>
-            <h3>See All</h3>
+            <button>See All</button>
           </Row>
         </Col>
       </Row>
       <Row className="px-5 mb-5 row__allow__gutter">
-        <Col>
+        {/* <Col>
           <RentalCard />
         </Col>
         <Col>
@@ -85,11 +85,24 @@ function HomeScreen() {
         </Col>
         <Col>
           <RentalCard />
-        </Col>
+        </Col> */}
         {newestAdditions.map((newestAddition, index) => {
           return index <= 2 ? (
-            <Col>
-              <RentalCard />
+            <Col key={newestAddition.rental_id}>
+              <Link
+                to={{
+                  pathname: "/rentalinfo/",
+                  rentalId: `${newestAddition.rental_id}`,
+                }}
+              >
+                <RentalCard
+                  rental_id={newestAddition.rental_id}
+                  name={newestAddition.name}
+                  pricePerDay={newestAddition.priceperday}
+                  noOfRooms={newestAddition.numberofrooms}
+                  noOfGuests={newestAddition.numberofguests}
+                />
+              </Link>
             </Col>
           ) : null;
         })}

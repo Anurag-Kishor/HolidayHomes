@@ -10,7 +10,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import resortPhoto from "../assets/pixabay_maldives-1200.jpg";
 
-const RentalCard = () => {
+const RentalCard = (props) => {
   return (
     <Paper elevation={3}>
       <Card sx={{ maxWidth: 345 }}>
@@ -23,7 +23,7 @@ const RentalCard = () => {
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              Holiday Inn Resort Bali Benoa
+              {props.name}
             </Typography>
             <Row
               style={{
@@ -38,11 +38,11 @@ const RentalCard = () => {
                 className="border rounded"
                 style={{ marginLeft: 10 }}
               >
-                1 ROOM
+                {props.noOfRooms} ROOMS
               </Col>
               <Col md={{ span: 3, offset: 5 }}>
                 <Typography variant="body1" align="right">
-                  Rs. 4200/Night
+                  Rs. {props.pricePerDay}/Day
                 </Typography>
               </Col>
             </Row>

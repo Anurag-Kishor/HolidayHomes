@@ -50,7 +50,8 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import { Box } from "@mui/system";
 import Footer from "../Components/Footer";
 import NavbarHH from "../Components/NavbarHH";
-function RentalInfo() {
+function RentalInfo(props) {
+  console.log(props.location.rentalId);
   const [searchValue, setSearchValue] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
   const [checkInDate, setCheckInDate] = useState("");
