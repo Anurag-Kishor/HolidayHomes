@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Image, Navbar, Row, Button, Container } from "react-bootstrap";
 import logo from "../assets/hhlogo.png";
 import testimonial1 from "../assets/1.png";
@@ -26,6 +26,9 @@ import ReviewDiv from "../Components/ReviewDiv";
 function HomeScreen() {
   const getUser = useSelector((state) => state.user.user);
   const navigate = useNavigate();
+
+  const [newestAdditions, setNewestAdditions] = useState([]);
+  const [mostBooked, setMostBooked] = useState([]);
 
   useEffect(() => {
     if (getUser === null) {
@@ -83,6 +86,13 @@ function HomeScreen() {
         <Col>
           <RentalCard />
         </Col>
+        {newestAdditions.map((newestAddition, index) => {
+          return index <= 2 ? (
+            <Col>
+              <RentalCard />
+            </Col>
+          ) : null;
+        })}
       </Row>
 
       {/* Testimonials */}

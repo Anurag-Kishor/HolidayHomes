@@ -10,6 +10,10 @@ import {
   Paper,
   TextField,
   Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Col, Row } from "react-bootstrap";
@@ -71,18 +75,52 @@ export default function BasicInfo(props) {
                 </InputField>
               </Row>
               <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                <InputField
-                  label="Address"
-                  iconPlacement="left"
-                  value={props.basicInfoFields.address}
-                  onChange={(e) =>
-                    props.basicInfoFields.setAddress(e.target.value)
-                  }
-                >
+                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <EditLocationIcon
                     sx={{ color: "action.active", mr: 1, my: 0.5 }}
                   />
-                </InputField>
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                    <InputLabel>Location</InputLabel>
+                    <Select
+                      value={props.selectedLocation}
+                      onChange={(e) =>
+                        props.setSelectedLocation(e.target.value)
+                      }
+                      label="Location"
+                      variant="standard"
+                      color="warning"
+                      fullWidth
+                    >
+                      {props.location.map((option) => (
+                        <MenuItem
+                          key={option.location_id}
+                          value={option.location_id}
+                        >
+                          {option.city}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Row>
+              <Row className="h-100 d-flex flex-row align-items-center mb-3">
+                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+                  <RateReviewIcon
+                    sx={{ color: "action.active", mr: 1, my: 0.5 }}
+                  />
+                  <TextField
+                    placeholder="Place Description"
+                    multiline
+                    label="Address"
+                    variant="standard"
+                    color="warning"
+                    fullWidth
+                    value={props.basicInfoFields.address}
+                    onChange={(e) =>
+                      props.basicInfoFields.setAddress(e.target.value)
+                    }
+                  />
+                </Box>
               </Row>
               <Row className="h-100 d-flex flex-row align-items-center mb-3">
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
