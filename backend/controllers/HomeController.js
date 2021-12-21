@@ -22,7 +22,7 @@ const getMostBookedRentals = async(req, res) => {
 
 const getMostRecentRentals = async(req, res) => {
     try {
-        const result = await HomeService.getMostBookedRentals();
+        const result = await HomeService.getMostRecentRentals();
         return res.status(result.status).json({success: true, data: result.data})
     } catch (error) {
         return res.status(404).json({success: false, error: error.message })
