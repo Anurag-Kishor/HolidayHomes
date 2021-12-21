@@ -119,6 +119,7 @@ const setAvailability = async(rental_id) => {
 const postReview = async(rental_id, data) => {
 
     try {
+        console.log(rental_id, data);
         const res = await pool.query('INSERT INTO rental_reviews(user_id, rental_id, description, stars) VALUES($1, $2, $3, $4)', [data.traveler_id, rental_id, data.description, data.stars]);
         return {status : 200, success: true};
 

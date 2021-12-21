@@ -119,3 +119,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0Z
 ### GET most booked Rentals
 GET http://localhost:5000/api/home/mostBooked
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTE3NzM4LCJleHAiOjE2Mzk5MjA3Mzh9.2YAMd3muTHQkgFerMpFIs19PIhqensUbquFu8ASAnVY
+
+### Add a review
+POST http://localhost:5000/api/rental/b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7/review
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTA5NDEyLCJleHAiOjE2NDAxMTI0MTJ9.mmC6BXNVHz4NalwUUpxRMVtcFe74WPFTMAHxOfYQD6k
+Content-Type: application/json
+
+{
+    "traveler_id": "677f1bbb-a5b5-4b27-8c6f-368725abdbb8",
+    "description": "Good",
+    "stars": 3
+}
+
+### Get all locations
+GET http://localhost:5000/api/home/location
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTA5NDEyLCJleHAiOjE2NDAxMTI0MTJ9.mmC6BXNVHz4NalwUUpxRMVtcFe74WPFTMAHxOfYQD6k
+
+### Get most recent rentals
+GET http://localhost:5000/api/home/mostRecent
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTEzMzQ2LCJleHAiOjE2NDAxMTYzNDZ9.jqRMA-6Ue3DkameaXnAA7cA6CjNjryQ8thO0hAWSGB0
