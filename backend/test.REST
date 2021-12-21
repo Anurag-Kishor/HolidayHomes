@@ -2,14 +2,14 @@ POST http://localhost:5000/api/user
 Content-Type: application/json
 
 {
-    "firstName": "User2",
-    "lastName": "LastName2",
-    "email": "User2@gmail.com",
+    "firstName": "Anurag",
+    "lastName": "Kakkan",
+    "email": "anurag@gmail.com",
     "password": "1234",
     "addressLine1": "12th street",
     "addressLine2": "baker road",
-    "locationId": "f3c392ca-4e26-48f2-844d-8a5beb24d086",
-    "phoneNumber": 9409809199
+    "locationId": "4fcd289b-dc14-4f94-93d9-83ce0deeb613",
+    "phoneNumber": 9409809197
 }
 
 ###
@@ -39,23 +39,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0Z
 
 ### Adding a new rental
 POST http://localhost:5000/api/rental
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODM0MjQ3LCJleHAiOjE2Mzk4MzU0NDd9.AfHcO96xdhOPi6MPgePfV843e4vuhYUxkYFBlVeBd9Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTA4NDEwYTEtNDczYS00MWU4LWE2ZjItZmRhOWMxMzA1NmZiIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTE2MjE3LCJleHAiOjE2NDAxMTkyMTd9.1IPOyYvXUKkDeLMFniPnV0QlBYids0OQbMaTbzviDws
 Content-Type: application/json
 
 {
-    "name": "mansion3",
+    "name": "New mansion2",
     "description": "This is a rich people mansion",
     "addressLine1": "78th Random address",
     "addressLine2": "No-where Lane",
-    "location_id": "b68f029b-4f95-4f0a-b15c-afb737c88643",
+    "location_id": "08d72c22-d8f9-47ad-984b-6b9e6a6f0ea5",
     "dateFrom": "2021-12-20",
     "dateTo": "2021-12-25",
     "pricePerDay": 1500,
-    "rentalTypeId": "c1a7c5f4-d9d0-412d-9ca1-86390d409988",
+    "rentalTypeId": "516539eb-8508-4f06-bbd4-535d94507517",
     "numberOfRooms": 2,
     "numberOfGuests": 4,
-    "services": ["c8d912d0-eaed-4072-8d46-daa27ad1aab3", "f18c5974-ea89-4d3d-871e-47099ef1bfca"],
-    "host_id": "e24e95c6-31f9-4da3-8448-bbd040a06b93"
+    "services": ["2903c22a-ff95-42f7-9133-bb03e9c1acf2", "d36a651f-f612-4cd3-83ff-73eedea8cb79"],
+    "host_id": "b48b7054-4ad9-4c62-a221-085590638b7b"
 }
 
 
@@ -137,7 +137,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0Z
 
 ### Get most recent rentals
 GET http://localhost:5000/api/home/mostRecent
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTEzMzQ2LCJleHAiOjE2NDAxMTYzNDZ9.jqRMA-6Ue3DkameaXnAA7cA6CjNjryQ8thO0hAWSGB0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTA4NDEwYTEtNDczYS00MWU4LWE2ZjItZmRhOWMxMzA1NmZiIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTE2MjE3LCJleHAiOjE2NDAxMTkyMTd9.1IPOyYvXUKkDeLMFniPnV0QlBYids0OQbMaTbzviDws
 
 ### Get average stars/reviews
 GET http://localhost:5000/api/rental/b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7/avgReview

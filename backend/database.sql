@@ -82,6 +82,7 @@ CREATE TABLE Rental (
     numberOfRooms INT NOT NULL,
     numberOfGuests INT NOT NULL,
     host_id uuid NOT NULL,
+    time timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT fk_rentalType
         FOREIGN KEY(rentalType)
         REFERENCES Rental_Type(Type_id)
