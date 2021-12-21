@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import dateFormat, { masks } from "dateformat";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import { Rating, Typography, Divider, Paper, TextField } from "@mui/material";
-
+import { useDispatch, useSelector } from "react-redux";
 import BasicInfo from "../Components/BasicInfo";
 import Amenities from "../Components/Amenities";
 import RentalDetails from "../Components/RentalDetails";
+import { fetchAmenities, fetchRentalTypes } from "../app/Actions/hostActions";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const steps = ["Basic Info", "Ameneties", "Rental Details"];
 
 export default function HorizontalNonLinearStepper() {
+  const dispatch = useDispatch();
+  const userDetails = useSelector((state) => state.user.user);
+  // const amenities = useSelector((state) => state.host.amenities);
+  // const rentalTypes = useSelector((state) => state.host.rentalTypes);
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [loading, setLoading] = useState(true);
 
   //   Basic Info fields
   const [placeName, setPlaceName] = useState("");
@@ -31,14 +40,46 @@ export default function HorizontalNonLinearStepper() {
 
   //   Facilities
   const [facilities, setFacilities] = useState([]);
+  const [selectedFacilities, setSelectedFacilities] = useState([]);
+  const [houseRules, setHouseRules] = useState([]);
 
   // Dates and Prices
   const [pricePerDay, setPricePerDay] = useState([]);
   const [availabilityDates, setAvailabilityDates] = useState([]);
   const [roomTypes, setRoomTypes] = useState([]);
+  const [selectedRoomType, setSelectedRoomType] = useState("");
   const [noOfBeds, setNoOfBeds] = useState(0);
   const [roomNumbers, setRoomNumbers] = useState(0);
   const [noOfGuests, setNoOfGuests] = useState(0);
+  const datePriceFields = {
+    pricePerDay,
+    setPricePerDay,
+    availabilityDates,
+    setAvailabilityDates,
+    roomTypes,
+    setRoomTypes,
+    selectedRoomType,
+    setSelectedRoomType,
+    noOfBeds,
+    setNoOfBeds,
+    roomNumbers,
+    setRoomNumbers,
+    noOfGuests,
+    setNoOfGuests,
+  };
+
+  const fetchAmenitiesRentalTypes = useCallback(async () => {
+    const userAccessToken = await userDetails.accessToken;
+    setFacilities(await dispatch(fetchAmenities(userAccessToken)));
+    setRoomTypes(await dispatch(fetchRentalTypes(userAccessToken)));
+  }, []);
+
+  useEffect(() => {
+    fetchAmenitiesRentalTypes();
+    setLoading(false);
+    console.log(facilities);
+    console.log(roomTypes);
+  }, []);
 
   const totalSteps = () => {
     return steps.length;
@@ -75,12 +116,29 @@ export default function HorizontalNonLinearStepper() {
   };
 
   const handleComplete = () => {
-    // const newCompleted = completed;
-    // newCompleted[activeStep] = true;
-    // setCompleted(newCompleted);
-    // handleNext();
+    const startDate = dateFormat(availabilityDates[0], "yyyy-mm-dd");
+    const endDate = dateFormat(availabilityDates[1], "yyyy-mm-dd");
 
-    console.log(placeName + address + about);
+    console.log(
+      placeName +
+        " " +
+        address +
+        " " +
+        about +
+        " " +
+        selectedFacilities +
+        " " +
+        " " +
+        selectedRoomType +
+        " " +
+        pricePerDay +
+        " " +
+        noOfBeds +
+        " " +
+        roomNumbers +
+        " " +
+        noOfGuests
+    );
   };
 
   const handleReset = () => {
@@ -89,78 +147,92 @@ export default function HorizontalNonLinearStepper() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label} completed={completed[index]}>
-            <StepButton color="inherit" onClick={handleStep(index)}>
-              {label}
-            </StepButton>
-          </Step>
-        ))}
-      </Stepper>
-      <div>
-        {allStepsCompleted() ? (
-          <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
-            </Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
-            </Box>
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            {/* <BasicInfo /> */}
-            {activeStep === 0 && (
-              <BasicInfo basicInfoFields={basicInfoFields} />
-            )}
+    <>
+      {loading || facilities.length === 0 || roomTypes.length === 0 ? (
+        <LinearProgress />
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <Stepper nonLinear activeStep={activeStep}>
+            {steps.map((label, index) => (
+              <Step key={label} completed={completed[index]}>
+                <StepButton color="inherit" onClick={handleStep(index)}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+          <div>
+            {allStepsCompleted() ? (
+              <React.Fragment>
+                <Typography sx={{ mt: 2, mb: 1 }}>
+                  All steps completed - you&apos;re finished
+                </Typography>
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  <Button onClick={handleReset}>Reset</Button>
+                </Box>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                {/* <BasicInfo /> */}
+                {activeStep === 0 && (
+                  <BasicInfo basicInfoFields={basicInfoFields} />
+                )}
 
-            {/* Amenities & Rental Rules */}
-            {activeStep === 1 && <Amenities />}
+                {/* Amenities & Rental Rules */}
+                {activeStep === 1 && (
+                  <Amenities
+                    facilities={facilities}
+                    selectedFacilities={selectedFacilities}
+                    setSelectedFacilities={setSelectedFacilities}
+                  />
+                )}
 
-            {/* Date, Price and Other Details */}
-            {activeStep === 2 && <RentalDetails />}
+                {/* Date, Price and Other Details */}
+                {activeStep === 2 && (
+                  <RentalDetails datePriceFields={datePriceFields} />
+                )}
 
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Button
-                color="secondary"
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button
-                color="warning"
-                onClick={handleNext}
-                sx={{ mr: 1 }}
-                disabled={activeStep === 2}
-              >
-                Next
-              </Button>
-              {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography
-                    variant="caption"
-                    sx={{ display: "inline-block" }}
-                  >
-                    Steps {activeStep + 1} already completed
-                  </Typography>
-                ) : (
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                   <Button
-                    onClick={handleComplete}
-                    disabled={activeStep !== steps.length - 1}
+                    color="secondary"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
                   >
-                    Finish
+                    Back
                   </Button>
-                ))}
-            </Box>
-          </React.Fragment>
-        )}
-      </div>
-    </Box>
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  <Button
+                    color="warning"
+                    onClick={handleNext}
+                    sx={{ mr: 1 }}
+                    disabled={activeStep === 2}
+                  >
+                    Next
+                  </Button>
+                  {activeStep !== steps.length &&
+                    (completed[activeStep] ? (
+                      <Typography
+                        variant="caption"
+                        sx={{ display: "inline-block" }}
+                      >
+                        Steps {activeStep + 1} already completed
+                      </Typography>
+                    ) : (
+                      <Button
+                        onClick={handleComplete}
+                        disabled={activeStep !== steps.length - 1}
+                      >
+                        Finish
+                      </Button>
+                    ))}
+                </Box>
+              </React.Fragment>
+            )}
+          </div>
+        </Box>
+      )}
+    </>
   );
 }

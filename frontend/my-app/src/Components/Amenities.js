@@ -9,22 +9,17 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Box from "@mui/material/Box";
 import { Col, Image, Navbar, Row, Card, Container } from "react-bootstrap";
 
-export default function Amenities() {
-  const [amenities, setAmenities] = useState({});
-
+export default function Amenities(props) {
   const handleChange = (event) => {
-    setAmenities({
-      ...amenities,
-      [event.target.id]: event.target.checked,
-    });
+    props.setSelectedFacilities((oldArray) => [...oldArray, event.target.id]);
   };
-
   return (
     <Row
       style={{
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-around",
+        alignItems: "center",
       }}
     >
       <Col md={5}>
@@ -44,136 +39,31 @@ export default function Amenities() {
               }}
             >
               <Row>
-                <Col md="6">
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
+                <Col md={{ span: 6, offset: 5 }}>
+                  {props.facilities.map((facility, index) => {
+                    return (
+                      <Row
+                        key={facility.service_id}
+                        className="h-10 d-flex flex-row align-items-center mx-3"
+                      >
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              onChange={handleChange}
+                              style={{
+                                color: "#FF6666",
+                              }}
+                              id={facility.service_id}
+                            />
+                          }
+                          label={facility.description}
                         />
-                      }
-                      label="Parking"
-                    />
-                  </Row>
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Balcony"
-                    />
-                  </Row>
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Swimming Pool"
-                    />
-                  </Row>
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Game Zone"
-                    />
-                  </Row>
-                </Col>
-
-                <Col md="5">
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Cafe"
-                    />
-                  </Row>
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Garden"
-                    />
-                  </Row>
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Air Conditioner"
-                    />
-                  </Row>
-                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          onChange={handleChange}
-                          style={{
-                            color: "#FF6666",
-                          }}
-                        /> //color change
-                      }
-                      label="Gymnasium"
-                    />
-                  </Row>
+                      </Row>
+                    );
+                  })}
                 </Col>
               </Row>
             </Paper>
-            <Col>
-              <Typography
-                variant="h5"
-                align="center"
-                style={{ marginLeft: 30 }}
-              >
-                Others
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                <CreateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-                <TextField
-                  id="input-with-sx"
-                  label="eg:- No Drinking;outside food not allowed"
-                  variant="standard"
-                  color="warning"
-                  fullWidth
-                />
-              </Box>
-            </Col>
           </Paper>
         </Row>
       </Col>
@@ -252,26 +142,6 @@ export default function Amenities() {
                 </Col>
               </Row>
             </Paper>
-            <Col>
-              <Typography
-                variant="h5"
-                align="center"
-                style={{ marginLeft: 30 }}
-              >
-                Others
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                <CreateIcon sx={{ color: "action.active", mr: 1, my: 0.5 }} />
-                <TextField
-                  id="input-with-sx"
-                  label="eg:- No Drinking;outside food not allowed"
-                  variant="standard"
-                  color="warning"
-                  fullWidth
-                />
-              </Box>
-            </Col>
-            {/* Add Others Fieled */}
           </Paper>
           <hr />
         </Row>

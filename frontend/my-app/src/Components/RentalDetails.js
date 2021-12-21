@@ -1,6 +1,13 @@
 import * as React from "react";
 import CreateIcon from "@mui/icons-material/Create";
-import { Typography, Paper, TextField } from "@mui/material";
+import {
+  Typography,
+  Paper,
+  TextField,
+  InputLabel,
+  Select,
+  FormControl,
+} from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import DateRangePicker from "rsuite/DateRangePicker";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
@@ -12,35 +19,7 @@ import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import { Col, Image, Navbar, Row, Card, Container } from "react-bootstrap";
 
-const roomtype = [
-  {
-    value: "single_bed",
-    label: "Single Bed",
-  },
-  {
-    value: "double_bed",
-    label: "Double bed",
-  },
-  {
-    value: "family_room",
-    label: "Family Room",
-  },
-  {
-    value: "queen",
-    label: "Queen",
-  },
-  {
-    value: "king",
-    label: "King",
-  },
-];
-
-export default function RentalDetails() {
-  const [room_type, setType] = React.useState("EUR");
-  const handleChange = (event) => {
-    setType(event.target.value);
-  };
-
+export default function RentalDetails(props) {
   return (
     <Row
       style={{
@@ -65,12 +44,6 @@ export default function RentalDetails() {
                 marginBottom: 35,
               }}
             >
-              {/* <FormControlLabel
-            control={
-              <Checkbox checked={gilad} onChange={handleChange} name="gilad" />
-            }
-            label="Gilad Gray"
-          /> */}
               <Row>
                 <Col md="12">
                   <Row className="h-10 d-flex flex-row align-items-center mx-3 mb-5">
@@ -83,6 +56,10 @@ export default function RentalDetails() {
                         label="Price Per day"
                         variant="standard"
                         color="warning"
+                        value={props.datePriceFields.pricePerDay}
+                        onChange={(e) =>
+                          props.datePriceFields.setPricePerDay(e.target.value)
+                        }
                         fullWidth
                       />
                     </Box>
@@ -91,9 +68,11 @@ export default function RentalDetails() {
                   <Row className="h-40 d-flex flex-row align-items-center mx-3">
                     <DateRangePicker
                       appearance="default"
+                      format="yyyy-MM-dd"
+                      value={props.datePriceFields.availabilityDates}
+                      onChange={props.datePriceFields.setAvailabilityDates}
                       style={{ color: "#ff6666 !important" }}
                     />
-                    {/* akki */}
                   </Row>
                 </Col>
               </Row>
@@ -123,22 +102,33 @@ export default function RentalDetails() {
                       <RoomPreferencesIcon
                         sx={{ color: "action.active", mr: 1, my: 0.5 }}
                       />
-                      <TextField
-                        id="input-with-sx"
-                        select
-                        label="Room Type"
-                        value={room_type}
+                      <FormControl
                         variant="standard"
-                        color="warning"
-                        fullWidth
-                        onChange={handleChange}
+                        sx={{ m: 1, minWidth: 120 }}
                       >
-                        {roomtype.map((option) => (
-                          <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                          </MenuItem>
-                        ))}
-                      </TextField>
+                        <InputLabel>Room Type</InputLabel>
+                        <Select
+                          value={props.datePriceFields.selectedRoomType}
+                          onChange={(e) =>
+                            props.datePriceFields.setSelectedRoomType(
+                              e.target.value
+                            )
+                          }
+                          label="Room Type"
+                          variant="standard"
+                          color="warning"
+                          fullWidth
+                        >
+                          {props.datePriceFields.roomTypes.map((option) => (
+                            <MenuItem
+                              key={option.type_id}
+                              value={option.type_id}
+                            >
+                              {option.name}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
                     </Box>
                   </Row>
                   <Row className="h-10 d-flex flex-row align-items-center mb-3">
@@ -150,6 +140,10 @@ export default function RentalDetails() {
                         id="input-with-sx"
                         label="Room Number"
                         variant="standard"
+                        value={props.datePriceFields.roomNumbers}
+                        onChange={(e) =>
+                          props.datePriceFields.setRoomNumbers(e.target.value)
+                        }
                         color="warning"
                         fullWidth
                       />
@@ -169,6 +163,10 @@ export default function RentalDetails() {
                         label="No. of Beds"
                         variant="standard"
                         color="warning"
+                        value={props.datePriceFields.noOfBeds}
+                        onChange={(e) =>
+                          props.datePriceFields.setNoOfBeds(e.target.value)
+                        }
                         fullWidth
                       />
                     </Box>
@@ -182,6 +180,10 @@ export default function RentalDetails() {
                         id="input-with-sx"
                         label="No. of Guests"
                         variant="standard"
+                        value={props.datePriceFields.noOfGuests}
+                        onChange={(e) =>
+                          props.datePriceFields.setNoOfGuests(e.target.value)
+                        }
                         color="warning"
                         fullWidth
                       />
@@ -190,8 +192,6 @@ export default function RentalDetails() {
                 </Col>
               </Row>
             </Paper>
-
-            {/* Add Others Fieled */}
           </Paper>
           <hr />
         </Row>

@@ -30,9 +30,6 @@ function HomeScreen() {
   useEffect(() => {
     if (getUser === null) {
       navigate("/signup");
-      console.log("CALLING");
-    } else {
-      console.log(getUser);
     }
   }, [getUser]);
 

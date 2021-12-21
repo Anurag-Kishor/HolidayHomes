@@ -26,9 +26,9 @@ export const signupUser = (user) => {
 export const loginUser = (user) => {
   return async (dispatch) => {
     //Test
-    const responseTest = await fetch("/api/user");
-    const resDataTest = await responseTest.json();
-    console.log(resDataTest);
+    // const responseTest = await fetch("/api/user");
+    // const resDataTest = await responseTest.json();
+    // console.log(resDataTest);
 
     const response = await fetch("/api/auth/login", {
       method: "POST",
@@ -39,16 +39,16 @@ export const loginUser = (user) => {
     });
 
     const resData = await response.json();
-    console.log(resData);
-    if (resData.success === true && resData.status === 200) {
-      const userTokensEmail = {
+    if (resData.accessToken) {
+      const userTokensEmailId = {
         email: user.email,
-        accessToken: resData.tokens.accessToken,
-        refreshToken: resData.tokens.refreshToken,
+        accessToken: resData.accessToken,
+        refreshToken: resData.refreshToken,
+        userId: resData.user_id,
       };
       await dispatch({
         type: LOGIN,
-        user: userTokensEmail,
+        user: userTokensEmailId,
       });
       return { success: true };
     } else {
