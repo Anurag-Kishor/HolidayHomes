@@ -53,27 +53,26 @@ const confirmBooking = async(req, res) => {
 
 
 const calculateFinalCost = async(req, res) => {
-   /* try {
+    try {
         const data = req.body;
-
-        const result =await BookingService.calculateFinalCost(data.start_date, data.end_date, data.rental_id);
+     
+        const result = await BookingService.calculateFinalCost(data.start_date, data.end_date, data.rentalId);
         return res.status(result.status).json(result)
     } catch (error) {
         res.status(401).json({success: false, error: error.message});
-    }*/
+    }
 }
 
 const checkIfRentalIsBooked = async(req, res) => {
     try {
-        console.log('here')
 
-        // const data = req.body;
+        const data = req.body;
 
-        // const result = BookingService.checkIfRentalIsBooked(data.bookFrom, data.bookTo, data.rentalId);
-        // return res.status(200).json(result)
+        const result = await BookingService.checkIfRentalIsBooked(data.bookFrom, data.bookTo, data.rentalId);
+        return res.status(200).json({data: result})
 
     } catch (error) {
-       // res.status(401).json({success: false, error: error.message});
+        res.status(401).json({status: 401, success: false, error: error.message});
         
     }
 }

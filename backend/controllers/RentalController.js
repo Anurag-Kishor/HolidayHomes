@@ -100,7 +100,6 @@ const addService = async(req, res) => {
 
 const getAllServices = async(req, res) => {
     try {
-        console.log('here11')
         const result = await RentalService.getAllServices();
         res.status(result.status).json(result);  
     } catch (error) {
@@ -111,7 +110,6 @@ const getAllServices = async(req, res) => {
 
 const getRentalTypes = async(req, res) => {
     try {
-        console.log('here11')
         const result = await RentalService.getRentalTypes();
         res.status(result.status).json(result);  
     } catch (error) {
