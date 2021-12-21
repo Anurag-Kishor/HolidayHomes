@@ -131,8 +131,8 @@ const postReview = async(rental_id, data) => {
 const calculateAverageReview = async(rental_id) => {
     try {
         const res = await pool.query('SELECT AVG(stars) FROM rental_reviews WHERE rental_id = $1', [rental_id]);
-
-        return {status : 200, success: true, data: Math.ceil(res.rows[0].avg)};
+        const count = await pool.query('SELECT COUNT(*) FROM rental_reviews WHERE rental_id =$1', [rental_id]);
+        return {status : 200, success: true, data: {avg: Math.ceil(res.rows[0].avg), count: count.rows[0].count}};
     } catch (error) {
         return {status : 400, success: false, error: error};
     }
