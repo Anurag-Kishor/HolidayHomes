@@ -66,14 +66,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0Z
 
 ### POSTing a new booking
 POST http://localhost:5000/api/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQxNTI2LCJleHAiOjE2Mzk4NDI3MjZ9.0ipqq8T-EDDWdotZ7xknsVOWNU9GqRjDYLMyV0QWRBc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTExNjU5LCJleHAiOjE2Mzk5MTQ2NTl9.bcJXj-cPm5NzGiapVoT9QZxyUfOOKwq5i9caNsW_HCk
 Content-Type: application/json
 
 {
     "rentalId": "b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7",
     "userId": "677f1bbb-a5b5-4b27-8c6f-368725abdbb8",
-    "bookFrom": "2021-11-25",
-    "bookTo": "2021-12-01",
+    "bookFrom": "2020-11-25",
+    "bookTo": "2020-12-01",
     "amount": 540, 
     "numberOfGuests": 2
     
@@ -81,12 +81,11 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQxNTI2LCJleHAiOjE2Mzk4NDI3MjZ9.0ipqq8T-EDDWdotZ7xknsVOWNU9GqRjDYLMyV0QWRBc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTE3NzM4LCJleHAiOjE2Mzk5MjA3Mzh9.2YAMd3muTHQkgFerMpFIs19PIhqensUbquFu8ASAnVY
 
-
-###
-GET http://localhost:5000/api/booking/availablity
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQyOTg2LCJleHAiOjE2Mzk4NDQxODZ9.NCPYAJJBD7wv-IPrtoekK84tH3LSaVWyZiVZt7E9j3A
+### CHECK if booking is available
+GET http://localhost:5000/api/booking/availability
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTE3NzM4LCJleHAiOjE2Mzk5MjA3Mzh9.2YAMd3muTHQkgFerMpFIs19PIhqensUbquFu8ASAnVY
 Content-Type: application/json
 
 {
@@ -95,10 +94,28 @@ Content-Type: application/json
     "bookTo": "2021-12-01"  
 }
 
-###
-GET http://localhost:5000/api/rental/info/service
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQ4MDc1LCJleHAiOjE2Mzk4NDkyNzV9.HMUIc3m9ehoVp2AW7UgT8m6n3cnJ3UqBVN8T-OTRFiQ
 
-###
+### Calculate final Cost
+GET http://localhost:5000/api/booking/rental/cost
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTE3NzM4LCJleHAiOjE2Mzk5MjA3Mzh9.2YAMd3muTHQkgFerMpFIs19PIhqensUbquFu8ASAnVY
+Content-Type: application/json
+
+{
+    "rentalId": "b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7",
+    "bookFrom": "2021-11-25",
+    "bookTo": "2021-12-01"  
+}
+
+### GET all services
+GET http://localhost:5000/api/rental/info/service
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODUxNjg2LCJleHAiOjE2Mzk4NTI4ODZ9.cQcFnJYE43NxD_zEd5fxdz0wifLm_VuBzlIqNewjkv4
+
+
+###GET all rental types
 GET http://localhost:5000/api/rental/info/rentalType
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5ODQ4MDc1LCJleHAiOjE2Mzk4NDkyNzV9.HMUIc3m9ehoVp2AW7UgT8m6n3cnJ3UqBVN8T-OTRFiQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTA3NTExLCJleHAiOjE2Mzk5MTA1MTF9.o_huaxWmi8H8IOTchFiGiOOYHobDUxGsM1Fkus9xsPQ
+
+
+### GET most booked Rentals
+GET http://localhost:5000/api/home/mostBooked
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTE3NzM4LCJleHAiOjE2Mzk5MjA3Mzh9.2YAMd3muTHQkgFerMpFIs19PIhqensUbquFu8ASAnVY
