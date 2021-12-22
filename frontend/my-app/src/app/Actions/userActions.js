@@ -71,3 +71,24 @@ export const getUserDetails = (userId, userAccessToken) => {
     return resData.data;
   };
 };
+
+export const becomeAHost = (userId, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userId),
+    });
+
+    const resData = await response.json();
+
+    if (resData.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false, error: resData.error };
+    }
+  };
+};

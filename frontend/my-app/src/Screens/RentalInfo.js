@@ -22,7 +22,8 @@ import {
   Alert,
   LinearProgress,
 } from "@mui/material";
-import { fetchRentalInfo } from "../app/Actions/appActions";
+import dateFormat, { masks } from "dateformat";
+import { addBookingAction, fetchRentalInfo } from "../app/Actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 import "../../node_modules/rsuite/dist/rsuite.min.css";
@@ -55,6 +56,8 @@ import { Box } from "@mui/system";
 import Footer from "../Components/Footer";
 import NavbarHH from "../Components/NavbarHH";
 import SearchCardNavbar from "../Components/SearchCardNavbar";
+import { checkForAvailability } from "../app/Actions/appActions";
+
 function RentalInfo(props) {
   const location = useLocation();
   const [loading, setLoading] = useState(true);
@@ -67,13 +70,16 @@ function RentalInfo(props) {
   const [noOfGuests, setNoOfGuests] = useState("");
   const [errors, setErrors] = useState("");
   const [rentalInfo, setRentalInfo] = useState({});
+  const [totalAmount, setTotalAmount] = useState();
+  const [unmodifiable, setUnmodifiable] = useState(false);
   var rentalPhotoVar = {
     backgroundImage: "url(" + rentalPhoto + ")",
   };
   const dispatch = useDispatch();
 
   let { id } = useParams();
-
+  var startDate;
+  var endDate;
   const getRentalData = useCallback(async () => {
     const userAccessToken = await userDetails.accessToken;
     setRentalInfo(await dispatch(fetchRentalInfo(id, userAccessToken)));
@@ -83,6 +89,62 @@ function RentalInfo(props) {
   useEffect(() => {
     getRentalData();
   }, []);
+
+  const checkAvailability = async () => {
+    const startDate = dateFormat(availabilityDates[0], "yyyy-mm-dd");
+    const endDate = dateFormat(availabilityDates[1], "yyyy-mm-dd");
+
+    if (noOfGuests > rentalInfo.numberofguests || noOfGuests < 1) {
+      return setErrors("No of guests entered are more or less than expected");
+    }
+
+    const toCheckObj = {
+      rentalId: id,
+      bookFrom: startDate,
+      bookTo: endDate,
+    };
+
+    const ifAvailable = await dispatch(
+      checkForAvailability(toCheckObj, userDetails.accessToken)
+    );
+
+    if (ifAvailable.data) {
+      setIsAvailable(true);
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const Difference_In_Time = end.getTime() - start.getTime();
+      const days = Difference_In_Time / (1000 * 3600 * 24);
+      const finalAmount = days * rentalInfo.priceperday;
+      setTotalAmount(finalAmount);
+      setUnmodifiable(true);
+      setErrors("");
+    } else {
+      setErrors("Rental is not available between the selected dates");
+    }
+  };
+
+  const modifyData = () => {
+    setUnmodifiable(false);
+    setIsAvailable(false);
+    setErrors("");
+  };
+
+  const addBooking = async () => {
+    const startDate = dateFormat(availabilityDates[0], "yyyy-mm-dd");
+    const endDate = dateFormat(availabilityDates[1], "yyyy-mm-dd");
+    const bookingObj = {
+      rentalId: id,
+      userId: userDetails.userId,
+      bookFrom: startDate,
+      bookTo: endDate,
+      amount: totalAmount,
+      numberOfGuests: noOfGuests,
+    };
+
+    const response = await dispatch(
+      addBookingAction(bookingObj, userDetails.accessToken)
+    );
+  };
 
   return (
     <>
@@ -569,6 +631,7 @@ function RentalInfo(props) {
                       <DateRangePicker
                         appearance="default"
                         value={availabilityDates}
+                        disabled={unmodifiable}
                         onChange={setAvailabilityDates}
                         style={{ color: "#ff6666 !important" }}
                       />
@@ -583,7 +646,7 @@ function RentalInfo(props) {
                           label="Check-In-date"
                           disabled
                           variant="standard"
-                          value={availabilityDates[0]}
+                          // value={availabilityDates[0]}
                           color="warning"
                           fullWidth
                         />
@@ -598,7 +661,7 @@ function RentalInfo(props) {
                           id="input-with-sx"
                           label="Check-Out-Date"
                           disabled
-                          value={availabilityDates[1]}
+                          // value={availabilityDates[1]}
                           variant="standard"
                           color="warning"
                           fullWidth
@@ -615,7 +678,10 @@ function RentalInfo(props) {
                           type="number"
                           min="1"
                           max="20"
+                          disabled={unmodifiable}
                           label="No. Of Guests"
+                          value={noOfGuests}
+                          onChange={(e) => setNoOfGuests(e.target.value)}
                           variant="standard"
                           color="warning"
                           fullWidth
@@ -627,17 +693,43 @@ function RentalInfo(props) {
                     <>
                       <Row className="mb-4">
                         <Col
-                          md={{ span: 8, offset: 2 }}
+                          md={{ span: 4, offset: 1 }}
                           className="d-grid gap-2"
                         >
                           <Typography variant="body1">
-                            Total Amount: 13200
+                            Total Amount: {totalAmount}
+                          </Typography>
+                        </Col>
+                        <Col
+                          md={{ span: 4, offset: 2 }}
+                          className="d-grid gap-2"
+                        >
+                          <Typography variant="body1">
+                            No of Guests: {noOfGuests}
                           </Typography>
                         </Col>
                       </Row>
                       <Row className="mb-4">
                         <Col
-                          md={{ span: 8, offset: 2 }}
+                          md={{ span: 6, offset: 3 }}
+                          className="d-grid gap-2"
+                        >
+                          <Typography variant="body1">
+                            Check In Date: {availabilityDates[0].toString()}
+                          </Typography>
+                        </Col>
+                        <Col
+                          md={{ span: 6, offset: 3 }}
+                          className="d-grid gap-2 mt-3"
+                        >
+                          <Typography variant="body1">
+                            Check Out Date: {availabilityDates[1].toString()}
+                          </Typography>
+                        </Col>
+                      </Row>
+                      <Row className="mb-4">
+                        <Col
+                          md={{ span: 4, offset: 1 }}
                           className="d-grid gap-2"
                         >
                           <Button
@@ -646,6 +738,22 @@ function RentalInfo(props) {
                               backgroundColor: "#FF6666",
                               borderColor: "#ff6666",
                             }}
+                            onClick={modifyData}
+                          >
+                            Modify
+                          </Button>
+                        </Col>
+                        <Col
+                          md={{ span: 4, offset: 2 }}
+                          className="d-grid gap-2"
+                        >
+                          <Button
+                            variant="primary"
+                            style={{
+                              backgroundColor: "#FF6666",
+                              borderColor: "#ff6666",
+                            }}
+                            onClick={addBooking}
                           >
                             Make Payment
                           </Button>
@@ -661,6 +769,7 @@ function RentalInfo(props) {
                         >
                           <Button
                             variant="primary"
+                            onClick={checkAvailability}
                             style={{
                               backgroundColor: "#FF6666",
                               borderColor: "#ff6666",

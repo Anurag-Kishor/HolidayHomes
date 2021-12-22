@@ -98,10 +98,11 @@ const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
 
 
 
+
 module.exports = {
-    getAllBookings,
-    getBookingsByUserId,
-    confirmBooking,
-    calculateFinalCost,
-    checkIfRentalIsBooked
-}
+  getAllBookings,
+  getBookingsByUserId,
+  confirmBooking,
+  calculateFinalCost,
+  checkIfRentalIsBooked,
+};
