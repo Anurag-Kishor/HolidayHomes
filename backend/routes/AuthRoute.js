@@ -27,14 +27,7 @@ router.post('/login', async(req, res) => {
         res.cookie('refresh_token', tokens.refreshToken, {httpOnly: true});
         tokens["user_id"] = user.rows[0].user_id;
 
-        //Check if user is host
-        const result = UserService.checkIfUserIsHost(user.rows[0].user_id)
-        if(result.data) {
-          token["role"] = "host"
-        }else{
-          token["role"] = "traveller"
-        }
-        
+    
         return res.json(tokens);
 
     } catch (error) {
