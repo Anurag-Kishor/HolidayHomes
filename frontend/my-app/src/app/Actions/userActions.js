@@ -62,3 +62,12 @@ export const logoutUser = () => {
     type: LOGOUT,
   };
 };
+
+export const getUserDetails = (userId, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch("/api/user");
+    const resData = await response.json();
+    console.log(resData.data);
+    return resData.data;
+  };
+};

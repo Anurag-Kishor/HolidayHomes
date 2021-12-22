@@ -81,6 +81,7 @@ export const fetchRentalInfo = (rentalId, userAccessToken) => {
       },
     });
     const resData = await response.json();
+    console.log("RES DATA(APP ACTIONS): " + resData);
     const responseRating = await fetch(`/api/rental/${rentalId}/avgReview`, {
       headers: {
         Authorization: "Bearer " + userAccessToken,
@@ -90,7 +91,7 @@ export const fetchRentalInfo = (rentalId, userAccessToken) => {
 
     resData.data["avg"] = getVal.data.avg;
     resData.data["count"] = getVal.data.count;
-
+    console.log("RENTAL INFO(APP ACTIONS): " + resData.data);
     return resData.data;
   };
 };

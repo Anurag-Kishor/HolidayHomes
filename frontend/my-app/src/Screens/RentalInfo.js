@@ -76,7 +76,7 @@ function RentalInfo(props) {
 
   const getRentalData = useCallback(async () => {
     const userAccessToken = await userDetails.accessToken;
-    await setRentalInfo(await dispatch(fetchRentalInfo(id, userAccessToken)));
+    setRentalInfo(await dispatch(fetchRentalInfo(id, userAccessToken)));
     setLoading(false);
   }, []);
 
