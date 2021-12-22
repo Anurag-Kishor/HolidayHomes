@@ -3,6 +3,7 @@ const pool = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { jwtTokens } = require("../utils/jwtHelpers.js");
+const UserService = require('../services/UserService')
 
 const router = express.Router();
 
@@ -25,6 +26,15 @@ router.post('/login', async(req, res) => {
         let tokens = jwtTokens(user.rows[0]);
         res.cookie('refresh_token', tokens.refreshToken, {httpOnly: true});
         tokens["user_id"] = user.rows[0].user_id;
+
+        //Check if user is host
+        const result = UserService.checkIfUserIsHost(user.rows[0].user_id)
+        if(result.data) {
+          token["role"] = "host"
+        }else{
+          token["role"] = "traveller"
+        }
+        
         return res.json(tokens);
 
     } catch (error) {
