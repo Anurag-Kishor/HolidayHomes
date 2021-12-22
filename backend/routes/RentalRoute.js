@@ -16,12 +16,13 @@ const {
 const { checkForHost } = require("../middleware/CheckForHost");
 
 //GET rentals
-router.get("/info/service", getAllServices);
-router.get("/info/rentalType", getRentalTypes);
-router.get("/info/all", getAllRentals);
-router.get("/info/:id", getRentalById);
-router.get("/:rental_id/avgReview", averageRating);
-router.get("/:rental_id/allReviews", getRentalReviews);
+router.get('/info/service', getAllServices)
+router.get('/info/rentalType', getRentalTypes)
+router.get('/info/all', getAllRentals)
+router.get('/info/:id', getRentalById)
+router.get('/:rental_id/avgReview', averageRating)
+router.get('/:rental_id/allReviews', getRentalReviews)
+
 
 // POST / ADD rental
 router.post("/", addRental);

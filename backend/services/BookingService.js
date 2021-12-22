@@ -57,20 +57,13 @@ const confirmBooking = async(data) => {
     }
 }
 
+
 const calculateFinalCost = async(start_date, end_date, rental_id) => {
     try {
-        console.log(rental_id)
-        const rental = await pool.query('SELECT priceperday from Rental');
-        console.log("Price: " + rental)
-    } catch (error) {
+        console.log(start_date, end_date, rental_id)
+        const rentalCost = await pool.query('SELECT priceperday FROM Rental WHERE rental_id=$1', [rental_id]);
         
-    }
-}
-/*const calculateFinalCost = async(start_date, end_date, rental_id) => {
-    try {
-        console.log("ID: " + rental_id)
-        const rentalCost = await pool.query('SELECT * FROM Rental');
-        console.log('Cost: ' + rentalCost);
+        console.log('Rental Cost' + rentalCost)
         const start = new Date(start_date);
         const end = new Date(end_date);
         var Difference_In_Time = end.getTime() - start.getTime();
@@ -82,10 +75,11 @@ const calculateFinalCost = async(start_date, end_date, rental_id) => {
     } catch (error) {
         return {status: 401, success: false, error: error.message}
     }
-}*/
+}   
 
 const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
     try {
+
         console.log('Start: ' + start_date);
         console.log('End: ' + end_date);
         const check = await pool.query('SELECT * FROM booking WHERE rental_id=$1 AND (trip_start_date BETWEEN $2 AND $3 OR trip_end_date BETWEEN $2 AND $3)', [rental_id, start_date, end_date]);
@@ -99,17 +93,7 @@ const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
         return {success: false, data: false};
     }
 }
-// const checkIfRentalIsBooked = async(start_date, end_date) => {
-//     try {
-//         console.log('Start Date: ' + start_date)
-//         const check = await pool.query('SELECT * from Booking');
-        
-//         console.log('Data' + check);
-//         return true;
-//     } catch (error) {
-        
-//     }
-// }
+
 
 
 
