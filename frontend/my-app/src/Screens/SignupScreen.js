@@ -34,9 +34,6 @@ function SignupScreen() {
   const [password, setPassword] = useState("");
   const [addressLine1, setAddressLine1] = useState("");
   const [addressLine2, setAddressLine2] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -48,10 +45,7 @@ function SignupScreen() {
       !regexValidations.validPhoneNumber.test(contactNumber) ||
       fullName.length === 0 ||
       addressLine1.length === 0 ||
-      addressLine2.length === 0 ||
-      country.length === 0 ||
-      state.length === 0 ||
-      city.length === 0
+      addressLine2.length === 0
     ) {
       setErrors(
         "There are some issues with the values inputted. Please try again."
@@ -60,16 +54,13 @@ function SignupScreen() {
       setErrors("");
       const fullNameArr = fullName.split(" ");
       const user = {
-        firstName: fullName,
-        lastName: "TATTI",
+        firstName: fullName.split(" ")[0],
+        lastName: fullName.split(" ")[1],
         phoneNumber: contactNumber,
         email,
         password,
         addressLine1,
         addressLine2,
-        country,
-        state,
-        city,
       };
 
       const response = await dispatch(signupUser(user));
@@ -247,7 +238,7 @@ function SignupScreen() {
                 </Row>
 
                 {/* Country - State - City */}
-                <Row style={{ height: "8vh" }} className="mb-3">
+                {/* <Row style={{ height: "8vh" }} className="mb-3">
                   <Col
                     md={4}
                     style={{ backgroundColor: "white", borderRadius: 10 }}
@@ -337,7 +328,7 @@ function SignupScreen() {
                       </Box>
                     </Row>
                   </Col>
-                </Row>
+                </Row> */}
 
                 {/* Signup Button */}
                 <Row className="mb-3">
