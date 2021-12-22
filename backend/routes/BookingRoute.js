@@ -1,14 +1,13 @@
-const express = require('express');
+const express = require("express");
 const {
-    getAllBookings, 
-    getBookingsByUserId,
-    getBookingsByDate,
-    confirmBooking,
-    calculateFinalCost,
-    checkIfRentalIsBooked
-} = require('../controllers/BookingController');
+  getAllBookings,
+  getBookingsByUserId,
+  getBookingsByDate,
+  confirmBooking,
+  calculateFinalCost,
+  checkIfRentalIsBooked,
+} = require("../controllers/BookingController");
 const router = express.Router();
-
 
 //takes trip start_date,end_date, rental_id in body
 router.get('/rental/cost', calculateFinalCost)
@@ -22,10 +21,8 @@ router.post('/availability', checkIfRentalIsBooked)
 
 
 
+
 //takes booking details
-router.post('/', confirmBooking);
-
-
+router.post("/", confirmBooking);
 
 module.exports = router;
-

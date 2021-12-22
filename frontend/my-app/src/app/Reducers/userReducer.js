@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "../Actions/userActions";
+import { LOGIN, LOGOUT, BECOME_HOST } from "../Actions/userActions";
 
 const initialState = {
   user: null,
@@ -16,6 +16,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: null,
+      };
+    }
+    case BECOME_HOST: {
+      return {
+        ...state,
+        user: (state.user["userRole"] = "host"),
       };
     }
     default: {

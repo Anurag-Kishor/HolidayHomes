@@ -14,7 +14,7 @@ const getAllBookings = async (req, res) => {
 const getBookingsByUserId = async (req, res) => {
   try {
     const userId = req.params.user_id;
-    const result = BookingService.getBookingsByUserId(userId);
+    const result = await BookingService.getBookingsByUserId(userId);
     return res.status(result.status).json(result);
   } catch (error) {
     return res.status(401).json({ success: false, error: error.message });
@@ -69,7 +69,8 @@ const calculateFinalCost = async (req, res) => {
 const checkIfRentalIsBooked = async (req, res) => {
   try {
     const data = req.body;
-
+    console.log("DATA");
+    console.log(data);
     const result = await BookingService.checkIfRentalIsBooked(
       data.rentalId,
       data.bookFrom,

@@ -98,9 +98,12 @@ export const fetchRentalInfo = (rentalId, userAccessToken) => {
 export const checkForAvailability = (datesRentalIdObj, userAccessToken) => {
   return async (dispatch) => {
     const response = await fetch(`/api/booking/availability`, {
+      method: "POST",
       headers: {
         Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify(datesRentalIdObj),
     });
     const resData = await response.json();
     return resData.data;

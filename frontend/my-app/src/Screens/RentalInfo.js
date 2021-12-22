@@ -25,7 +25,12 @@ import {
 import dateFormat, { masks } from "dateformat";
 import { addBookingAction, fetchRentalInfo } from "../app/Actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import "../../node_modules/rsuite/dist/rsuite.min.css";
 import DateRangePicker from "rsuite/DateRangePicker";
 import PasswordIcon from "@mui/icons-material/Password";
@@ -76,7 +81,7 @@ function RentalInfo(props) {
     backgroundImage: "url(" + rentalPhoto + ")",
   };
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   let { id } = useParams();
   var startDate;
   var endDate;
@@ -114,7 +119,7 @@ function RentalInfo(props) {
       const end = new Date(endDate);
       const Difference_In_Time = end.getTime() - start.getTime();
       const days = Difference_In_Time / (1000 * 3600 * 24);
-      const finalAmount = days * rentalInfo.priceperday;
+      const finalAmount = (days + 1) * rentalInfo.priceperday;
       setTotalAmount(finalAmount);
       setUnmodifiable(true);
       setErrors("");
@@ -144,6 +149,11 @@ function RentalInfo(props) {
     const response = await dispatch(
       addBookingAction(bookingObj, userDetails.accessToken)
     );
+    if (response.success === true) {
+      navigate("../");
+    } else {
+      setErrors(response.error);
+    }
   };
 
   return (
