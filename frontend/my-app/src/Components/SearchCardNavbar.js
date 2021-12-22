@@ -164,6 +164,10 @@ function SearchCardNavbar(props) {
                     <TextField
                       id="input-with-sx"
                       label="Check-in Date"
+                      value={props.searchFields.checkInDate}
+                      onChange={(e) =>
+                        props.searchFields.setCheckInDate(e.target.value)
+                      }
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -190,6 +194,10 @@ function SearchCardNavbar(props) {
                     <TextField
                       id="input-with-sx"
                       label="Check-out-date"
+                      value={props.searchFields.checkOutDate}
+                      onChange={(e) =>
+                        props.searchFields.setCheckOutDate(e.target.value)
+                      }
                       variant="standard"
                       color="warning"
                       fullWidth
@@ -222,6 +230,10 @@ function SearchCardNavbar(props) {
                   <TextField
                     id="input-with-sx"
                     label="Number of Guests"
+                    value={props.searchFields.noOfGuests}
+                    onChange={(e) =>
+                      props.searchFields.setNoOfGuests(e.target.value)
+                    }
                     variant="standard"
                     color="warning"
                     type="number"

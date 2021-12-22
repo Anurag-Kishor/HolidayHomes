@@ -43,6 +43,14 @@ function HomeScreen() {
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [noOfGuests, setNoOfGuests] = useState("");
+  const searchFields = {
+    checkInDate,
+    setCheckInDate,
+    checkOutDate,
+    setCheckOutDate,
+    noOfGuests,
+    setNoOfGuests,
+  };
 
   const homeScreenData = useCallback(async () => {
     const userAccessToken = await getUser.accessToken;
@@ -59,10 +67,12 @@ function HomeScreen() {
 
   const searchFunc = () => {
     navigate("/search", {
-      selectedLocation,
-      checkInDate,
-      checkOutDate,
-      noOfGuests,
+      state: {
+        selectedLocation,
+        checkInDate,
+        checkOutDate,
+        noOfGuests,
+      },
     });
   };
 
@@ -73,6 +83,7 @@ function HomeScreen() {
         location={location}
         selectedLocation={selectedLocation}
         setSelectedLocation={setSelectedLocation}
+        searchFields={searchFields}
         searchFunc={searchFunc}
       />
 

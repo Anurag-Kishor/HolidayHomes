@@ -137,11 +137,10 @@ export const updateProfileDetails = (userDataObj, userAccessToken, userId) => {
 
 export const makeUserHost = (userId, userAccessToken) => {
   return async (dispatch) => {
-    const response = await fetch("", {
-      method: "POST",
+    const response = await fetch(`/api/user/host/${userId}`, {
+      method: "PUT",
       headers: {
         Authorization: "Bearer " + userAccessToken,
-        "Content-Type": "application/json",
       },
     });
 
