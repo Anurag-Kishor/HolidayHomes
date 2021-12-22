@@ -10,13 +10,16 @@ const {
     averageRating,
     getAllServices,
     getRentalTypes,
-    getRentalReviews
+    getRentalReviews,
+    getAllRentals
 } = require('../controllers/RentalController')
-
+const { checkForHost } = require("../middleware/CheckForHost");
+ 
 //GET rentals
 router.get('/info/service', getAllServices)
 router.get('/info/rentalType', getRentalTypes)
-router.get('/info/:id', getRentalById)
+router.get('/info/all', getAllRentals)
+router.get('/info/:id', checkForHost, getRentalById)
 router.get('/:rental_id/avgReview', averageRating)
 router.get('/:rental_id/allReviews', getRentalReviews)
 

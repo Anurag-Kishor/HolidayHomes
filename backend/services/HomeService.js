@@ -31,8 +31,29 @@ const getMostRecentRentals = async () => {
   }
 };
 
+const getRentalsBasedOnLocation = async (location_id) => {
+  try {
+  } catch (error) {}
+};
+
+const getRentalsBasedOnDate = async (start_date, end_date) => {
+  try {
+  } catch (error) {}
+};
+
+const getRentalsBasedOnDateAndLocation = async (
+  location_id,
+  start_date,
+  end_date
+) => {
+  try {
+  } catch (error) {}
+};
 module.exports = {
   getAllLocations,
   getMostBookedRentals,
   getMostRecentRentals,
+  getRentalsBasedOnLocation,
+  getRentalsBasedOnDate,
+  getRentalsBasedOnDateAndLocation,
 };

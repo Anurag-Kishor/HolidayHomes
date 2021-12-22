@@ -115,6 +115,15 @@ const getRentalReviews = async (req, res) => {
   }
 };
 
+const getAllRentals = async (req, res) => {
+  try {
+    const result = await RentalService.getAllRentals();
+    res.status(result.status).json(result);
+  } catch (error) {
+    res.status(401).send({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
   addRental,
   updateRental,
@@ -127,4 +136,5 @@ module.exports = {
   getAllServices,
   getRentalTypes,
   getRentalReviews,
+  getAllRentals,
 };

@@ -2,6 +2,9 @@ const HomeService = require("../services/HomeService");
 
 const getRentalsBasedOnProperties = async (req, res) => {
   try {
+    const data = req.body;
+    if (data.location_id && data.start_date && data.end_date) {
+    }
   } catch (error) {}
 };
 
