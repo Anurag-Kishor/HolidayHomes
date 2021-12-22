@@ -83,10 +83,9 @@ const updateUser = async(id, user) => {
 
     try {
 
-        const locationId = await findLocationId(host.city, host.state, host.country);
         const updatedUser = await pool.query(
-            "UPDATE host SET firstname=$1, lastname=$2, phonenumber= $3, addressline1= $4, addressline2 =$5, location_id=$6 WHERE host_id=$7 RETURNING *",
-            [user.firstName, user.lastName, user.phoneNumber, user.addressLine1, user.addressLine2, locationId.toString(), id]
+            "UPDATE host SET firstname=$1, lastname=$2, phonenumber= $3, addressline1= $4, addressline2 =$5 WHERE host_id=$6 RETURNING *",
+            [user.firstName, user.lastName, user.phoneNumber, user.addressLine1, user.addressLine2, id]
         )
 
         return {status : 200, success: true};

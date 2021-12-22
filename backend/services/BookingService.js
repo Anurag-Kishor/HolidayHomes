@@ -5,7 +5,7 @@ const getAllBookings = async() => {
 
         //fetching details from BOOKING, USERS, RENTAL, LOCATION tables.
         const bookings = await pool.query(
-            'SELECT b.Booking_id, b.Trip_start_date, b.Trip_end_date, b.NumberOfTravellers, b.TripCost, b.Booking_date, ' +
+            'SELECT b.Booking_id, to_char(b.Trip_start_date, \'YYYY-MM-DD\') as trip_start_date, to_char(b.Trip_end_date, \'YYYY-MM-DD\') as trip_end_date, b.NumberOfTravellers, b.TripCost, b.Booking_date, ' +
             'r.Name , r.Description, r.AddressLine1, r.AddressLine2, r.numberOfRooms, l.city, l.state, l.country, ' +
             'u.firstname, u.lastname FROM Booking b ' +
             'JOIN Users u ON b.traveler_id = u.user_id ' + 
@@ -22,14 +22,18 @@ const getAllBookings = async() => {
 const getBookingsByUserId = async(userId) => {
     try 
     {
+        console.log('Im here' + userId);
         //fetching details from BOOKING, USERS, RENTAL, LOCATION tables.
         const bookings = await pool.query(
-            'SELECT b.Booking_id, b.Trip_start_date, b.Trip_end_date, b.NumberOfTravellers, b.TripCost, b.Booking_date, ' +
-            'r.Name as RentalName, r.Description, r.AddressLine1, r.AddressLine2, r.numberOfRooms, l.city, l.state, l.country, ' +
-            'u.firstname, u.lastname FROM Booking b WHERE b.Traveler_id=$1' +
-            'JOIN Users u ON Booking.Traveler_id = Users.User_id' + 
-            'JOIN Rental r ON Rental.Rental_id = Booking.Rental_id' + 
-            'JOIN Location l ON Location.Location_id = Rental.Location_id', [userId])
+            'SELECT b.Booking_id, to_char(b.Trip_start_date, \'YYYY-MM-DD\') as trip_start_date, to_char(b.Trip_end_date, \'YYYY-MM-DD\') as trip_end_date, b.NumberOfTravellers, b.TripCost, ' +
+            'to_char(b.Booking_date, \'YYYY-MM-DD\') as booking_date, r.Name , r.Description, r.AddressLine1, r.AddressLine2, r.numberOfRooms, l.city, l.state, l.country, ' +
+            'u.firstname, u.lastname FROM Booking b ' +
+            'JOIN Users u ON b.traveler_id = u.user_id ' + 
+            'JOIN Rental r ON r.Rental_id = b.Rental_id ' + 
+            'JOIN Location l ON l.Location_id = r.Location_id WHERE b.Traveler_id=$1', [userId])
+
+
+        console.log(bookings.rows)
         return {status: 200, success: true, data: bookings.rows}
             
     } catch (error) {
@@ -69,7 +73,7 @@ const calculateFinalCost = async(start_date, end_date, rental_id) => {
         var Difference_In_Time = end.getTime() - start.getTime();
         var days = Difference_In_Time / (1000 * 3600 * 24);
 
-        const amount = parseInt(rentalCost.rows[0].priceperday) * days;
+        const amount = parseInt(rentalCost.rows[0].priceperday) * (days + 1);
 
         return {status: 200, success: true, data: amount}                
     } catch (error) {
@@ -93,7 +97,6 @@ const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
         return {success: false, error: error.message};
     }
 }
-
 
 
 
