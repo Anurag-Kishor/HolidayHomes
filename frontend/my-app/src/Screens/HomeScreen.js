@@ -27,6 +27,7 @@ import Footer from "../Components/Footer";
 import RentalCard from "../Components/RentalCard";
 import InputField from "../Components/InputField";
 import ReviewDiv from "../Components/ReviewDiv";
+import { fetchAddresses } from "../app/Actions/hostActions";
 
 function HomeScreen() {
   const dispatch = useDispatch();
@@ -36,9 +37,17 @@ function HomeScreen() {
   const [newestAdditions, setNewestAdditions] = useState([]);
   const [mostBooked, setMostBooked] = useState([]);
 
+  //Search Fields
+  const [location, setLocation] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [noOfGuests, setNoOfGuests] = useState("");
+
   const homeScreenData = useCallback(async () => {
     const userAccessToken = await getUser.accessToken;
     setNewestAdditions(await dispatch(fetchNewestAdditions(userAccessToken)));
+    setLocation(await dispatch(fetchAddresses(userAccessToken)));
   }, []);
 
   useEffect(() => {
@@ -48,10 +57,24 @@ function HomeScreen() {
     homeScreenData();
   }, [getUser]);
 
+  const searchFunc = () => {
+    navigate("/search", {
+      selectedLocation,
+      checkInDate,
+      checkOutDate,
+      noOfGuests,
+    });
+  };
+
   return (
     <>
       {/* Cover Photo - Search Form - Navbar */}
-      <SearchCardNavbar />
+      <SearchCardNavbar
+        location={location}
+        selectedLocation={selectedLocation}
+        setSelectedLocation={setSelectedLocation}
+        searchFunc={searchFunc}
+      />
 
       {/* Newest Additions */}
       <Row className="px-0 pt-5 row__allow__gutter">
@@ -98,7 +121,7 @@ function HomeScreen() {
               <RentalCard
                 rental_id={newestAddition.rental_id}
                 name={newestAddition.name}
-                pricePerDay={newestAddition.priceperday}
+                pricePerDay={parseFloat(newestAddition.priceperday)}
                 noOfRooms={newestAddition.numberofrooms}
                 noOfGuests={newestAddition.numberofguests}
               />

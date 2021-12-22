@@ -11,7 +11,13 @@ import {
 import InputField from "../Components/InputField";
 import logo from "../assets/hhlogo.png";
 import "../assets/css/main.css";
-import { TextField } from "@mui/material";
+import {
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  FormControl,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import RentalCard from "../Components/RentalCard";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,7 +28,7 @@ import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 import BAHdialog from "./BAHdialog";
 
-function SearchCardNavbar() {
+function SearchCardNavbar(props) {
   return (
     <>
       <Row
@@ -40,7 +46,7 @@ function SearchCardNavbar() {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                  <Link to="/addplace" style={{ textDecoration: "none" }}>
+                  <Link to="/host" style={{ textDecoration: "none" }}>
                     <Navbar.Text
                       className="p-5 h5"
                       style={{ color: "#ff6666" }}
@@ -101,14 +107,29 @@ function SearchCardNavbar() {
                 }}
                 className="align-items-center mb-3 row__allow__gutter"
               >
-                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                  <TextField
-                    id="input-with-sx"
-                    label="Location"
-                    variant="standard"
-                    color="warning"
-                    fullWidth
-                  />
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <FormControl variant="standard" sx={{ m: 1, minWidth: 510 }}>
+                    <InputLabel>Location</InputLabel>
+                    <Select
+                      value={props.selectedLocation}
+                      onChange={(e) =>
+                        props.setSelectedLocation(e.target.value)
+                      }
+                      label="Location"
+                      variant="standard"
+                      color="warning"
+                      fullWidth
+                    >
+                      {props.location.map((option) => (
+                        <MenuItem
+                          key={option.location_id}
+                          value={option.location_id}
+                        >
+                          {option.city}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                   <AddLocationAltRoundedIcon
                     sx={{
                       color: "action.active",
@@ -200,9 +221,11 @@ function SearchCardNavbar() {
                 <Box sx={{ display: "flex", alignItems: "flex-end" }}>
                   <TextField
                     id="input-with-sx"
-                    label="Email"
+                    label="Number of Guests"
                     variant="standard"
                     color="warning"
+                    type="number"
+                    min={1}
                     fullWidth
                   />
                   <GroupAddRoundedIcon
@@ -222,6 +245,7 @@ function SearchCardNavbar() {
                   <Button
                     variant="primary"
                     size="lg"
+                    onClick={props.searchFunc}
                     style={{
                       backgroundColor: "#FF6666",
                       borderColor: "#ff6666",

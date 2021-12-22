@@ -323,7 +323,7 @@ const UserProfileScreen = () => {
                           title={userBooking.name}
                           startDate={userBooking.trip_start_date}
                           endDate={userBooking.trip_end_date}
-                          totalCost={userBooking.tripcost}
+                          totalCost={parseFloat(userBooking.tripcost)}
                           totalRooms={userBooking.numberofrooms}
                           totalGuests={userBooking.numberoftravellers}
                         />
