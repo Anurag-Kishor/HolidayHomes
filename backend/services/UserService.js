@@ -84,7 +84,7 @@ const updateUser = async(id, user) => {
     try {
 
         const updatedUser = await pool.query(
-            "UPDATE host SET firstname=$1, lastname=$2, phonenumber= $3, addressline1= $4, addressline2 =$5 WHERE host_id=$6 RETURNING *",
+            "UPDATE host SET firstname=$1, lastname=$2, phonenumber= $3, addressline1= $4, addressline2 =$5 WHERE user_id=$6 RETURNING *",
             [user.firstName, user.lastName, user.phoneNumber, user.addressLine1, user.addressLine2, id]
         )
 
@@ -106,7 +106,7 @@ const getUserById = async(id) => {
             [id]
         );
 
-        return {status: 200, success: true, data: data.rows};
+        return {status: 200, success: true, data: data.rows[0]};
     } catch (error) {
         return {status: 401, success: false, error: error.message};
     }
