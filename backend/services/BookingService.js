@@ -98,10 +98,26 @@ const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
     }
 }
 
+const getBookingsByRentalId = async(rental_id) => {
+    try {
+        const bookings = await pool.query('SELECT * FROM booking WHERE rental_id=$1', [rental_id]);
+        
+        if(bookings.rowCount === 0) {
+            return {status: 200, success: true, data: null}                
+        }
+        return {status: 200, success: true, data: bookings.rows}                
+
+    } catch (error) {
+        return {success: false, status: 401, error: error.message};
+        
+    }
+}
+
 module.exports = {
   getAllBookings,
   getBookingsByUserId,
   confirmBooking,
   calculateFinalCost,
   checkIfRentalIsBooked,
+  getBookingsByRentalId
 };

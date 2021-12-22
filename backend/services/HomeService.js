@@ -41,13 +41,9 @@ const getRentalsBasedOnDate = async (start_date, end_date) => {
   } catch (error) {}
 };
 
-const getRentalsBasedOnDateAndLocation = async (
-  location_id,
-  start_date,
-  end_date
-) => {
+const getRentalsBasedOnDateAndLocation = async (location_id, start_date, end_date) => {
   try {
-  } catch (error) {}
+  } catch (error) { }
 };
 module.exports = {
   getAllLocations,

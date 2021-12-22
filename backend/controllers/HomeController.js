@@ -4,6 +4,12 @@ const getRentalsBasedOnProperties = async (req, res) => {
   try {
     const data = req.body;
     if (data.location_id && data.start_date && data.end_date) {
+      const result = await HomeService.getRentalsBasedOnDateAndLocation();
+    }else if(data.location_id){
+      const result = await HomeService.getRentalsBasedOnLocation();
+    }else if (data.start_date && data.end_date){
+      const result = await HomeService.getRentalsBasedOnDate();
+      
     }
   } catch (error) {}
 };
