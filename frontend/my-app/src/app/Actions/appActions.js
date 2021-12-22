@@ -81,7 +81,7 @@ export const fetchRentalInfo = (rentalId, userAccessToken) => {
       },
     });
     const resData = await response.json();
-    console.log("RES DATA(APP ACTIONS): " + resData);
+
     const responseRating = await fetch(`/api/rental/${rentalId}/avgReview`, {
       headers: {
         Authorization: "Bearer " + userAccessToken,
@@ -91,7 +91,40 @@ export const fetchRentalInfo = (rentalId, userAccessToken) => {
 
     resData.data["avg"] = getVal.data.avg;
     resData.data["count"] = getVal.data.count;
-    console.log("RENTAL INFO(APP ACTIONS): " + resData.data);
     return resData.data;
+  };
+};
+
+export const checkForAvailability = (datesRentalIdObj, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch(`/api/booking/availability`, {
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+      },
+    });
+    const resData = await response.json();
+    return resData.data;
+  };
+};
+
+export const addBookingAction = (bookingObj, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch("/api/booking", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingObj),
+    });
+
+    const resData = await response.json();
+
+    console.log(resData);
+    if (resData.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false, error: resData.error };
+    }
   };
 };

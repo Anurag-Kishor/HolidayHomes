@@ -56,7 +56,6 @@ export const fetchAddresses = (userAccessToken) => {
 
 export const addRental = (addRentalObj, userAccessToken) => {
   return async (dispatch) => {
-    console.log("SERVICES: " + addRentalObj.services);
     const response = await fetch("/api/rental", {
       method: "POST",
       headers: {
