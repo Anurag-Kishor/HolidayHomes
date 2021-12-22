@@ -9,7 +9,8 @@ const {
     addService,
     averageRating,
     getAllServices,
-    getRentalTypes
+    getRentalTypes,
+    getRentalReviews
 } = require('../controllers/RentalController')
 
 //GET rentals
@@ -17,7 +18,7 @@ router.get('/info/service', getAllServices)
 router.get('/info/rentalType', getRentalTypes)
 router.get('/info/:id', getRentalById)
 router.get('/:rental_id/avgReview', averageRating)
-
+router.get('/:rental_id/allReviews', getRentalReviews)
 
 // POST / ADD rental
 router.post('/', addRental);

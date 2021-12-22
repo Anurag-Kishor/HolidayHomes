@@ -16,11 +16,12 @@ class Rental {
         this.numberOfGuests = null;
         this.services = null;
         this.host_id = null;
+        this.numberOfBeds = null;
     }
 
     initModel(name, description, addressLine1, addressLine2, locationId,
             dateFrom, dateTo, pricePerDay, rentalTypeId,
-            numberOfRooms, numberOfGuests, services, host_id) {
+            numberOfRooms, numberOfGuests, services, host_id, numberOfBeds) {
         this.name = name;
         this.description = description;
         this.addressLine1 = addressLine1;
@@ -33,6 +34,7 @@ class Rental {
         this.rentalTypeId = rentalTypeId;
         this.numberOfRooms = numberOfRooms;
         this.numberOfGuests = numberOfGuests;
+        this.numberOfBeds = numberOfBeds;
         this.services = services;
         this.host_id = host_id;
 
