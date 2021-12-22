@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import {
+  fetchNewestAdditions,
+  fetchMostBooked,
+  fetchAvgAndCountReviews,
+} from "../app/Actions/appActions";
 import { Col, Image, Navbar, Row, Button, Container } from "react-bootstrap";
 import logo from "../assets/hhlogo.png";
 import testimonial1 from "../assets/1.png";
@@ -15,7 +20,7 @@ import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 import SearchCardNavbar from "../Components/SearchCardNavbar";
 import { Carousel } from "react-responsive-carousel";
 import "../assets/css/carousel.min.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import abus from "../assets/4.png";
 import Footer from "../Components/Footer";
@@ -24,16 +29,23 @@ import InputField from "../Components/InputField";
 import ReviewDiv from "../Components/ReviewDiv";
 
 function HomeScreen() {
+  const dispatch = useDispatch();
   const getUser = useSelector((state) => state.user.user);
   const navigate = useNavigate();
 
   const [newestAdditions, setNewestAdditions] = useState([]);
   const [mostBooked, setMostBooked] = useState([]);
 
+  const homeScreenData = useCallback(async () => {
+    const userAccessToken = await getUser.accessToken;
+    setNewestAdditions(await dispatch(fetchNewestAdditions(userAccessToken)));
+  }, []);
+
   useEffect(() => {
     if (getUser === null) {
-      navigate("/signup");
+      return navigate("/signup");
     }
+    homeScreenData();
   }, [getUser]);
 
   return (
@@ -65,10 +77,10 @@ function HomeScreen() {
         </Col>
       </Row>
 
-      {/* Most Viewed */}
+      {/* Newly Added */}
       <Row className="px-0 pt-5 row__allow__gutter">
         <Col md={2}>
-          <h4>Most Viewed</h4>{" "}
+          <h4>Newly Added</h4>{" "}
         </Col>
         <Col md={{ span: 2, offset: 8 }}>
           <Row>
@@ -77,32 +89,16 @@ function HomeScreen() {
         </Col>
       </Row>
       <Row className="px-5 mb-5 row__allow__gutter">
-        {/* <Col>
-          <RentalCard />
-        </Col>
-        <Col>
-          <RentalCard />
-        </Col>
-        <Col>
-          <RentalCard />
-        </Col> */}
         {newestAdditions.map((newestAddition, index) => {
           return index <= 2 ? (
-            <Col key={newestAddition.rental_id}>
-              <Link
-                to={{
-                  pathname: "/rentalinfo/",
-                  rentalId: `${newestAddition.rental_id}`,
-                }}
-              >
-                <RentalCard
-                  rental_id={newestAddition.rental_id}
-                  name={newestAddition.name}
-                  pricePerDay={newestAddition.priceperday}
-                  noOfRooms={newestAddition.numberofrooms}
-                  noOfGuests={newestAddition.numberofguests}
-                />
-              </Link>
+            <Col key={newestAddition.rental_id} md={4}>
+              <RentalCard
+                rental_id={newestAddition.rental_id}
+                name={newestAddition.name}
+                pricePerDay={newestAddition.priceperday}
+                noOfRooms={newestAddition.numberofrooms}
+                noOfGuests={newestAddition.numberofguests}
+              />
             </Col>
           ) : null;
         })}
