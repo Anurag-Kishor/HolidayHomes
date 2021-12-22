@@ -204,7 +204,7 @@ const getRentalsWithHostId = async(user_id) => {
     try {
         const rentals = await pool.query('SELECT rental_id, name, description, numberOfRooms, numberOfBeds, numberOfGuests as maximumGuests, priceperday ' + 
                                         'from Rental WHERE host_id=$1', [user_id]);
-        return {status: 200, sucess: true, data: rentals.rows}
+        return {status: 200, success: true, data: rentals.rows}
     } catch (error) {
         return {status : 400, success: false, error: error.message};
     }

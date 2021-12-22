@@ -100,7 +100,7 @@ const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
 
 const getBookingsByRentalId = async(rental_id) => {
     try {
-        const bookings = await pool.query('SELECT * FROM booking WHERE rental_id=$1', [rental_id]);
+        const bookings = await pool.query('SELECT b.booking_id, b.rental_id, to_char(b.trip_start_date, \'YYYY-MM-DD\') as trip_start_date, to_char(b.trip_end_date,\'YYYY-MM-DD\') as trip_end_date, b.numberoftravellers, b.tripcost, to_char(b.booking_date, \'YYYY-MM-DD\') as booking_date, u.firstName, u.lastName, u.phonenumber, u.email FROM booking b JOIN users u ON u.user_id = b.traveler_id WHERE rental_id=$1', [rental_id]);
         
         if(bookings.rowCount === 0) {
             return {status: 200, success: true, data: null}                

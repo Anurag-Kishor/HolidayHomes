@@ -10,8 +10,8 @@ const { authenticateToken } = require("../middleware/Authorization");
 
 //GET
 router.get("/location", authenticateToken, getAllLocations);
-router.get("/search", authenticateToken, getRentalsBasedOnProperties);
 router.get("/mostBooked", authenticateToken, getMostBookedRentals);
 router.get("/mostRecent", authenticateToken, getMostRecentRentals);
+router.post("/search", authenticateToken, getRentalsBasedOnProperties);
 
 module.exports = router;

@@ -33,16 +33,37 @@ const getMostRecentRentals = async () => {
 
 const getRentalsBasedOnLocation = async (location_id) => {
   try {
-  } catch (error) {}
+    console.log(location_id)
+
+    const result = await pool.query('SELECT * FROM Rental WHERE location_id=$1', [location_id]);
+    return {status: 200, success: true, data: result.rows}
+  } catch (error) {
+    return { status: 404, success: false, error: error };
+  }
 };
 
 const getRentalsBasedOnDate = async (start_date, end_date) => {
   try {
-  } catch (error) {}
+    console.log(start_date, end_date)
+
+    const result = await pool.query('SELECT * FROM Rental WHERE (trip_start_date < $1) AND (trip_end_date > $2)', [start_date, end_date]);
+    
+    return {status: 200, success: true, data: result.rows}
+  } catch (error) {
+    return { status: 404, success: false, error: error };
+  }
 };
 
 const getRentalsBasedOnDateAndLocation = async (location_id, start_date, end_date) => {
   try {
+    try {
+      console.log(location_id, start_date, end_date)
+      const result = await pool.query('SELECT * FROM Rental WHERE (trip_start_date BETWEEN $1 AND $2 AND trip_end_date BETWEEN $1 AND $2)  AND location_id=$2', [start_date, location_id]);
+      
+      return {status: 200, success: true, data: result.rows}
+    } catch (error) {
+      return { status: 404, success: false, error: error };
+    }
   } catch (error) { }
 };
 module.exports = {
