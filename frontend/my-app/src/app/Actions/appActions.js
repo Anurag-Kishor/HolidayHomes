@@ -103,7 +103,28 @@ export const checkForAvailability = (datesRentalIdObj, userAccessToken) => {
       },
     });
     const resData = await response.json();
-    console.log(resData.data);
     return resData.data;
+  };
+};
+
+export const addBookingAction = (bookingObj, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch("/api/booking", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(bookingObj),
+    });
+
+    const resData = await response.json();
+
+    console.log(resData);
+    if (resData.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false, error: resData.error };
+    }
   };
 };
