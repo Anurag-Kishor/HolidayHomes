@@ -20,6 +20,7 @@ import ReviewDiv from "../Components/ReviewDiv";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
+import BAHdialog from "./BAHdialog";
 
 function SearchCardNavbar() {
   return (
@@ -46,6 +47,7 @@ function SearchCardNavbar() {
                     >
                       Become a Host
                     </Navbar.Text>
+                    {/* <BAHdialog /> */}
                   </Link>
                   <Link to="/me" style={{ textDecoration: "none" }}>
                     <Navbar.Text

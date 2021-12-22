@@ -22,6 +22,7 @@ import {
   Alert,
   LinearProgress,
 } from "@mui/material";
+import dateFormat, { masks } from "dateformat";
 import { fetchRentalInfo } from "../app/Actions/appActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
@@ -83,6 +84,24 @@ function RentalInfo(props) {
   useEffect(() => {
     getRentalData();
   }, []);
+
+  const checkAvailability = async () => {
+    const startDate = dateFormat(availabilityDates[0], "yyyy-mm-dd");
+    const endDate = dateFormat(availabilityDates[1], "yyyy-mm-dd");
+    if (noOfGuests > rentalInfo.numberofguests || noOfGuests < 1) {
+      return setErrors("No of guests entered are more or less than expected");
+    }
+
+    const toCheckObj = {
+      rentalId: id,
+      bookFrom: startDate,
+      bookTo: endDate,
+    };
+
+    const ifAvailable = await dispatch(
+      checkAvailability(toCheckObj, userDetails.accessToken)
+    );
+  };
 
   return (
     <>
@@ -583,7 +602,7 @@ function RentalInfo(props) {
                           label="Check-In-date"
                           disabled
                           variant="standard"
-                          value={availabilityDates[0]}
+                          // value={availabilityDates[0]}
                           color="warning"
                           fullWidth
                         />
@@ -598,7 +617,7 @@ function RentalInfo(props) {
                           id="input-with-sx"
                           label="Check-Out-Date"
                           disabled
-                          value={availabilityDates[1]}
+                          // value={availabilityDates[1]}
                           variant="standard"
                           color="warning"
                           fullWidth
@@ -616,6 +635,8 @@ function RentalInfo(props) {
                           min="1"
                           max="20"
                           label="No. Of Guests"
+                          value={noOfGuests}
+                          onChange={(e) => setNoOfGuests(e.target.value)}
                           variant="standard"
                           color="warning"
                           fullWidth
@@ -661,6 +682,7 @@ function RentalInfo(props) {
                         >
                           <Button
                             variant="primary"
+                            onClick={checkAvailability}
                             style={{
                               backgroundColor: "#FF6666",
                               borderColor: "#ff6666",
