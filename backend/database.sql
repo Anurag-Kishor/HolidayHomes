@@ -111,7 +111,7 @@ CREATE TABLE Host_Rentals (
 );
 
 CREATE TABLE Rental_Services (
-    Service_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    Service_id uuid NOT NULL,
     Rental_id uuid NOT NULL,
     CONSTRAINT fk_serviceid
         FOREIGN KEY(Service_id)
