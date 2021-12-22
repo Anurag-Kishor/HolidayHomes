@@ -40,8 +40,8 @@ const createRental = async(rental) => {
         if(!check) return {status : 400, success: false, error: "The location is not available!"};
 
         //Adding to RENTAL Table
-        const rentalData = 'INSERT INTO RENTAL(name, description, addressline1, addressline2, location_id, available, datefrom, dateto, verified, priceperday,rentaltype, numberofrooms, numberofguests, host_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING rental_id'
-        const rentalDataValues = [rental.name, rental.description, rental.addressLine1, rental.addressLine2, rental.locationId, rental.available, rental.dateFrom, rental.dateTo, false, rental.pricePerDay, rental.rentalTypeId, rental.numberOfRooms, rental.numberOfGuests, rental.host_id]
+        const rentalData = 'INSERT INTO RENTAL(name, description, addressline1, addressline2, location_id, available, datefrom, dateto, verified, priceperday,rentaltype, numberofrooms, numberofguests, host_id, numberOfBeds) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING rental_id'
+        const rentalDataValues = [rental.name, rental.description, rental.addressLine1, rental.addressLine2, rental.locationId, rental.available, rental.dateFrom, rental.dateTo, false, rental.pricePerDay, rental.rentalTypeId, rental.numberOfRooms, rental.numberOfGuests, rental.host_id, rental.numberOfBeds]
         const res = await pool.query(rentalData, rentalDataValues)
 
         //Adding to RENTAL_SERVICES Table
@@ -80,7 +80,7 @@ const getRentalById = async(id) => {
         console.log(id)
 
         const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, r.dateFrom, r.dateTo, r.pricePerDay, ' + 
-                                        't.name as rentalType, r.numberOfRooms, r.numberOfGuests, ' + 
+                                        't.name as rentalType, r.numberOfRooms, r.numberOfGuests, r.numberOfBeds ' + 
                                         'u.FirstName, u.LastName, u.PhoneNumber, u.Email from rental r ' + 
                                         'JOIN Location l ON r.location_id= l.location_id ' + 
                                         'JOIN Users u ON r.host_id=u.user_id ' + 
@@ -119,7 +119,7 @@ const setAvailability = async(rental_id) => {
 const postReview = async(rental_id, data) => {
 
     try {
-        console.log(rental_id, data);
+     //   console.log(rental_id, data);
         const res = await pool.query('INSERT INTO rental_reviews(user_id, rental_id, description, stars) VALUES($1, $2, $3, $4)', [data.traveler_id, rental_id, data.description, data.stars]);
         return {status : 200, success: true};
 
@@ -128,6 +128,15 @@ const postReview = async(rental_id, data) => {
     }
 }
 
+const getRentalReviews = async(rental_id) => {
+    try {
+        const res = await pool.query('SELECT user_id, description, stars FROM rental_reviews WHERE rental_id = $1', [rental_id]);
+        return {status : 200, success: true, data = res.rows};
+
+    } catch (error) {
+        return {status : 400, success: false, error: error.message};
+    } 
+}
 const calculateAverageReview = async(rental_id) => {
     try {
         const res = await pool.query('SELECT AVG(stars) FROM rental_reviews WHERE rental_id = $1', [rental_id]);
@@ -198,6 +207,6 @@ module.exports = {
     addService,
     calculateAverageReview,
     getAllServices,
-    getRentalTypes
-    
+    getRentalTypes,
+    getRentalReviews
 }
