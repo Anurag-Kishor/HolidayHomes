@@ -15,21 +15,20 @@ export const fetchNewestAdditions = (userAccessToken) => {
     //     amenities: resData.data,
     //   });
 
-    await resData.data.forEach(async (rental) => {
-      const response = await fetch(
-        `/api/rental/${rental.rental_id}/avgReview`,
-        {
-          headers: {
-            Authorization: "Bearer " + userAccessToken,
-          },
-        }
-      );
-      const getVal = await response.json();
-      rental["avg"] = await getVal.data.avg;
-      rental["count"] = await getVal.data.count;
-    });
-    // console.log(resData.data);
-
+    // await resData.data.forEach(async (rental) => {
+    //   const response = await fetch(
+    //     `/api/rental/${rental.rental_id}/avgReview`,
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + userAccessToken,
+    //       },
+    //     }
+    //   );
+    //   const getVal = await response.json();
+    //   rental["avg"] = await getVal.data.avg;
+    //   rental["count"] = await getVal.data.count;
+    // });
+    // // console.log(resData.data);
     return resData.data;
   };
 };
@@ -48,15 +47,15 @@ export const fetchMostBooked = (userAccessToken) => {
     //     amenities: resData.data,
     //   });
 
-    resData.data.map(async (rental) => {
-      const getVal = await fetchAvgAndCountReviews(
-        rental.rental_id,
-        userAccessToken
-      );
-      rental["avg"] = getVal.avg;
-      rental["count"] = getVal.count;
-      return rental;
-    });
+    // resData.data.map(async (rental) => {
+    //   const getVal = await fetchAvgAndCountReviews(
+    //     rental.rental_id,
+    //     userAccessToken
+    //   );
+    //   rental["avg"] = getVal.avg;
+    //   rental["count"] = getVal.count;
+    //   return rental;
+    // });
     // console.log(resData.data);
     return resData.data;
   };
@@ -70,11 +69,6 @@ export const fetchAvgAndCountReviews = (rentalId, userAccessToken) => {
       },
     });
     const resData = await response.json();
-
-    //   await dispatch({
-    //     type: FETCH_AMENITIES,
-    //     amenities: resData.data,
-    //   });
     return resData.data;
   };
 };
@@ -93,10 +87,10 @@ export const fetchRentalInfo = (rentalId, userAccessToken) => {
       },
     });
     const getVal = await responseRating.json();
+
     resData.data["avg"] = getVal.data.avg;
     resData.data["count"] = getVal.data.count;
-    console.log(getVal);
-    console.log(resData);
+
     return resData.data;
   };
 };

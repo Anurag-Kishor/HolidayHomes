@@ -22,7 +22,7 @@ CREATE TABLE Users (
     PhoneNumber numeric(10, 0) NOT NULL UNIQUE,
     AddressLine1 varchar(100) NOT NULL,
     AddressLine2 varchar(100),
-    Location_id uuid NOT NULL,
+    Location_id uuid,
     isHost BOOLEAN NOT NULL DEFAULT 'f',
     CONSTRAINT fk_Role 
         FOREIGN KEY(Role_id) 

@@ -34,7 +34,6 @@ const RentalCard = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(props);
     if (props.rental_id) getAvgReviews();
   }, []);
   return (

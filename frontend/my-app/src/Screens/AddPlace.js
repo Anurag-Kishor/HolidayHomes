@@ -95,8 +95,6 @@ export default function HorizontalNonLinearStepper() {
   useEffect(() => {
     fetchAmenitiesRentalTypes();
     setLoading(false);
-    console.log(facilities);
-    console.log(roomTypes);
   }, []);
 
   const totalSteps = () => {
@@ -156,7 +154,6 @@ export default function HorizontalNonLinearStepper() {
     const response = await dispatch(
       addRental(addRentalDetails, userDetails.accessToken)
     );
-    console.log(response);
     if (!response.success) {
       setError(response.error);
     } else {

@@ -62,6 +62,7 @@ function RentalInfo(props) {
   const [searchValue, setSearchValue] = useState("");
   const [isAvailable, setIsAvailable] = useState(false);
   const [checkInDate, setCheckInDate] = useState("");
+  const [availabilityDates, setAvailabilityDates] = useState([]);
   const [checkOutDate, setCheckOutDate] = useState("");
   const [noOfGuests, setNoOfGuests] = useState("");
   const [errors, setErrors] = useState("");
@@ -567,6 +568,8 @@ function RentalInfo(props) {
                     <Row className="h-100 d-flex flex-row align-items-center mb-3">
                       <DateRangePicker
                         appearance="default"
+                        value={availabilityDates}
+                        onChange={setAvailabilityDates}
                         style={{ color: "#ff6666 !important" }}
                       />
                     </Row>
@@ -580,6 +583,7 @@ function RentalInfo(props) {
                           label="Check-In-date"
                           disabled
                           variant="standard"
+                          value={availabilityDates[0]}
                           color="warning"
                           fullWidth
                         />
@@ -594,6 +598,7 @@ function RentalInfo(props) {
                           id="input-with-sx"
                           label="Check-Out-Date"
                           disabled
+                          value={availabilityDates[1]}
                           variant="standard"
                           color="warning"
                           fullWidth

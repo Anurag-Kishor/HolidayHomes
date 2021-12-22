@@ -10,7 +10,7 @@ import testimonial1 from "../assets/1.png";
 import testimonial2 from "../assets/2.png";
 import testimonial3 from "../assets/3.png";
 import "../assets/css/main.css";
-import { TextField } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -89,6 +89,9 @@ function HomeScreen() {
         </Col>
       </Row>
       <Row className="px-5 mb-5 row__allow__gutter">
+        {newestAdditions.length === 0 && (
+          <Typography>No New Rentals!</Typography>
+        )}
         {newestAdditions.map((newestAddition, index) => {
           return index <= 2 ? (
             <Col key={newestAddition.rental_id} md={4}>
