@@ -42,7 +42,7 @@ const confirmBooking = async(data) => {
         let today = new Date().toISOString().slice(0, 10)
 
         const check = await checkIfRentalIsBooked(data.rentalId, data.bookFrom, data.bookTo);
-        if(check.data) return ({status: 401, success: false, error: 'The date is not available'})
+        if(!check.data) return ({status: 401, success: false, error: 'The date is not available'})
         
         const amount = await calculateFinalCost(data.bookFrom, data.bookTo, data.rentalId);
         const result = await pool.query('INSERT INTO Booking(rental_id, trip_start_date, trip_end_date, numberOfTravellers, tripCost, booking_date, traveler_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
@@ -85,12 +85,12 @@ const checkIfRentalIsBooked = async(rental_id, start_date, end_date) => {
         const check = await pool.query('SELECT * FROM booking WHERE rental_id=$1 AND (trip_start_date BETWEEN $2 AND $3 OR trip_end_date BETWEEN $2 AND $3)', [rental_id, start_date, end_date]);
 
         if(check.rowCount > 0) {
-            return {success: true, data: true};
+            return {success: true, data: false};
         }
        // console.log(check);
-        return {success: true, data: false};
+        return {success: true, data: true};
     } catch (error) {
-        return {success: false, data: false};
+        return {success: false, error: error.message};
     }
 }
 
