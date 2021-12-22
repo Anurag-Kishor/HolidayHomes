@@ -124,10 +124,10 @@ const getAllRentals = async (req, res) => {
   }
 };
 
-const getRentalsWithBookingInfo = async(req, res) => {
+const getRentalsWithHostId = async(req, res) => {
   try {
     const host_id = req.params.host_id
-    const result = await RentalService.getRentalsWithBookingInfo(host_id);
+    const result = await RentalService.getRentalsWithHostId(host_id);
     res.status(result.status).json(result);
 
   } catch (error) {
@@ -148,5 +148,5 @@ module.exports = {
   getRentalTypes,
   getRentalReviews,
   getAllRentals,
-  getRentalsWithBookingInfo
+  getRentalsWithHostId
 };

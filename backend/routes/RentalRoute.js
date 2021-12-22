@@ -12,7 +12,7 @@ const {
   getRentalTypes,
   getRentalReviews,
   getAllRentals,
-  getRentalsWithBookingInfo
+  getRentalsWithHostId
 } = require("../controllers/RentalController");
 const { checkForHost } = require("../middleware/CheckForHost");
 
@@ -20,7 +20,7 @@ const { checkForHost } = require("../middleware/CheckForHost");
 router.get('/info/service', getAllServices)
 router.get('/info/rentalType', getRentalTypes)
 router.get('/info/all', getAllRentals)
-router.get('/info/booking/rentals/:host_id', getRentalsWithBookingInfo)
+router.get('/info/booking/rentals/:host_id', getRentalsWithHostId)
 router.get('/info/:id', getRentalById)
 router.get('/:rental_id/avgReview', averageRating)
 router.get('/:rental_id/allReviews', getRentalReviews)
