@@ -21,10 +21,13 @@ export default function BAHdialog() {
     const handleClose = () => {
         setOpen(false);
     };
+    const handleCloseAgree = () => {
+        setOpen(false);
+    };
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen} style={{ color: "#ff6666", borderColor: "#ff6666" }}>
                 Become a Host
       </Button>
             <Dialog
@@ -34,7 +37,7 @@ export default function BAHdialog() {
                 onClose={handleClose}
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                <DialogTitle>{"Become A Host"}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
                         Are you sure you want to become a host and add places for rental
@@ -42,7 +45,7 @@ export default function BAHdialog() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Disagree</Button>
-                    <Button onClick={handleClose}>Agree</Button>
+                    <Button onClick={handleCloseAgree}>Agree</Button>
                 </DialogActions>
             </Dialog>
         </div>
