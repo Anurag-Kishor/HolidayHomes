@@ -24,11 +24,10 @@ router.post("/login", async (req, res) => {
         .status(401)
         .json({ success: false, error: "Incorrect Password!" });
     }
-
-    //JWT
     let tokens = jwtTokens(user.rows[0]);
     res.cookie("refresh_token", tokens.refreshToken, { httpOnly: true });
     tokens["user_id"] = user.rows[0].user_id;
+    return res.json(tokens);
 
     //Check if user is host
     // const value = await pool.query(
@@ -45,8 +44,6 @@ router.post("/login", async (req, res) => {
     // } else {
     //   token["role"] = "traveller";
     // }
-
-    return res.json(tokens);
   } catch (error) {
     return res.status(401).json({ success: false, error: error.message });
   }
