@@ -40,7 +40,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0Z
 
 ### Adding a new rental
 POST http://localhost:5000/api/rental
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTYzMjQ1LCJleHAiOjE2NDAxNjYyNDV9.kJbmkXavE6eD8dV4RrI31DD0rclb5D-hFVDAyGX-lGE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTk0MzYyLCJleHAiOjE2NDAxOTczNjJ9._Lc_gKMMpe_A7MGkkujhz6n-avQyI-QH0Z1YQAlGn_Y
 Content-Type: application/json
 
 {
@@ -67,18 +67,24 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyM
 
 
 ### GETTING rental details by ID 
-GET http://localhost:5000/api/rental/info/af0c33d7-8583-4142-88d4-83cc6493b262
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTY2MjIyLCJleHAiOjE2NDAxNjkyMjJ9.dc1BKzfgxXHoaU3EQylTjNRL1YWabUS6ZKVfjyzxhpI
+GET http://localhost:5000/api/rental/info/a520e3e5-e75e-4023-a531-23c02f8bb780
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTc4NDAyLCJleHAiOjE2NDAxODE0MDJ9.Qm5vPnNvjcAqz6nIdFnuyFJo-EjUjMkELD0bumIZJgI
+
+
+
+### GETTING bookings by user ID 
+GET http://localhost:5000/api/booking/a520e3e5-e75e-4023-a531-23c02f8bb780
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTc4NDAyLCJleHAiOjE2NDAxODE0MDJ9.Qm5vPnNvjcAqz6nIdFnuyFJo-EjUjMkELD0bumIZJgI
 
 
 ### POSTing a new booking
 POST http://localhost:5000/api/booking
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjM5OTExNjU5LCJleHAiOjE2Mzk5MTQ2NTl9.bcJXj-cPm5NzGiapVoT9QZxyUfOOKwq5i9caNsW_HCk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTc4NDAyLCJleHAiOjE2NDAxODE0MDJ9.Qm5vPnNvjcAqz6nIdFnuyFJo-EjUjMkELD0bumIZJgI
 Content-Type: application/json
 
 {
-    "rentalId": "b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7",
-    "userId": "677f1bbb-a5b5-4b27-8c6f-368725abdbb8",
+    "rentalId": "af0c33d7-8583-4142-88d4-83cc6493b262",
+    "userId": "a520e3e5-e75e-4023-a531-23c02f8bb780",
     "bookFrom": "2020-11-25",
     "bookTo": "2020-12-01",
     "amount": 540, 
@@ -150,4 +156,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyM
 GET http://localhost:5000/api/rental/b6a2b99f-2dbb-4f9e-ba67-0228c8d50ad7/avgReview
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTI0ZTk1YzYtMzFmOS00ZGEzLTg0NDgtYmJkMDQwYTA2YjkzIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTEzMzQ2LCJleHAiOjE2NDAxMTYzNDZ9.jqRMA-6Ue3DkameaXnAA7cA6CjNjryQ8thO0hAWSGB0
 
-
+### GET rentals and bookings
+GET http://localhost:5000/api/rental/info/booking/rentals/88956e70-7daa-4ca7-977f-91a1357f8cee
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMTk0MzYyLCJleHAiOjE2NDAxOTczNjJ9._Lc_gKMMpe_A7MGkkujhz6n-avQyI-QH0Z1YQAlGn_Y

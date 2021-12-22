@@ -124,6 +124,17 @@ const getAllRentals = async (req, res) => {
   }
 };
 
+const getRentalsWithBookingInfo = async(req, res) => {
+  try {
+    const host_id = req.params.host_id
+    const result = await RentalService.getRentalsWithBookingInfo(host_id);
+    res.status(result.status).json(result);
+
+  } catch (error) {
+    res.status(401).send({ success: false, error: error.message });    
+  }
+}
+
 module.exports = {
   addRental,
   updateRental,
@@ -137,4 +148,5 @@ module.exports = {
   getRentalTypes,
   getRentalReviews,
   getAllRentals,
+  getRentalsWithBookingInfo
 };

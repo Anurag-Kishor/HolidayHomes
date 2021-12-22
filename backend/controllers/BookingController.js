@@ -10,6 +10,7 @@ const getAllBookings = async (req, res) => {
   }
 };
 
+
 const getBookingsByUserId = async (req, res) => {
   try {
     const userId = req.params.user_id;
@@ -24,6 +25,7 @@ const getBookingsByDate = async (req, res) => {
   try {
   } catch (error) {}
 };
+
 
 const confirmBooking = async (req, res) => {
   try {
@@ -80,6 +82,13 @@ const checkIfRentalIsBooked = async (req, res) => {
   }
 };
 
+const getBookingsByRentalId = async(req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
 module.exports = {
   getAllBookings,
   getBookingsByUserId,

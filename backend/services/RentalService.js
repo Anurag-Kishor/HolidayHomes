@@ -200,6 +200,18 @@ const getRentalTypes = async() => {
     }
 }
 
+const getRentalsWithBookingInfo = async(user_id) => {
+    try {
+        console.log(user_id);
+        const rentals = await pool.query('SELECT r.rental_id, r.name, r.description, r.numberOfRooms, r.numberOfBeds, r.numberOfGuests as maximumGuests, r.priceperday, ' + 
+        'b.booking_id, b.trip_start_date, b.trip_end_date, b.tripcost as finalCost, b.numberoftravellers from Rental r LEFT JOIN Booking b ON r.rental_id=b.rental_id WHERE host_id=$1', [user_id]);
+
+        return {status: 200, sucess: true, data: rentals.rows}
+    } catch (error) {
+        return {status : 400, success: false, error: error.message};
+    }
+}
+
 
 
 module.exports = {
@@ -214,4 +226,5 @@ module.exports = {
   getRentalTypes,
   getRentalReviews,
   getAllRentals,
+  getRentalsWithBookingInfo
 };
