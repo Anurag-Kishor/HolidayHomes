@@ -34,11 +34,12 @@ const HostProfileScreen = () => {
   const [searchValue, setSearchValue] = React.useState("");
   const userDetails = useSelector((state) => state.user.user);
   const [userRole, setUserRole] = useState("");
+  const [hostRentals, setHostRentals] = useState([]);
 
   const getHostRentalsWithBookings = useCallback(async () => {
     const userId = await userDetails.userId;
     const userAccessToken = await userDetails.accessToken;
-    const responseRentals = await dispatch(getRentals(userId, userAccessToken));
+    setHostRentals(await dispatch(getRentals(userId, userAccessToken)));
 
     const userRole = await userDetails.userRole;
     setUserRole(userRole);
@@ -46,7 +47,6 @@ const HostProfileScreen = () => {
 
   useEffect(() => {
     getHostRentalsWithBookings();
-    console.log(userRole);
   }, []);
   return (
     <>
@@ -154,202 +154,33 @@ const HostProfileScreen = () => {
                 </Col>
               </Row>
               <List>
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion disableGutters={true} style={{ margin: 0 }}>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666" variant="body1" align="right">
-                        Accordion 1 Accordion 1 Accordion 1 Accordion 1
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
+                {hostRentals.map((hostRental, index) => {
+                  return (
+                    <div key={hostRental.rental_id}>
+                      <ListItem key={hostRental.rental_id}>
+                        <Accordion>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            <Typography color="#ff6666">
+                              {hostRental.name}
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <HostRentalBookingList
+                              bookings={hostRental.bookings}
+                            />
+                          </AccordionDetails>
+                        </Accordion>
+                      </ListItem>
+                      {index < hostRentals.length - 1 ? (
+                        <Divider variant="middle" component="li" />
+                      ) : null}
+                    </div>
+                  );
+                })}
               </List>
             </Col>
           </Row>{" "}

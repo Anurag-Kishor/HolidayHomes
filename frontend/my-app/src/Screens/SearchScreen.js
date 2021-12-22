@@ -23,12 +23,15 @@ import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded
 import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 import { fetchAddresses } from "../app/Actions/hostActions";
+import { searchRentals } from "../app/Actions/appActions";
 
 function SearchScreen() {
   const dispatch = useDispatch();
   const getUser = useSelector((state) => state.user.user);
 
   const locationRouter = useLocation();
+
+  const [searchResults, setSearchResults] = useState([]);
 
   //Search Fields
   const [location, setLocation] = useState([]);
@@ -64,7 +67,19 @@ function SearchScreen() {
     bindParams();
   }, []);
 
-  const searchFunc = () => {};
+  const searchFunc = async () => {
+    const userAccessToken = await getUser.accessToken;
+    //start_date,
+    //end_date,
+    //numberofguests
+    const searchValuesObj = {
+      location_id: selectedLocationSt,
+    };
+
+    setSearchResults(
+      await dispatch(searchRentals(searchValuesObj, userAccessToken))
+    );
+  };
 
   return (
     <>

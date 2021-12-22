@@ -74,7 +74,7 @@ export const getUserDetails = (userId, userAccessToken) => {
       },
     });
     const resData = await response.json();
-
+    console.log(resData);
     return resData.data;
   };
 };
