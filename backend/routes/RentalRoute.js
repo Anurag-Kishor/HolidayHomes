@@ -19,7 +19,7 @@ const { checkForHost } = require("../middleware/CheckForHost");
 router.get('/info/service', getAllServices)
 router.get('/info/rentalType', getRentalTypes)
 router.get('/info/all', getAllRentals)
-router.get('/info/:id', checkForHost, getRentalById)
+router.get('/info/:id', getRentalById)
 router.get('/:rental_id/avgReview', averageRating)
 router.get('/:rental_id/allReviews', getRentalReviews)
 

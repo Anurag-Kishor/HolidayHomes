@@ -33,9 +33,7 @@ const doesLocationIdExist = async(location_id) => {
 
 const createRental = async(rental) => {
 
-  //  const client = await pool.connect();
     try {
-       // await client.query('BEGIN')
         const check = await doesLocationIdExist(rental.locationId);
         
         if(!check) return {status : 400, success: false, error: "The location is not available!"};
@@ -47,27 +45,15 @@ const createRental = async(rental) => {
 
         let servicesToAdd = []
         let rental_id = res.rows[0].rental_id;
-        rental.services.forEach(async(service) => {
-            
+        rental.services.forEach(async(service) => { 
             servicesToAdd.push([service, rental_id])
-           /* try{
-                console.log("SERVICES: " + service)
-                const rental_serviceRes = await pool.query('INSERT INTO rental_services(service_id, rental_id) VALUES ($1, $2) RETURNING *', [service, res.rows[0].rental_id])
-                console.log('Here' + rental_serviceRes.rows)
-            }
-            catch(e) {
-           //    await client.query('ROLLBACK')
-                return {status : 400, success: false, error: e.message};
-            }*/
         })
-        console.log(servicesToAdd);
         let query1 = format('INSERT INTO rental_services(service_id, rental_id) VALUES %L returning service_id', servicesToAdd);
-
         let {rows} = await pool.query(query1);
-        console.log(rows);
         return {status : 200, success: true};
-    } catch (error) {
-     //   await client.query('ROLLBACK')
+    
+    } 
+    catch (error) {
         return {status : 400, success: false, error: error.message};
 
     } 
@@ -83,7 +69,6 @@ const updateRental = async(rental) => {
 
 const getRentalById = async(id) => {
     try {
-        console.log(id)
 
         const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, to_char(r.dateFrom, \'YYYY-MM-DD\') as dateFrom, to_char(r.dateTo, \'YYYY-MM-DD\') as dateTo, r.pricePerDay, ' + 
                                         't.name as rentalType, r.numberOfRooms, r.numberOfGuests, r.numberOfBeds, ' + 
@@ -92,7 +77,6 @@ const getRentalById = async(id) => {
                                         'JOIN Users u ON r.host_id=u.user_id ' + 
                                         'JOIN rental_type t on t.type_id=r.rentalType WHERE r.rental_id=$1', [id]);
        
-
        const result = await getRentalServices(id);
 
        if(result.data) {
@@ -115,14 +99,12 @@ const getRentalById = async(id) => {
 
 const getAllRentals = async() => {
     try {
-        console.log('Here')
         const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, to_char(r.dateFrom, \'YYYY-MM-DD\') as dateFrom, to_char(r.dateTo, \'YYYY-MM-DD\') as dateTo, r.pricePerDay, ' + 
                                         't.name as rentalType, r.numberOfRooms, r.numberOfGuests, r.numberOfBeds, ' + 
                                         'u.FirstName, u.LastName, u.PhoneNumber, u.Email from rental r ' + 
                                         'JOIN Location l ON r.location_id= l.location_id ' + 
                                         'JOIN Users u ON r.host_id=u.user_id ' + 
                                         'JOIN rental_type t on t.type_id=r.rentalType');
-        console.log(rental);
         return {status : 200, success: true, data: rental.rows};
         
     } catch (error) {
