@@ -40,8 +40,8 @@ function HomeScreen() {
   //Search Fields
   const [location, setLocation] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
+  const [checkInDate, setCheckInDate] = useState(new Date());
+  const [checkOutDate, setCheckOutDate] = useState(new Date());
   const [noOfGuests, setNoOfGuests] = useState("");
   const searchFields = {
     checkInDate,

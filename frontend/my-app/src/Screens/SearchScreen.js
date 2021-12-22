@@ -22,11 +22,11 @@ import { useDispatch, useSelector } from "react-redux";
 import AddLocationAltRoundedIcon from "@mui/icons-material/AddLocationAltRounded";
 import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
+import { fetchAddresses } from "../app/Actions/hostActions";
 
 function SearchScreen() {
   const dispatch = useDispatch();
   const getUser = useSelector((state) => state.user.user);
-  const navigate = useNavigate();
 
   const locationRouter = useLocation();
 
@@ -36,6 +36,7 @@ function SearchScreen() {
   const [checkInDateSt, setCheckInDateSt] = useState("");
   const [checkOutDateSt, setCheckOutDateSt] = useState("");
   const [noOfGuestsSt, setNoOfGuestsSt] = useState("");
+
   const searchFields = {
     checkInDate: checkInDateSt,
     setCheckInDate: setCheckInDateSt,
@@ -46,25 +47,35 @@ function SearchScreen() {
   };
 
   const bindParams = useCallback(async () => {
+    const userAccessToken = await getUser.accessToken;
     if (locationRouter.state.selectedLocation !== "")
-      setSelectedLocationSt(locationRouter.state.selectedLocation);
+      setSelectedLocationSt(await locationRouter.state.selectedLocation);
     if (locationRouter.state.checkInDate !== "")
-      setCheckInDateSt(locationRouter.state.checkInDate);
+      setCheckInDateSt(await locationRouter.state.checkInDate);
     if (locationRouter.state.checkOutDate !== "")
-      setCheckOutDateSt(locationRouter.state.checkOutDate);
+      setCheckOutDateSt(await locationRouter.state.checkOutDate);
     if (locationRouter.state.noOfGuests !== "")
-      setNoOfGuestsSt(locationRouter.state.noOfGuests);
+      setNoOfGuestsSt(await locationRouter.state.noOfGuests);
 
-    console.log(selectedLocationSt, checkInDateSt, checkOutDateSt);
+    setLocation(await dispatch(fetchAddresses(userAccessToken)));
   }, []);
 
   useEffect(() => {
     bindParams();
   }, []);
+
+  const searchFunc = () => {};
+
   return (
     <>
       {/* Cover Photo - Search Form - Navbar */}
-      {/* <SearchCardNavbar /> */}
+      <SearchCardNavbar
+        location={location}
+        selectedLocation={selectedLocationSt}
+        setSelectedLocation={setSelectedLocationSt}
+        searchFields={searchFields}
+        searchFunc={searchFunc}
+      />
       <Row className="px-0 pt-5 row__allow__gutter">
         <Col md={3}>
           <h2 style={{ color: "#ff6666" }}>Search Title Goes Here</h2>{" "}

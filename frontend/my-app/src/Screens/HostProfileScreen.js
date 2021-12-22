@@ -27,23 +27,30 @@ import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import HomeIcon from "@mui/icons-material/Home";
 import { useDispatch, useSelector } from "react-redux";
 import BAHdialog from "../Components/BAHdialog";
+import { getRentals } from "../app/Actions/hostActions";
 
 const HostProfileScreen = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = React.useState("");
   const userDetails = useSelector((state) => state.user.user);
   const [userRole, setUserRole] = useState("");
 
   const getHostRentalsWithBookings = useCallback(async () => {
+    const userId = await userDetails.userId;
+    const userAccessToken = await userDetails.accessToken;
+    const responseRentals = await dispatch(getRentals(userId, userAccessToken));
+
     const userRole = await userDetails.userRole;
     setUserRole(userRole);
   }, []);
 
   useEffect(() => {
     getHostRentalsWithBookings();
+    console.log(userRole);
   }, []);
   return (
     <>
-      {userRole === "traveler" ? (
+      {userRole === "traveller" && userRole !== undefined ? (
         <BAHdialog setUserRole={setUserRole} />
       ) : (
         <>

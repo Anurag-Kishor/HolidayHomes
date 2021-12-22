@@ -72,21 +72,18 @@ export const addRental = (addRentalObj, userAccessToken) => {
     } else {
       return { success: false, error: resData.error };
     }
+  };
+};
 
-    // if (resData.accessToken) {
-    //   const userTokensEmailId = {
-    //     email: user.email,
-    //     accessToken: resData.accessToken,
-    //     refreshToken: resData.refreshToken,
-    //     userId: resData.user_id,
-    //   };
-    //   await dispatch({
-    //     type: LOGIN,
-    //     user: userTokensEmailId,
-    //   });
-    //   return { success: true };
-    // } else {
-    //   return { success: false, error: resData.error };
-    // }
+export const getRentals = (userId, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch(`/api/rental/info/booking/rentals/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+      },
+    });
+    const resData = await response.json();
+    console.log(resData.data);
+    return resData.data;
   };
 };

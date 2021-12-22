@@ -46,7 +46,7 @@ export const loginUser = (user) => {
         accessToken: resData.accessToken,
         refreshToken: resData.refreshToken,
         userId: resData.user_id,
-        userRole: "traveler",
+        userRole: resData.role,
       };
       await dispatch({
         type: LOGIN,
