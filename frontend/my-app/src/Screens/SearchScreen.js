@@ -97,15 +97,19 @@ function SearchScreen() {
         </Col>
       </Row>
       <Row className="px-5 mb-5 row__allow__gutter">
-        <Col>
-          <RentalCard />
-        </Col>
-        <Col>
-          <RentalCard />
-        </Col>
-        <Col>
-          <RentalCard />
-        </Col>
+        {searchResults.map((result, index) => {
+          return (
+            <Col key={result.rental_id} md={4}>
+              <RentalCard
+                rental_id={result.rental_id}
+                name={result.name}
+                pricePerDay={parseFloat(result.priceperday)}
+                noOfRooms={result.numberofrooms}
+                noOfGuests={result.numberofguests}
+              />
+            </Col>
+          );
+        })}
       </Row>
 
       {/* footer */}
