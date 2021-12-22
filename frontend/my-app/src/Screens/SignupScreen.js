@@ -247,7 +247,7 @@ function SignupScreen() {
                 </Row>
 
                 {/* Country - State - City */}
-                <Row style={{ height: "8vh" }} className="mb-3">
+                {/* <Row style={{ height: "8vh" }} className="mb-3">
                   <Col
                     md={4}
                     style={{ backgroundColor: "white", borderRadius: 10 }}
@@ -337,7 +337,7 @@ function SignupScreen() {
                       </Box>
                     </Row>
                   </Col>
-                </Row>
+                </Row> */}
 
                 {/* Signup Button */}
                 <Row className="mb-3">

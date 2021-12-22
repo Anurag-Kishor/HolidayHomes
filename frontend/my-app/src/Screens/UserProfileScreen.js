@@ -36,28 +36,68 @@ import {
   Typography,
 } from "@mui/material";
 import UserBooking from "../Components/UserBooking";
-import { getUserDetails } from "../app/Actions/userActions";
+import {
+  getUserDetails,
+  getUserBookings,
+  updateProfileDetails,
+} from "../app/Actions/userActions";
 const UserProfileScreen = () => {
   const dispatch = useDispatch();
-
+  const userDetails = useSelector((state) => state.user.user);
   const [loading, setLoading] = useState(true);
   const [searchValue, setSearchValue] = React.useState("");
 
-  const [profileDetails, setProfileDetails] = useState({});
+  // const [profileDetails, setProfileDetails] = useState({});
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [contactNo, setContactNo] = useState("");
+  const [addressLine1, setAddressLine1] = useState("");
+  const [addressLine2, setAddressLine2] = useState("");
 
-  const userDetails = useSelector((state) => state.user.user);
+  const [userBookings, setUserBookings] = useState([]);
   const getUserProfileDetails = useCallback(async () => {
-    const getAccessToken = await userDetails.userAccessToken;
+    const getAccessToken = await userDetails.accessToken;
     const getUserId = await userDetails.userId;
-    setProfileDetails(
-      await dispatch(getUserDetails(getUserId, getAccessToken))
+
+    //User Details
+    const userDetailsResponse = await dispatch(
+      getUserDetails(getUserId, getAccessToken)
     );
+    // setProfileDetails(userDetailsResponse);
+    setFirstName(userDetailsResponse.firstname);
+    setLastName(userDetailsResponse.lastname);
+    setContactNo(userDetailsResponse.phonenumber);
+    setAddressLine1(userDetailsResponse.addressline1);
+    setAddressLine2(userDetailsResponse.addressline2);
+
+    //User Bookings
+    const userBookingsResponse = await dispatch(
+      getUserBookings(getUserId, getAccessToken)
+    );
+    console.log(userBookingsResponse);
+    setUserBookings(userBookingsResponse);
     setLoading(false);
   }, []);
 
   useEffect(() => {
     getUserProfileDetails();
   }, []);
+
+  const updateProfileDetailsFunc = async () => {
+    const getAccessToken = await userDetails.accessToken;
+    const getUserId = await userDetails.userId;
+    const userDataObj = {
+      firstName: firstName,
+      lastName: lastName,
+      addressLine1: addressLine1,
+      addressLine2: addressLine2,
+      phoneNumber: contactNo,
+    };
+    const response = await dispatch(
+      updateProfileDetails(userDataObj, getAccessToken, getUserId)
+    );
+    console.log(response);
+  };
   return (
     <>
       {loading ? (
@@ -65,25 +105,43 @@ const UserProfileScreen = () => {
       ) : (
         <>
           <Container fluid="md">
-            <Row className="row__allow__gutter px-5">
+            <Row>
               <Navbar>
-                <Navbar.Brand href="#home">
-                  <Image src={logo} height="100" />
-                </Navbar.Brand>
-                <Col md={{ span: 6, offset: 1 }}>
-                  <SearchBar
-                    value={searchValue}
-                    onChange={(newValue) => setSearchValue(searchValue)}
-                    onRequestSearch={() => {}}
-                  />
-                </Col>
-                <Navbar.Toggle />
-                <Navbar.Collapse className="justify-content-center">
-                  <Navbar.Text className="p-5 h5" style={{ color: "#ff6666" }}>
-                    Become a Host
-                  </Navbar.Text>
-                </Navbar.Collapse>
-                <Image src={userAvatarMale} height={50} />
+                <Container>
+                  <Navbar.Brand>
+                    <Link to="/">
+                      <Image src={logo} height="100" />
+                    </Link>
+                  </Navbar.Brand>
+                  <Navbar.Toggle />
+                  <Navbar.Collapse className="justify-content-end">
+                    <Link to="/addplace" style={{ textDecoration: "none" }}>
+                      <Navbar.Text
+                        className="p-5 h5"
+                        style={{ color: "#ff6666" }}
+                      >
+                        Become a Host
+                      </Navbar.Text>
+                      {/* <BAHdialog /> */}
+                    </Link>
+                    <Link to="/user/me" style={{ textDecoration: "none" }}>
+                      <Navbar.Text
+                        className="p-5 h5"
+                        style={{ color: "#ff6666" }}
+                      >
+                        Me
+                      </Navbar.Text>
+                    </Link>
+                    <Link to="/signin" style={{ textDecoration: "none" }}>
+                      <Navbar.Text
+                        className="p-5 h5"
+                        style={{ color: "#ff6666" }}
+                      >
+                        Logout
+                      </Navbar.Text>
+                    </Link>
+                  </Navbar.Collapse>
+                </Container>
               </Navbar>
             </Row>
 
@@ -136,7 +194,12 @@ const UserProfileScreen = () => {
                     </Col>
                   </Row>
                   <Row className="mb-2">
-                    <InputField label="Full Name" iconPlacement="left">
+                    <InputField
+                      label="First Name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      iconPlacement="left"
+                    >
                       <BadgeIcon
                         sx={{
                           color: "action.active",
@@ -148,7 +211,29 @@ const UserProfileScreen = () => {
                     </InputField>
                   </Row>
                   <Row className="mb-2">
-                    <InputField label="Contact No." iconPlacement="left">
+                    <InputField
+                      label="Last Name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      iconPlacement="left"
+                    >
+                      <BadgeIcon
+                        sx={{
+                          color: "action.active",
+                          mr: 1,
+                          my: 0.5,
+                          fontSize: 30,
+                        }}
+                      />
+                    </InputField>
+                  </Row>
+                  <Row className="mb-2">
+                    <InputField
+                      label="Contact No."
+                      value={contactNo}
+                      onChange={(e) => setContactNo(e.target.value)}
+                      iconPlacement="left"
+                    >
                       <PhoneInTalkIcon
                         sx={{
                           color: "action.active",
@@ -159,21 +244,13 @@ const UserProfileScreen = () => {
                       />
                     </InputField>
                   </Row>
-
                   <Row className="mb-2">
-                    <InputField label="Email ID" iconPlacement="left">
-                      <MarkEmailReadIcon
-                        sx={{
-                          color: "action.active",
-                          mr: 1,
-                          my: 0.5,
-                          fontSize: 30,
-                        }}
-                      />
-                    </InputField>
-                  </Row>
-                  <Row className="mb-2">
-                    <InputField label="Address Line 1" iconPlacement="left">
+                    <InputField
+                      label="Address Line 1"
+                      value={addressLine1}
+                      onChange={(e) => setAddressLine1(e.target.value)}
+                      iconPlacement="left"
+                    >
                       <HomeIcon
                         sx={{
                           color: "action.active",
@@ -185,7 +262,12 @@ const UserProfileScreen = () => {
                     </InputField>
                   </Row>
                   <Row className="mb-2">
-                    <InputField label="Address Line 2" iconPlacement="left">
+                    <InputField
+                      label="Address Line 2"
+                      value={addressLine2}
+                      onChange={(e) => setAddressLine2(e.target.value)}
+                      iconPlacement="left"
+                    >
                       <HomeIcon
                         sx={{
                           color: "action.active",
@@ -203,6 +285,7 @@ const UserProfileScreen = () => {
                         <Button
                           variant="primary"
                           size="lg"
+                          onClick={updateProfileDetailsFunc}
                           className="btn-primary"
                           style={{ width: "100%", display: "block" }}
                         >
@@ -232,49 +315,25 @@ const UserProfileScreen = () => {
 
               {/* Bookings */}
               <List>
-                <ListItem>
-                  <UserBooking
-                    title="TITLE GOES HERE"
-                    startDate="2020-12-03"
-                    endDate="2020-12-05"
-                    totalCost="4200"
-                    totalRooms="1"
-                    totalGuests="2"
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem>
-                  <UserBooking
-                    title="TITLE GOES HERE"
-                    startDate="2020-12-03"
-                    endDate="2020-12-05"
-                    totalCost="4200"
-                    totalRooms="1"
-                    totalGuests="2"
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem>
-                  <UserBooking
-                    title="TITLE GOES HERE"
-                    startDate="2020-12-03"
-                    endDate="2020-12-05"
-                    totalCost="4200"
-                    totalRooms="1"
-                    totalGuests="2"
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem>
-                  <UserBooking
-                    title="TITLE GOES HERE"
-                    startDate="2020-12-03"
-                    endDate="2020-12-05"
-                    totalCost="4200"
-                    totalRooms="1"
-                    totalGuests="2"
-                  />
-                </ListItem>
+                {userBookings.map((userBooking, index) => {
+                  return (
+                    <>
+                      <ListItem>
+                        <UserBooking
+                          title={userBooking.name}
+                          startDate={userBooking.trip_start_date}
+                          endDate={userBooking.trip_end_date}
+                          totalCost={userBooking.tripcost}
+                          totalRooms={userBooking.numberofrooms}
+                          totalGuests={userBooking.numberoftravellers}
+                        />
+                      </ListItem>
+                      {index < userBookings.length - 1 ? (
+                        <Divider variant="inset" component="li" />
+                      ) : null}
+                    </>
+                  );
+                })}
               </List>
             </Col>
           </Row>

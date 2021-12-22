@@ -21,12 +21,12 @@ const getBookingsByUserId = async (userId) => {
   try {
     //fetching details from BOOKING, USERS, RENTAL, LOCATION tables.
     const bookings = await pool.query(
-      "SELECT b.Booking_id, b.Trip_start_date, b.Trip_end_date, b.NumberOfTravellers, b.TripCost, b.Booking_date, " +
-        "r.Name as RentalName, r.Description, r.AddressLine1, r.AddressLine2, r.numberOfRooms, l.city, l.state, l.country, " +
-        "u.firstname, u.lastname FROM Booking b WHERE b.Traveler_id=$1" +
-        "JOIN Users u ON Booking.Traveler_id = Users.User_id" +
-        "JOIN Rental r ON Rental.Rental_id = Booking.Rental_id" +
-        "JOIN Location l ON Location.Location_id = Rental.Location_id",
+      "SELECT b.Booking_id, to_char(b.Trip_start_date, 'YYYY-MM-DD') as trip_start_date, to_char(b.Trip_end_date, 'YYYY-MM-DD') as trip_end_date, b.NumberOfTravellers, b.TripCost, " +
+        "to_char(b.Booking_date, 'YYYY-MM-DD') as booking_date, r.Name , r.Description, r.AddressLine1, r.AddressLine2, r.numberOfRooms, l.city, l.state, l.country, " +
+        "u.firstname, u.lastname FROM Booking b " +
+        "JOIN Users u ON b.traveler_id = u.user_id " +
+        "JOIN Rental r ON r.Rental_id = b.Rental_id " +
+        "JOIN Location l ON l.Location_id = r.Location_id WHERE b.Traveler_id=$1",
       [userId]
     );
     return { status: 200, success: true, data: bookings.rows };
@@ -97,6 +97,7 @@ const calculateFinalCost = async (start_date, end_date, rental_id) => {
 
 const checkIfRentalIsBooked = async (rental_id, start_date, end_date) => {
   try {
+    console.log(rental_id, start_date, end_date);
     const check = await pool.query(
       "SELECT * FROM booking WHERE rental_id=$1 AND (trip_start_date BETWEEN $2 AND $3 OR trip_end_date BETWEEN $2 AND $3)",
       [rental_id, start_date, end_date]

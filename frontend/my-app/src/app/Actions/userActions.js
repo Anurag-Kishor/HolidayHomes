@@ -65,7 +65,26 @@ export const logoutUser = () => {
 
 export const getUserDetails = (userId, userAccessToken) => {
   return async (dispatch) => {
-    const response = await fetch("/api/user");
+    const response = await fetch(`/api/user/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+    });
+    const resData = await response.json();
+
+    return resData.data;
+  };
+};
+
+export const getUserBookings = (userId, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch(`/api/booking/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+    });
     const resData = await response.json();
     console.log(resData.data);
     return resData.data;
@@ -81,6 +100,27 @@ export const becomeAHost = (userId, userAccessToken) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userId),
+    });
+
+    const resData = await response.json();
+
+    if (resData.status === 200) {
+      return { success: true };
+    } else {
+      return { success: false, error: resData.error };
+    }
+  };
+};
+
+export const updateProfileDetails = (userDataObj, userAccessToken, userId) => {
+  return async (dispatch) => {
+    const response = await fetch(`/api/user/${userId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userDataObj),
     });
 
     const resData = await response.json();

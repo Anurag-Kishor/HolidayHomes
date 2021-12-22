@@ -49,7 +49,7 @@ function SearchCardNavbar() {
                     </Navbar.Text>
                     {/* <BAHdialog /> */}
                   </Link>
-                  <Link to="/me" style={{ textDecoration: "none" }}>
+                  <Link to="/user/me" style={{ textDecoration: "none" }}>
                     <Navbar.Text
                       className="p-5 h5"
                       style={{ color: "#ff6666" }}
