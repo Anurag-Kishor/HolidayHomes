@@ -8,6 +8,7 @@ import {
   Card,
   Container,
 } from "react-bootstrap";
+import { DatePicker } from "rsuite";
 import InputField from "../Components/InputField";
 import logo from "../assets/hhlogo.png";
 import "../assets/css/main.css";
@@ -150,33 +151,33 @@ function SearchCardNavbar(props) {
                   <h5>Check Out</h5>
                 </Col>
               </Row>
-              <Row className="align-items-center mb-3 row__allow__gutter">
+              <Row
+                className="align-items-end mb-3 row__allow__gutter"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "flex-end",
+                }}
+              >
                 <Col
                   md={5}
                   style={{
                     backgroundColor: "white",
                     borderRadius: 12,
                     height: "7vh",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                   }}
-                  className="align-items-center"
                 >
-                  <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                    <TextField
-                      id="input-with-sx"
-                      label="Check-in Date"
-                      variant="standard"
-                      color="warning"
-                      fullWidth
-                    />
-                    <EventNoteRoundedIcon
-                      sx={{
-                        color: "action.active",
-                        mr: 1,
-                        my: 0.5,
-                        fontSize: 30,
-                      }}
-                    />
-                  </Box>
+                  <DatePicker
+                    value={props.searchFields.checkInDate}
+                    onChange={props.searchFields.setCheckInDate}
+                    appearance="default"
+                    type="date"
+                    block
+                    style={{ width: 220 }}
+                  />
                 </Col>
                 <Col
                   md={{ span: 5, offset: 2 }}
@@ -184,25 +185,21 @@ function SearchCardNavbar(props) {
                     backgroundColor: "white",
                     borderRadius: 12,
                     height: "7vh",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                   }}
                 >
-                  <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                    <TextField
-                      id="input-with-sx"
-                      label="Check-out-date"
-                      variant="standard"
-                      color="warning"
-                      fullWidth
-                    />
-                    <EventNoteRoundedIcon
-                      sx={{
-                        color: "action.active",
-                        mr: 1,
-                        my: 0.5,
-                        fontSize: 30,
-                      }}
-                    />
-                  </Box>
+                  <DatePicker
+                    value={props.searchFields.checkOutDate}
+                    onChange={props.searchFields.setCheckOutDate}
+                    appearance="default"
+                    type="date"
+                    block
+                    style={{
+                      width: 220,
+                    }}
+                  />
                 </Col>
               </Row>
 
@@ -222,6 +219,10 @@ function SearchCardNavbar(props) {
                   <TextField
                     id="input-with-sx"
                     label="Number of Guests"
+                    value={props.searchFields.noOfGuests}
+                    onChange={(e) =>
+                      props.searchFields.setNoOfGuests(e.target.value)
+                    }
                     variant="standard"
                     color="warning"
                     type="number"

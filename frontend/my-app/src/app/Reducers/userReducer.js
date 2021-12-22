@@ -19,9 +19,11 @@ const userReducer = (state = initialState, action) => {
       };
     }
     case BECOME_HOST: {
+      const userNew = { ...state.user };
+      userNew["userRole"] = "host";
       return {
         ...state,
-        user: (state.user["userRole"] = "host"),
+        user: userNew,
       };
     }
     default: {

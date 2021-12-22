@@ -46,7 +46,7 @@ export const loginUser = (user) => {
         accessToken: resData.accessToken,
         refreshToken: resData.refreshToken,
         userId: resData.user_id,
-        userRole: "traveler",
+        userRole: resData.role,
       };
       await dispatch({
         type: LOGIN,
@@ -74,7 +74,7 @@ export const getUserDetails = (userId, userAccessToken) => {
       },
     });
     const resData = await response.json();
-
+    console.log(resData);
     return resData.data;
   };
 };
@@ -137,11 +137,10 @@ export const updateProfileDetails = (userDataObj, userAccessToken, userId) => {
 
 export const makeUserHost = (userId, userAccessToken) => {
   return async (dispatch) => {
-    const response = await fetch("", {
-      method: "POST",
+    const response = await fetch(`/api/user/host/${userId}`, {
+      method: "PUT",
       headers: {
         Authorization: "Bearer " + userAccessToken,
-        "Content-Type": "application/json",
       },
     });
 
