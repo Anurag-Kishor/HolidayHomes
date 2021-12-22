@@ -23,7 +23,8 @@ const addRental = async(req, res) => {
             data.numberOfRooms,
             data.numberOfGuests,
             data.services,
-            data.host_id
+            data.host_id,
+            data.numberOfBeds
         )
         
        // console.log(host);
@@ -117,6 +118,16 @@ const getRentalTypes = async(req, res) => {
     }
 }
 
+const getRentalReviews = async(req, res) => {
+    try {
+        const rental_id = req.params.rental_id;
+        const result = await RentalService.getRentalReviews(rental_id);
+        res.status(result.status).json(result);  
+    } catch (error) {
+        res.status(401).send({success: false, error: error.message});
+    }
+}
+
 module.exports = {
     addRental,
     updateRental,
@@ -127,5 +138,6 @@ module.exports = {
     averageRating,
     addService,
     getAllServices,
-    getRentalTypes
+    getRentalTypes,
+    getRentalReviews
 }

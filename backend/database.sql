@@ -34,7 +34,6 @@ CREATE TABLE Users (
         ON DELETE CASCADE
 );
 
-INSERT INTO Users (Email, Password, FirstName, LastName, PhoneNumber, AddressLine1, AddressLine2, isHost ) values ('bob@gamil.com', '123', 'bob', 'saget', 9489809197, '12 abc', 'addline 2', false);
 
 CREATE TABLE Rental_Type (
     Type_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -82,6 +81,8 @@ CREATE TABLE Rental (
     numberOfRooms INT NOT NULL,
     numberOfGuests INT NOT NULL,
     host_id uuid NOT NULL,
+    numberOfBeds INT,
+    time timestamp NOT NULL DEFAULT NOW(),
     CONSTRAINT fk_rentalType
         FOREIGN KEY(rentalType)
         REFERENCES Rental_Type(Type_id)
