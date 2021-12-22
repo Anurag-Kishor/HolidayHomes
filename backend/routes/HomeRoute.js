@@ -13,7 +13,6 @@ const {authenticateToken} = require('../middleware/Authorization')
 router.get('/location', authenticateToken, getAllLocations);
 router.get('/search', authenticateToken, getRentalsBasedOnProperties)
 router.get('/mostBooked', authenticateToken, getMostBookedRentals);
-router.get('/mostRecent', authenticateToken, getMostRecentRentals,
-);
+router.get('/mostRecent', authenticateToken, getMostRecentRentals);
 
 module.exports = router;

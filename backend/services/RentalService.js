@@ -1,4 +1,5 @@
 const pool = require('../db');
+const format = require('pg-format');
 
 const findLocationId = async(city, state, country) => {
 
@@ -44,21 +45,26 @@ const createRental = async(rental) => {
         const rentalDataValues = [rental.name, rental.description, rental.addressLine1, rental.addressLine2, rental.locationId, rental.available, rental.dateFrom, rental.dateTo, false, rental.pricePerDay, rental.rentalTypeId, rental.numberOfRooms, rental.numberOfGuests, rental.host_id, rental.numberOfBeds]
         const res = await pool.query(rentalData, rentalDataValues)
 
-        //Adding to RENTAL_SERVICES Table
+        let servicesToAdd = []
+        let rental_id = res.rows[0].rental_id;
         rental.services.forEach(async(service) => {
-
-            try{
-            const rental_serviceRes = await pool.query('INSERT INTO rental_services(service_id, rental_id) VALUES ($1, $2)', [service, res.rows[0].rental_id])
+            
+            servicesToAdd.push([service, rental_id])
+           /* try{
+                console.log("SERVICES: " + service)
+                const rental_serviceRes = await pool.query('INSERT INTO rental_services(service_id, rental_id) VALUES ($1, $2) RETURNING *', [service, res.rows[0].rental_id])
+                console.log('Here' + rental_serviceRes.rows)
             }
             catch(e) {
            //    await client.query('ROLLBACK')
                 return {status : 400, success: false, error: e.message};
-            }
+            }*/
         })
+        console.log(servicesToAdd);
+        let query1 = format('INSERT INTO rental_services(service_id, rental_id) VALUES %L returning service_id', servicesToAdd);
 
-       // await client.query('COMMIT')
-        console.log(rental)
-
+        let {rows} = await pool.query(query1);
+        console.log(rows);
         return {status : 200, success: true};
     } catch (error) {
      //   await client.query('ROLLBACK')
@@ -79,8 +85,8 @@ const getRentalById = async(id) => {
     try {
         console.log(id)
 
-        const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, r.dateFrom, r.dateTo, r.pricePerDay, ' + 
-                                        't.name as rentalType, r.numberOfRooms, r.numberOfGuests, r.numberOfBeds ' + 
+        const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, to_char(r.dateFrom, \'YYYY-MM-DD\') as dateFrom, to_char(r.dateTo, \'YYYY-MM-DD\') as dateTo, r.pricePerDay, ' + 
+                                        't.name as rentalType, r.numberOfRooms, r.numberOfGuests, r.numberOfBeds, ' + 
                                         'u.FirstName, u.LastName, u.PhoneNumber, u.Email from rental r ' + 
                                         'JOIN Location l ON r.location_id= l.location_id ' + 
                                         'JOIN Users u ON r.host_id=u.user_id ' + 
@@ -102,12 +108,27 @@ const getRentalById = async(id) => {
 
     } 
     catch (error) {
-        console.log('here1')
 
         return {status : 400, success: false, error: error};
     }
 }
 
+const getAllRentals = async() => {
+    try {
+        console.log('Here')
+        const rental = await pool.query('SELECT r.name, r.description, r.addressLine1, r.addressLine2, l.city, l.state, l.country, to_char(r.dateFrom, \'YYYY-MM-DD\') as dateFrom, to_char(r.dateTo, \'YYYY-MM-DD\') as dateTo, r.pricePerDay, ' + 
+                                        't.name as rentalType, r.numberOfRooms, r.numberOfGuests, r.numberOfBeds, ' + 
+                                        'u.FirstName, u.LastName, u.PhoneNumber, u.Email from rental r ' + 
+                                        'JOIN Location l ON r.location_id= l.location_id ' + 
+                                        'JOIN Users u ON r.host_id=u.user_id ' + 
+                                        'JOIN rental_type t on t.type_id=r.rentalType');
+        console.log(rental);
+        return {status : 200, success: true, data: rental.rows};
+        
+    } catch (error) {
+        return {status : 400, success: false, error: error};
+    }
+}
 const setAvailability = async(rental_id) => {
     try {
         
@@ -131,7 +152,7 @@ const postReview = async(rental_id, data) => {
 const getRentalReviews = async(rental_id) => {
     try {
         const res = await pool.query('SELECT user_id, description, stars FROM rental_reviews WHERE rental_id = $1', [rental_id]);
-        return {status : 200, success: true, data = res.rows};
+        return {status : 200, success: true, data: res.rows};
 
     } catch (error) {
         return {status : 400, success: false, error: error.message};
@@ -208,5 +229,6 @@ module.exports = {
     calculateAverageReview,
     getAllServices,
     getRentalTypes,
-    getRentalReviews
+    getRentalReviews,
+    getAllRentals
 }
