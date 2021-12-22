@@ -201,16 +201,17 @@ const getRentalTypes = async() => {
 }
 
 
+
 module.exports = {
-    createRental,
-    updateRental,
-    getRentalById,
-    setAvailability,
-    postReview,
-    addService,
-    calculateAverageReview,
-    getAllServices,
-    getRentalTypes,
-    getRentalReviews,
-    getAllRentals
-}
+  createRental,
+  updateRental,
+  getRentalById,
+  setAvailability,
+  postReview,
+  addService,
+  calculateAverageReview,
+  getAllServices,
+  getRentalTypes,
+  getRentalReviews,
+  getAllRentals,
+};

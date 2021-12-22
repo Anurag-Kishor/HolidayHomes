@@ -39,7 +39,7 @@ function SearchCardNavbar() {
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                  <Link to="/become-a-host" style={{ textDecoration: "none" }}>
+                  <Link to="/addplace" style={{ textDecoration: "none" }}>
                     <Navbar.Text
                       className="p-5 h5"
                       style={{ color: "#ff6666" }}

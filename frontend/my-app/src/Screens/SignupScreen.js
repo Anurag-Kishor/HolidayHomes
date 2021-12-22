@@ -85,7 +85,7 @@ function SignupScreen() {
     <>
       <Row style={{ height: "100vh" }}>
         <Col xs={12} lg={7} style={{ backgroundColor: "#E5E5E5" }}>
-          {errors.length !== 0 ? (
+          {errors !== "" ? (
             <Row className="pt-0 px-10">
               <Col xs={12} lg={12}>
                 <Alert

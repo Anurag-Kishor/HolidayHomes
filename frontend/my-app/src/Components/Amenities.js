@@ -1,96 +1,151 @@
-import * as React from 'react';
-import EditLocationIcon from '@mui/icons-material/EditLocation';
-import InsertInvitationIcon from '@mui/icons-material/InsertInvitation';
-import RateReviewIcon from '@mui/icons-material/RateReview';
-import CreateIcon from '@mui/icons-material/Create';
+import React, { useState } from "react";
+import EditLocationIcon from "@mui/icons-material/EditLocation";
+import InsertInvitationIcon from "@mui/icons-material/InsertInvitation";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import CreateIcon from "@mui/icons-material/Create";
 import { Rating, Typography, Divider, Paper, TextField } from "@mui/material";
-import Box from '@mui/material/Box';
-import {
-    Col,
-    Image,
-    Navbar,
-    Row,
-    Card,
-    Container,
-} from "react-bootstrap";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Box from "@mui/material/Box";
+import { Col, Image, Navbar, Row, Card, Container } from "react-bootstrap";
 
-export default function BasicInfo() {
+export default function Amenities(props) {
+  const handleChange = (event) => {
+    props.setSelectedFacilities((oldArray) => [...oldArray, event.target.id]);
+  };
+  return (
+    <Row
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        alignItems: "center",
+      }}
+    >
+      <Col md={5}>
+        <Row className="px-5 pt-5">
+          <Paper elevation={5} style={{ padding: 10 }}>
+            <Typography variant="h5" align="center" style={{ marginLeft: 30 }}>
+              Facilities
+            </Typography>
 
+            <hr />
+            <Paper
+              variant="outlined"
+              style={{
+                padding: 20,
+                borderColor: "#ff6666",
+                marginBottom: 35,
+              }}
+            >
+              <Row>
+                <Col md={{ span: 6, offset: 5 }}>
+                  {props.facilities.map((facility, index) => {
+                    return (
+                      <Row
+                        key={facility.service_id}
+                        className="h-10 d-flex flex-row align-items-center mx-3"
+                      >
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              onChange={handleChange}
+                              style={{
+                                color: "#FF6666",
+                              }}
+                              id={facility.service_id}
+                            />
+                          }
+                          label={facility.description}
+                        />
+                      </Row>
+                    );
+                  })}
+                </Col>
+              </Row>
+            </Paper>
+          </Paper>
+        </Row>
+      </Col>
+      <Col md={5}>
+        <Row className="px-5 pt-5">
+          <Paper elevation={5} style={{ padding: 10 }}>
+            <Typography variant="h5" align="center" style={{ marginLeft: 30 }}>
+              House Rules
+            </Typography>
+            <hr />
+            <Paper
+              variant="outlined"
+              style={{
+                padding: 20,
+                borderColor: "#ff6666",
+                marginBottom: 35,
+              }}
+            >
+              <Row>
+                <Col md="6">
+                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onChange={handleChange}
+                          style={{
+                            color: "#FF6666",
+                          }}
+                        /> //color change
+                      }
+                      label="No Smoking"
+                    />
+                  </Row>
+                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onChange={handleChange}
+                          style={{
+                            color: "#FF6666",
+                          }}
+                        /> //color change
+                      }
+                      label="Pets Allowed"
+                    />
+                  </Row>
+                </Col>
 
-    return (
-        <Row style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
-            <Col md={5}>
-                <Row className="px-5 pt-5">
-                    <Paper elevation={5} style={{ padding: 10 }}>
-                        <Typography variant="h5" align="center" style={{ marginLeft: 30 }}>
-                            Amenities
-              </Typography>
-
-                        <hr />
-                        <Paper
-                            variant="outlined"
-                            style={{
-                                padding: 20,
-                                borderColor: "#ff6666",
-                                marginBottom: 35,
-                            }}
-                        >
-                            <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                                <h5>Upload an Image</h5>
-                                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-
-                                    <input type="file" name="img" />
-                                </Box>
-                            </Row>
-                            <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                                    <CreateIcon
-                                        sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                                    />
-                                    <TextField
-                                        id="input-with-sx"
-                                        label="Place Name"
-                                        variant="standard"
-                                        color="warning"
-                                        fullWidth
-                                    />
-                                </Box>
-                            </Row>
-                            <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                                    <EditLocationIcon
-                                        sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                                    />
-                                    <TextField
-                                        id="input-with-sx"
-                                        label="Address"
-                                        variant="standard"
-                                        color="warning"
-                                        fullWidth
-                                    />
-                                </Box>
-                            </Row>
-                            <Row className="h-100 d-flex flex-row align-items-center mb-3">
-                                <Box sx={{ display: "flex", alignItems: "flex-end" }}>
-                                    <RateReviewIcon
-                                        sx={{ color: "action.active", mr: 1, my: 0.5 }}
-                                    />
-                                    <TextField
-                                        placeholder="Place Description"
-                                        multiline
-                                        variant="standard"
-                                        color="warning"
-                                        fullWidth
-                                        rows={2}
-                                        maxRows={4}
-                                    />
-                                </Box>
-                            </Row>
-                        </Paper>
-                        <hr />
-                        <hr />
-                    </Paper>
-                </Row>
-            </Col>
-        </Row>);
+                <Col md="5">
+                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onChange={handleChange}
+                          style={{
+                            color: "#FF6666",
+                          }}
+                        /> //color change
+                      }
+                      label="Check-in: After 9:00 AM"
+                    />
+                  </Row>
+                  <Row className="h-10 d-flex flex-row align-items-center mx-3">
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          onChange={handleChange}
+                          style={{
+                            color: "#FF6666",
+                          }}
+                        /> //color change
+                      }
+                      label="Free Cancelation before 48 hours"
+                    />
+                  </Row>
+                </Col>
+              </Row>
+            </Paper>
+          </Paper>
+          <hr />
+        </Row>
+      </Col>
+    </Row>
+  );
 }
