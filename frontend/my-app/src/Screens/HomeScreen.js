@@ -40,8 +40,8 @@ function HomeScreen() {
   //Search Fields
   const [location, setLocation] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("");
-  const [checkInDate, setCheckInDate] = useState(new Date());
-  const [checkOutDate, setCheckOutDate] = useState(new Date());
+  const [checkInDate, setCheckInDate] = useState();
+  const [checkOutDate, setCheckOutDate] = useState();
   const [noOfGuests, setNoOfGuests] = useState("");
   const searchFields = {
     checkInDate,
@@ -55,6 +55,7 @@ function HomeScreen() {
   const homeScreenData = useCallback(async () => {
     const userAccessToken = await getUser.accessToken;
     setNewestAdditions(await dispatch(fetchNewestAdditions(userAccessToken)));
+    setMostBooked(await dispatch(fetchMostBooked(userAccessToken)));
     setLocation(await dispatch(fetchAddresses(userAccessToken)));
   }, []);
 
@@ -90,7 +91,7 @@ function HomeScreen() {
       {/* Newest Additions */}
       <Row className="px-0 pt-5 row__allow__gutter">
         <Col md={2}>
-          <h4>Newest Additions</h4>{" "}
+          <h4>Most Booked</h4>{" "}
         </Col>
         <Col md={{ span: 2, offset: 8 }}>
           <Row>
@@ -99,16 +100,20 @@ function HomeScreen() {
         </Col>
       </Row>
       <Row className="px-5 mb-3 row__allow__gutter">
-        <Col>
-          <RentalCard />
-        </Col>
-
-        <Col>
-          <RentalCard />
-        </Col>
-        <Col>
-          <RentalCard />
-        </Col>
+        {mostBooked.length === 0 && <Typography>No bookings yet!</Typography>}
+        {mostBooked.map((mostBookedElement, index) => {
+          return index <= 2 ? (
+            <Col key={mostBookedElement.rental_id} md={4}>
+              <RentalCard
+                rental_id={mostBookedElement.rental_id}
+                name={mostBookedElement.name}
+                pricePerDay={parseFloat(mostBookedElement.priceperday)}
+                noOfRooms={mostBookedElement.numberofrooms}
+                noOfGuests={mostBookedElement.numberofguests}
+              />
+            </Col>
+          ) : null;
+        })}
       </Row>
 
       {/* Newly Added */}

@@ -24,7 +24,7 @@ import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import GroupAddRoundedIcon from "@mui/icons-material/GroupAddRounded";
 import { fetchAddresses } from "../app/Actions/hostActions";
 import { searchRentals } from "../app/Actions/appActions";
-
+import dateFormat, { masks } from "dateformat";
 function SearchScreen() {
   const dispatch = useDispatch();
   const getUser = useSelector((state) => state.user.user);
@@ -36,8 +36,8 @@ function SearchScreen() {
   //Search Fields
   const [location, setLocation] = useState([]);
   const [selectedLocationSt, setSelectedLocationSt] = useState("");
-  const [checkInDateSt, setCheckInDateSt] = useState("");
-  const [checkOutDateSt, setCheckOutDateSt] = useState("");
+  const [checkInDateSt, setCheckInDateSt] = useState();
+  const [checkOutDateSt, setCheckOutDateSt] = useState();
   const [noOfGuestsSt, setNoOfGuestsSt] = useState("");
 
   const searchFields = {
@@ -72,8 +72,18 @@ function SearchScreen() {
     //start_date,
     //end_date,
     //numberofguests
+    let startDate = checkInDateSt;
+    let endDate = checkOutDateSt;
+    if (startDate) {
+      startDate = dateFormat(checkInDateSt, "yyyy-mm-dd");
+    }
+    if (endDate) {
+      endDate = dateFormat(checkOutDateSt, "yyyy-mm-dd");
+    }
     const searchValuesObj = {
       location_id: selectedLocationSt,
+      start_date: startDate,
+      end_date: endDate,
     };
 
     setSearchResults(

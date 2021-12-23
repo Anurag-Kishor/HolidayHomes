@@ -37,14 +37,15 @@ const HostProfileScreen = () => {
   const [hostRentals, setHostRentals] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const getHostRentalsWithBookings = async () => {
+  const getHostRentalsWithBookings = useCallback(async () => {
     setLoading(true);
     const userId = await userDetails.userId;
     const userAccessToken = await userDetails.accessToken;
     const response = await dispatch(getRentals(userId, userAccessToken));
     setHostRentals(response);
+    console.log(response);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     getHostRentalsWithBookings();
@@ -171,7 +172,7 @@ const HostProfileScreen = () => {
                   return (
                     <div key={hostRental.rental_id}>
                       <ListItem key={hostRental.rental_id}>
-                        <Accordion>
+                        <Accordion style={{ width: 1000 }}>
                           <AccordionSummary
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
@@ -182,11 +183,62 @@ const HostProfileScreen = () => {
                             </Typography>
                           </AccordionSummary>
                           <AccordionDetails>
-                            {hostRental.bookings !== null && (
+                            {/* {hostRental.bookings !== null ? (
                               <HostRentalBookingList
                                 bookings={hostRental.bookings}
                               />
-                            )}
+                            ) : (
+                              <Typography>No bookings yet!</Typography>
+                            )} */}
+
+                            {/* Description */}
+                            <Row
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Col md={{ span: 2, offset: 2 }}>
+                                <Typography variant="h6">
+                                  Description
+                                </Typography>
+                              </Col>
+                              <Col md={{ span: 6 }}>
+                                <Typography variant="body1" align="right">
+                                  {hostRental.description}
+                                </Typography>
+                              </Col>
+                            </Row>
+                            {/* Maximum Guests */}
+                            <Row>
+                              <Col md={{ span: 8, offset: 2 }}>
+                                <Divider />
+                              </Col>
+                            </Row>
+                            <Row
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Col md={{ span: 2, offset: 2 }}>
+                                <Typography variant="h6">
+                                  Maximum Guests
+                                </Typography>
+                              </Col>
+                              <Col md={{ span: 6 }}>
+                                <Typography variant="body1" align="right">
+                                  {hostRental.maximumguests}
+                                </Typography>
+                              </Col>
+                            </Row>
+                            <Row>
+                              <Col md={{ span: 8, offset: 2 }}>
+                                <Divider />
+                              </Col>
+                            </Row>
                           </AccordionDetails>
                         </Accordion>
                       </ListItem>
@@ -197,6 +249,22 @@ const HostProfileScreen = () => {
                   );
                 })}
               </List>
+            </Col>
+            <Col
+              md={4}
+              style={{
+                backgroundColor: "#e5e5e5",
+                borderRadius: 15,
+                height: "100%",
+                overflowY: "scroll",
+              }}
+              className="row__allow__gutter px-5"
+            >
+              <Row className="row__allow__gutter px-5 pt-3">
+                <Col md={12}>
+                  <h2 style={{ color: "#ff6666" }}>Bookings</h2>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </>

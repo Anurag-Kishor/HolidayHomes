@@ -76,12 +76,12 @@ function SearchCardNavbar(props) {
               </Container>
             </Navbar>
           </Row>
-          <Row className="row__allow__gutter">
+          <Row className="row__allow__gutter mt-5">
             <Col
               md={{ span: 4, offset: 3 }}
               style={{
                 backgroundColor: "#e5e5e5",
-                height: "60vh",
+                height: "47vh",
                 borderRadius: 15,
               }}
               className="p-5"
@@ -204,7 +204,7 @@ function SearchCardNavbar(props) {
               </Row>
 
               {/* Guest Field */}
-              <Row className="row__allow__gutter">
+              {/* <Row className="row__allow__gutter">
                 <h5>Guest</h5>
               </Row>
               <Row
@@ -238,7 +238,7 @@ function SearchCardNavbar(props) {
                     }}
                   />
                 </Box>
-              </Row>
+              </Row> */}
 
               {/* Search Button */}
               <Row className="row__allow__gutter">

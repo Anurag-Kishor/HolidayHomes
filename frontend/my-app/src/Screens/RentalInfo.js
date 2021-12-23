@@ -83,8 +83,6 @@ function RentalInfo(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let { id } = useParams();
-  var startDate;
-  var endDate;
   const getRentalData = useCallback(async () => {
     const userAccessToken = await userDetails.accessToken;
     setRentalInfo(await dispatch(fetchRentalInfo(id, userAccessToken)));

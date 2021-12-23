@@ -10,53 +10,19 @@ export const fetchNewestAdditions = (userAccessToken) => {
     });
     const resData = await response.json();
 
-    //   await dispatch({
-    //     type: FETCH_AMENITIES,
-    //     amenities: resData.data,
-    //   });
-
-    // await resData.data.forEach(async (rental) => {
-    //   const response = await fetch(
-    //     `/api/rental/${rental.rental_id}/avgReview`,
-    //     {
-    //       headers: {
-    //         Authorization: "Bearer " + userAccessToken,
-    //       },
-    //     }
-    //   );
-    //   const getVal = await response.json();
-    //   rental["avg"] = await getVal.data.avg;
-    //   rental["count"] = await getVal.data.count;
-    // });
-    // // console.log(resData.data);
     return resData.data;
   };
 };
 
 export const fetchMostBooked = (userAccessToken) => {
   return async (dispatch) => {
-    const response = await fetch("/api/rental/info/service", {
+    const response = await fetch("/api/home/mostBooked", {
       headers: {
         Authorization: "Bearer " + userAccessToken,
       },
     });
     const resData = await response.json();
 
-    //   await dispatch({
-    //     type: FETCH_AMENITIES,
-    //     amenities: resData.data,
-    //   });
-
-    // resData.data.map(async (rental) => {
-    //   const getVal = await fetchAvgAndCountReviews(
-    //     rental.rental_id,
-    //     userAccessToken
-    //   );
-    //   rental["avg"] = getVal.avg;
-    //   rental["count"] = getVal.count;
-    //   return rental;
-    // });
-    // console.log(resData.data);
     return resData.data;
   };
 };
