@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import HostRentalBookingList from "../Components/HostRentalBookingList";
-
+import resortPhoto from "../assets/pixabay_maldives-1200.jpg";
 import InputField from "../Components/InputField";
 import BadgeIcon from "@mui/icons-material/Badge";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
@@ -27,13 +27,20 @@ import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import HomeIcon from "@mui/icons-material/Home";
 import { useDispatch, useSelector } from "react-redux";
 import BAHdialog from "../Components/BAHdialog";
+import { getRentals } from "../app/Actions/hostActions";
 
 const HostProfileScreen = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = React.useState("");
   const userDetails = useSelector((state) => state.user.user);
   const [userRole, setUserRole] = useState("");
+  const [hostRentals, setHostRentals] = useState([]);
 
   const getHostRentalsWithBookings = useCallback(async () => {
+    const userId = await userDetails.userId;
+    const userAccessToken = await userDetails.accessToken;
+    setHostRentals(await dispatch(getRentals(userId, userAccessToken)));
+
     const userRole = await userDetails.userRole;
     setUserRole(userRole);
   }, []);
@@ -43,7 +50,7 @@ const HostProfileScreen = () => {
   }, []);
   return (
     <>
-      {userRole === "traveler" ? (
+      {userRole === "traveller" && userRole !== undefined ? (
         <BAHdialog setUserRole={setUserRole} />
       ) : (
         <>
@@ -58,7 +65,7 @@ const HostProfileScreen = () => {
                   </Navbar.Brand>
                   <Navbar.Toggle />
                   <Navbar.Collapse className="justify-content-end">
-                    <Link to="/addplace" style={{ textDecoration: "none" }}>
+                    <Link to="/host/me" style={{ textDecoration: "none" }}>
                       <Navbar.Text
                         className="p-5 h5"
                         style={{ color: "#ff6666" }}
@@ -109,7 +116,7 @@ const HostProfileScreen = () => {
                 </h5>
               </Col>
               <Col>
-                <Link to="../signin" style={{ textDecoration: "none" }}>
+                <Link to="../addplace" style={{ textDecoration: "none" }}>
                   <Button
                     variant="primary"
                     size="lg"
@@ -131,101 +138,6 @@ const HostProfileScreen = () => {
               justifyContent: "space-around",
             }}
           >
-            {/* <Col
-              md={{ span: 3 }}
-              style={{ backgroundColor: "white", borderRadius: 15 }}
-            >
-              <Row className="row__allow__gutter px-5 py-4">
-                <Col>
-                  <Image src={userTempProfPic} roundedCircle />{" "}
-                </Col>
-              </Row>
-              <Row className="row__allow__gutter px-5">
-                <Col md={12} className="apply__borders">
-                  <Row className="row__allow__gutter">
-                    <Col md={12}>
-                      <h2 style={{ color: "#ff6666" }}>Profile</h2>
-                    </Col>
-                  </Row>
-                  <Row className="mb-2">
-                    <InputField label="Full Name" iconPlacement="left">
-                      <BadgeIcon
-                        sx={{
-                          color: "action.active",
-                          mr: 1,
-                          my: 0.5,
-                          fontSize: 30,
-                        }}
-                      />
-                    </InputField>
-                  </Row>
-                  <Row className="mb-2">
-                    <InputField label="Contact No." iconPlacement="left">
-                      <PhoneInTalkIcon
-                        sx={{
-                          color: "action.active",
-                          mr: 1,
-                          my: 0.5,
-                          fontSize: 30,
-                        }}
-                      />
-                    </InputField>
-                  </Row>
-
-                  <Row className="mb-2">
-                    <InputField label="Email ID" iconPlacement="left">
-                      <MarkEmailReadIcon
-                        sx={{
-                          color: "action.active",
-                          mr: 1,
-                          my: 0.5,
-                          fontSize: 30,
-                        }}
-                      />
-                    </InputField>
-                  </Row>
-                  <Row className="mb-2">
-                    <InputField label="Address Line 1" iconPlacement="left">
-                      <HomeIcon
-                        sx={{
-                          color: "action.active",
-                          mr: 1,
-                          my: 0.5,
-                          fontSize: 30,
-                        }}
-                      />
-                    </InputField>
-                  </Row>
-                  <Row className="mb-2">
-                    <InputField label="Address Line 2" iconPlacement="left">
-                      <HomeIcon
-                        sx={{
-                          color: "action.active",
-                          mr: 1,
-                          my: 0.5,
-                          fontSize: 30,
-                        }}
-                      />
-                    </InputField>
-                  </Row>
-
-                  <Row className="mb-3">
-                    <Col md={12}>
-                      <Link to="../signin" style={{ textDecoration: "none" }}>
-                        <Button
-                          variant="primary"
-                          size="lg"
-                          className="btn-primary"
-                          style={{ width: "100%", display: "block" }}
-                        >
-                          Update
-                        </Button>
-                      </Link>
-                    </Col>
-                  </Row>
-                </Col>
-              </Row>
-            </Col> */}
             <Col
               md={7}
               style={{
@@ -242,200 +154,33 @@ const HostProfileScreen = () => {
                 </Col>
               </Row>
               <List>
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
-                <Divider variant="middle" component="li" />
-                <ListItem>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography color="#ff6666">Accordion 1</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <HostRentalBookingList />
-                    </AccordionDetails>
-                  </Accordion>
-                </ListItem>
+                {hostRentals.map((hostRental, index) => {
+                  return (
+                    <div key={hostRental.rental_id}>
+                      <ListItem key={hostRental.rental_id}>
+                        <Accordion>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            <Typography color="#ff6666">
+                              {hostRental.name}
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <HostRentalBookingList
+                              bookings={hostRental.bookings}
+                            />
+                          </AccordionDetails>
+                        </Accordion>
+                      </ListItem>
+                      {index < hostRentals.length - 1 ? (
+                        <Divider variant="middle" component="li" />
+                      ) : null}
+                    </div>
+                  );
+                })}
               </List>
             </Col>
           </Row>{" "}

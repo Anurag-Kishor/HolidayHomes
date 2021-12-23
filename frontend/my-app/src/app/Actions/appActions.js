@@ -131,3 +131,21 @@ export const addBookingAction = (bookingObj, userAccessToken) => {
     }
   };
 };
+
+export const searchRentals = (searchValuesObj, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch("/api/home/search", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(searchValuesObj),
+    });
+
+    const resData = await response.json();
+
+    console.log(resData);
+    return resData.data;
+  };
+};
