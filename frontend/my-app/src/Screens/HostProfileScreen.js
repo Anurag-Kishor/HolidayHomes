@@ -14,6 +14,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Divider,
+  LinearProgress,
   List,
   ListItem,
   Typography,
@@ -31,28 +32,39 @@ import { getRentals } from "../app/Actions/hostActions";
 
 const HostProfileScreen = () => {
   const dispatch = useDispatch();
-  const [searchValue, setSearchValue] = React.useState("");
   const userDetails = useSelector((state) => state.user.user);
   const [userRole, setUserRole] = useState("");
-  const [hostRentals, setHostRentals] = useState([]);
+  const [hostRentals, setHostRentals] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const getHostRentalsWithBookings = useCallback(async () => {
+  const getHostRentalsWithBookings = async () => {
+    setLoading(true);
     const userId = await userDetails.userId;
     const userAccessToken = await userDetails.accessToken;
-    setHostRentals(await dispatch(getRentals(userId, userAccessToken)));
-
-    const userRole = await userDetails.userRole;
-    setUserRole(userRole);
-  }, []);
+    const response = await dispatch(getRentals(userId, userAccessToken));
+    setHostRentals(response);
+    setLoading(false);
+  };
 
   useEffect(() => {
     getHostRentalsWithBookings();
   }, []);
+
+  if (loading) {
+    return <LinearProgress />;
+  }
+
+  if (!loading && !hostRentals) {
+    return <Typography align="center">No rentals found</Typography>;
+  }
+
+  if (userRole === "traveller" && userRole !== undefined) {
+    return <BAHdialog setUserRole={setUserRole} />;
+  }
+
   return (
-    <>
-      {userRole === "traveller" && userRole !== undefined ? (
-        <BAHdialog setUserRole={setUserRole} />
-      ) : (
+    <div>
+      {hostRentals && (
         <>
           <Container fluid="md">
             <Row>
@@ -129,6 +141,7 @@ const HostProfileScreen = () => {
               </Col>
             </Row>
           </Container>
+
           {/* Profile - Rentals */}
           <Row
             className="row__allow__gutter cover-photo-host-profile px-5 py-5"
@@ -169,9 +182,11 @@ const HostProfileScreen = () => {
                             </Typography>
                           </AccordionSummary>
                           <AccordionDetails>
-                            <HostRentalBookingList
-                              bookings={hostRental.bookings}
-                            />
+                            {hostRental.bookings !== null && (
+                              <HostRentalBookingList
+                                bookings={hostRental.bookings}
+                              />
+                            )}
                           </AccordionDetails>
                         </Accordion>
                       </ListItem>
@@ -183,10 +198,10 @@ const HostProfileScreen = () => {
                 })}
               </List>
             </Col>
-          </Row>{" "}
+          </Row>
         </>
       )}
-    </>
+    </div>
   );
 };
 

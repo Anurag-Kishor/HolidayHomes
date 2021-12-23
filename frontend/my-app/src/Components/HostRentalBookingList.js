@@ -3,22 +3,20 @@ import React, { useState, useCallback, useEffect } from "react";
 import "../assets/css/main.css";
 import HostelRentalBookingListItem from "./HostRentalBookingListItem";
 
-const HostRentalBookingList = (props) => {
-  const [bookingsSt, setBookings] = useState([]);
-  const getBookings = useCallback(async () => {
-    setBookings(await props.bookings);
-    console.log(props.bookings);
-    console.log(props);
-  }, []);
+const HostRentalBookingList = ({ bookingsSt }) => {
+  // const [bookingsSt, setBookings] = useState([]);
+  // const getBookings = useCallback(async () => {
+  //   setBookings(await props.bookings);
+  //   console.log(props.bookings);
+  // }, []);
 
-  useEffect(() => {
-    getBookings();
-  }, []);
+  // useEffect(() => {
+  //   getBookings();
+  // }, []);
 
   return (
     <List style={{ width: "100%", maxHeight: "265px", overflowY: "auto" }}>
-      {bookingsSt !== undefined ? (
-        bookingsSt !== null &&
+      {bookingsSt !== undefined &&
         bookingsSt.map((booking, index) => {
           return (
             <div key={booking.booking_id}>
@@ -39,49 +37,7 @@ const HostRentalBookingList = (props) => {
               ) : null}
             </div>
           );
-        })
-      ) : (
-        <Typography>No bookings yet!</Typography>
-      )}
-
-      {/* <ListItem>
-        <HostelRentalBookingListItem
-          bookingName="TITLE GOES HERE"
-          bookingEmail="testtesttesttest@gmail.com"
-          bookingPhoneNumber="1234567890"
-          startDate="2020-12-03"
-          endDate="2020-12-05"
-          totalCost="4200"
-          totalRooms="1"
-          totalGuests="2"
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem>
-        <HostelRentalBookingListItem
-          bookingName="TITLE GOES HERE"
-          bookingEmail="testtesttesttest@gmail.com"
-          bookingPhoneNumber="1234567890"
-          startDate="2020-12-03"
-          endDate="2020-12-05"
-          totalCost="4200"
-          totalRooms="1"
-          totalGuests="2"
-        />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem>
-        <HostelRentalBookingListItem
-          bookingName="TITLE GOES HERE"
-          bookingEmail="testtesttesttest@gmail.com"
-          bookingPhoneNumber="1234567890"
-          startDate="2020-12-03"
-          endDate="2020-12-05"
-          totalCost="4200"
-          totalRooms="1"
-          totalGuests="2"
-        />
-      </ListItem> */}
+        })}
     </List>
   );
 };

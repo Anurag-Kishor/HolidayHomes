@@ -84,7 +84,7 @@ export const getRentals = (userId, userAccessToken) => {
     });
     const resData = await response.json();
 
-    await resData.data.forEach(async (element, index) => {
+    resData.data.forEach(async (element, index) => {
       const singleResponse = await fetch(
         `/api/booking/rental/${element.rental_id}`,
         {
@@ -96,7 +96,6 @@ export const getRentals = (userId, userAccessToken) => {
       const singleResData = await singleResponse.json();
       element["bookings"] = singleResData.data;
     });
-
     return resData.data;
   };
 };
