@@ -167,10 +167,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyM
 
 ### GET rentals based on properties
 POST http://localhost:5000/api/home/search
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMjAxMTk0LCJleHAiOjE2NDAyMDQxOTR9.O5DnmF9NG0uBy6Vvq86MOWZIVcGAgOEJn94pzq69L-s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMjI4OTM5LCJleHAiOjE2NDAyMzE5Mzl9.579aNknrzzrf2xcIeIRMTFKvty2cjUJ95XAYke70HT0
 Content-Type: application/json
 
 {
-    "location_id": "691452e6-d5dd-4342-b310-6e32b7ee7d7b"
-
+    "start_date": "2021-12-20",
+    "end_date": "2021-12-22"
 }
