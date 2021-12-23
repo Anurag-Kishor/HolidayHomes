@@ -13,6 +13,10 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
   Divider,
   LinearProgress,
   List,
@@ -28,13 +32,14 @@ import MarkEmailReadIcon from "@mui/icons-material/MarkEmailRead";
 import HomeIcon from "@mui/icons-material/Home";
 import { useDispatch, useSelector } from "react-redux";
 import BAHdialog from "../Components/BAHdialog";
-import { getRentals } from "../app/Actions/hostActions";
+import { getRentals, getRentalsBookings } from "../app/Actions/hostActions";
 
 const HostProfileScreen = () => {
   const dispatch = useDispatch();
   const userDetails = useSelector((state) => state.user.user);
   const [userRole, setUserRole] = useState("");
   const [hostRentals, setHostRentals] = useState(null);
+  const [bookings, setBookings] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const getHostRentalsWithBookings = useCallback(async () => {
@@ -42,7 +47,11 @@ const HostProfileScreen = () => {
     const userId = await userDetails.userId;
     const userAccessToken = await userDetails.accessToken;
     const response = await dispatch(getRentals(userId, userAccessToken));
+    const bookingsResponse = await dispatch(
+      getRentalsBookings(userId, userAccessToken)
+    );
     setHostRentals(response);
+    setBookings(bookingsResponse);
     console.log(response);
     setLoading(false);
   }, []);
@@ -183,14 +192,6 @@ const HostProfileScreen = () => {
                             </Typography>
                           </AccordionSummary>
                           <AccordionDetails>
-                            {/* {hostRental.bookings !== null ? (
-                              <HostRentalBookingList
-                                bookings={hostRental.bookings}
-                              />
-                            ) : (
-                              <Typography>No bookings yet!</Typography>
-                            )} */}
-
                             {/* Description */}
                             <Row
                               style={{
@@ -199,8 +200,8 @@ const HostProfileScreen = () => {
                                 alignItems: "center",
                               }}
                             >
-                              <Col md={{ span: 2, offset: 2 }}>
-                                <Typography variant="h6">
+                              <Col md={{ span: 2, offset: 1 }}>
+                                <Typography variant="body1">
                                   Description
                                 </Typography>
                               </Col>
@@ -210,12 +211,14 @@ const HostProfileScreen = () => {
                                 </Typography>
                               </Col>
                             </Row>
-                            {/* Maximum Guests */}
-                            <Row>
-                              <Col md={{ span: 8, offset: 2 }}>
+
+                            <Row className="mb-3">
+                              <Col md={{ span: 8, offset: 1 }}>
                                 <Divider />
                               </Col>
                             </Row>
+
+                            {/* Maximum Guests */}
                             <Row
                               style={{
                                 display: "flex",
@@ -223,8 +226,8 @@ const HostProfileScreen = () => {
                                 alignItems: "center",
                               }}
                             >
-                              <Col md={{ span: 2, offset: 2 }}>
-                                <Typography variant="h6">
+                              <Col md={{ span: 2, offset: 1 }}>
+                                <Typography variant="body1">
                                   Maximum Guests
                                 </Typography>
                               </Col>
@@ -234,8 +237,56 @@ const HostProfileScreen = () => {
                                 </Typography>
                               </Col>
                             </Row>
-                            <Row>
-                              <Col md={{ span: 8, offset: 2 }}>
+                            <Row className="mb-3">
+                              <Col md={{ span: 8, offset: 1 }}>
+                                <Divider />
+                              </Col>
+                            </Row>
+                            {/* Number of Rooms */}
+                            <Row
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Col md={{ span: 2, offset: 1 }}>
+                                <Typography variant="body1">
+                                  Number of Rooms
+                                </Typography>
+                              </Col>
+                              <Col md={{ span: 6 }}>
+                                <Typography variant="body1" align="right">
+                                  {hostRental.numberofrooms}
+                                </Typography>
+                              </Col>
+                            </Row>
+                            <Row className="mb-3">
+                              <Col md={{ span: 8, offset: 1 }}>
+                                <Divider />
+                              </Col>
+                            </Row>
+                            {/* Price Per Day */}
+                            <Row
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Col md={{ span: 2, offset: 1 }}>
+                                <Typography variant="body1">
+                                  Price per day
+                                </Typography>
+                              </Col>
+                              <Col md={{ span: 6 }}>
+                                <Typography variant="body1" align="right">
+                                  {hostRental.priceperday}
+                                </Typography>
+                              </Col>
+                            </Row>
+                            <Row className="mb-3">
+                              <Col md={{ span: 8, offset: 1 }}>
                                 <Divider />
                               </Col>
                             </Row>
@@ -265,6 +316,74 @@ const HostProfileScreen = () => {
                   <h2 style={{ color: "#ff6666" }}>Bookings</h2>
                 </Col>
               </Row>
+              <List>
+                {bookings &&
+                  bookings.map((booking, index) => {
+                    return (
+                      <ListItem key={index}>
+                        <Card style={{ width: 500 }}>
+                          <CardActionArea>
+                            <CardContent>
+                              <Typography
+                                gutterBottom
+                                variant="h5"
+                                component="div"
+                              >
+                                Booking: {index + 1}
+                              </Typography>
+                              <Divider />
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                className="mt-3"
+                              >
+                                Rental Name: {booking.name}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Booked by:{" "}
+                                {booking.firstname + " " + booking.lastname}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Booked from: {booking.trip_start_date}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Booked till: {booking.trip_end_date}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Number of Travellers:{" "}
+                                {booking.numberoftravellers}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Traveller Email: {booking.email}
+                              </Typography>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >
+                                Traveller Contact: {booking.phonenumber}
+                              </Typography>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                      </ListItem>
+                    );
+                  })}
+              </List>
             </Col>
           </Row>
         </>

@@ -84,18 +84,31 @@ export const getRentals = (userId, userAccessToken) => {
     });
     const resData = await response.json();
 
-    resData.data.forEach(async (element, index) => {
-      const singleResponse = await fetch(
-        `/api/booking/rental/${element.rental_id}`,
-        {
-          headers: {
-            Authorization: "Bearer " + userAccessToken,
-          },
-        }
-      );
-      const singleResData = await singleResponse.json();
-      element["bookings"] = singleResData.data;
+    // resData.data.forEach(async (element, index) => {
+    //   const singleResponse = await fetch(
+    //     `/api/booking/rental/${element.rental_id}`,
+    //     {
+    //       headers: {
+    //         Authorization: "Bearer " + userAccessToken,
+    //       },
+    //     }
+    //   );
+    //   const singleResData = await singleResponse.json();
+    //   element["bookings"] = singleResData.data;
+    // });
+    return resData.data;
+  };
+};
+
+export const getRentalsBookings = (userId, userAccessToken) => {
+  return async (dispatch) => {
+    const response = await fetch(`/api/booking/rental/bookings/${userId}`, {
+      headers: {
+        Authorization: "Bearer " + userAccessToken,
+      },
     });
+    const resData = await response.json();
+    console.log(resData);
     return resData.data;
   };
 };
