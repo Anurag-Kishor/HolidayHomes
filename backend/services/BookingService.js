@@ -113,11 +113,28 @@ const getBookingsByRentalId = async(rental_id) => {
     }
 }
 
+const getRentalsWithBookings = async(host_id) => {
+    try {
+        const bookings = await pool.query('SELECT r.*, u.firstname, u.lastname, u.email, u.phonenumber, b.booking_id, to_char(b.trip_start_date, \'YYYY-MM-DD\') as trip_start_date, to_char(b.trip_end_date, \'YYYY-MM-DD\') as trip_end_date, to_char(b.booking_date, \'YYYY-MM-DD\') as booking_date, b.numberoftravellers, b.tripcost from Booking b JOIN rental r ON b.rental_id = r.rental_id ' +
+                                        ' JOIN users u ON u.user_id=b.traveler_id WHERE r.host_id=$1', [host_id]);
+        
+        if(bookings.rowCount === 0) {
+            return {status: 200, success: true, data: null}                
+        }
+        return {status: 200, success: true, data: bookings.rows}                
+
+    } catch (error) {
+        return {success: false, status: 401, error: error.message};
+        
+    }
+}
+
 module.exports = {
   getAllBookings,
   getBookingsByUserId,
   confirmBooking,
   calculateFinalCost,
   checkIfRentalIsBooked,
-  getBookingsByRentalId
+  getBookingsByRentalId,
+  getRentalsWithBookings
 };

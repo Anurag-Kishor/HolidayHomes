@@ -93,6 +93,17 @@ const getBookingsByRentalId = async(req, res) => {
     }
 }
 
+const getRentalsWithBookings = async(req, res) => {
+  try {
+    const host_id=req.params.host_id;
+    const result = await BookingService.getRentalsWithBookings(host_id);
+    return res.status(200).json(result);
+
+  } catch (error) {
+    res.status(401).json({ status: 401, success: false, error: error.message });
+    
+  }
+}
 
 module.exports = {
   getAllBookings,
@@ -101,5 +112,6 @@ module.exports = {
   confirmBooking,
   calculateFinalCost,
   checkIfRentalIsBooked,
-  getBookingsByRentalId
+  getBookingsByRentalId,
+  getRentalsWithBookings
 };
