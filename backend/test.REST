@@ -167,12 +167,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyM
 
 ### GET rentals based on properties
 POST http://localhost:5000/api/home/search
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMjI4OTM5LCJleHAiOjE2NDAyMzE5Mzl9.579aNknrzzrf2xcIeIRMTFKvty2cjUJ95XAYke70HT0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMjMyNTY3LCJleHAiOjE2NDAyMzU1Njd9.p5yi4LD4g1tqfzyzMFmpBIkB8eiodOjsd_fBxPlc914
 Content-Type: application/json
 
-{
-    "start_date": "2021-12-20",
-    "end_date": "2021-12-22"
+{   
+    "location_id": "2471448f-f88e-4997-8c41-009a6ebd6fd8",
+    "start_date": null,
+    "end_date": null
 }
 
 
@@ -180,3 +181,8 @@ Content-Type: application/json
 ### GET mostbooked
 GET http://localhost:5000/api/home/mostBooked
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMjI4OTM5LCJleHAiOjE2NDAyMzE5Mzl9.579aNknrzzrf2xcIeIRMTFKvty2cjUJ95XAYke70HT0
+
+
+### GET rentals with bookings by Hostid
+GET http://localhost:5000/api/booking/rental/bookings/88956e70-7daa-4ca7-977f-91a1357f8cee
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTUyMGUzZTUtZTc1ZS00MDIzLWE1MzEtMjNjMDJmOGJiNzgwIiwiZmlyc3RuYW1lIjoiQW51cmFnIiwiZW1haWwiOiJhbnVyYWdAZ21haWwuY29tIiwiaWF0IjoxNjQwMjMzODc1LCJleHAiOjE2NDAyMzY4NzV9.BTL5XxDO9sPmlNcUIlwTyEaFZpvc9l5kPW2THNGlu3k
