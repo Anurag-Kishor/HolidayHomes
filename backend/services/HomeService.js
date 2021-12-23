@@ -11,8 +11,14 @@ const getAllLocations = async () => {
 
 const getMostBookedRentals = async () => {
   try {
+    console.log('here')
+    // const result = await pool.query(
+    //   "select rental_id, COUNT(*) NumberOfBookings From Booking b GROUP BY rental_id ORDER BY count(*) desc;"
+    // );
+
     const result = await pool.query(
-      "select rental_id, COUNT(*) NumberOfBookings From Booking b GROUP BY rental_id ORDER BY count(*) desc;"
+      "select r.*, u.firstname, u.lastname, u.email, u.phonenumber from rental r JOIN (select b.rental_id, COUNT(*) NumberOfBookings From Booking b GROUP BY b.rental_id ORDER BY count(*) desc) as t ON t.rental_id = r.rental_id " +
+      "JOIN users u ON u.user_id = r.host_id"
     );
     return { status: 200, success: true, data: result.rows };
   } catch (error) {
